@@ -1,0 +1,93 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@section Scripts {
+    <script src="~/js/TractorAdd.js"></script>
+    <script src="~/js/Alerts.js"></script>
+    <!-- jquery-validation -->
+    <script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/plugins/jquery-validation/additional-methods.min.js"></script>
+
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Administración de tractores</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="~/Tractor">Admin Tractores</a></li>
+                    <li class="breadcrumb-item active">Agregar</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<div class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title">Información general del tractor</h3>
+    </div>
+    <!-- /.card-header -->
+    <form id="fmTractor">
+
+    
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="txtClave">Clave Tractor</label>
+                    <input class="form-control form-control-sm" type="text" id="txtClave" name="Clave" style="text-transform:uppercase" maxlength="200"> 
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="txtClave">Número Económico</label>
+                    <input class="form-control form-control-sm" type="text" id="txtNumEconomico" name="NumEconomico" style="text-transform:uppercase" maxlength="200"> 
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="txtClave">Placas</label>
+                    <input class="form-control form-control-sm" type="text" id="txtPlacas" name="Placas" style="text-transform:uppercase" maxlength="200"> 
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="txtClave">Modelo</label>
+                    <input class="form-control form-control-sm" type="text" id="txtModelo" name="Modelo" style="text-transform:uppercase" maxlength="200"> 
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="txtClave">Año</label>
+                    <input class="form-control form-control-sm" type="text" id="txtAnio" name="Anio" maxlength="4"> 
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    </form>
+    <!-- /.card-body -->
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-block btn-default btn-xs" href="~/Tractor">Cancelar</a>
+            </div> 
+            <div class="col-md-3">
+                <button id="BtnNuevoTracto" class="btn btn-block btn-success btn-xs">Agregar</button>
+            </div>
+        </div>     
+    </div>
+    <!-- /.card-footer -->
+</div>
+<!-- /.card -->
