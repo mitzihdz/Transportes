@@ -10,6 +10,7 @@ namespace AccesoDatos.Models
         public int Id { get; set; }
         public int TblProveedoresId { get; set; }
         public int TblCajasId { get; set; }
+        public DateTime? Inclusion { get; set; }
 
         public virtual TblCaja TblCajas { get; set; }
         public virtual TblProveedore TblProveedores { get; set; }

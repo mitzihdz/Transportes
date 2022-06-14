@@ -2,7 +2,7 @@
 
 namespace TranportesAdmin.Controllers
 {
-    public class TractorController : Controller
+    public class TractoController : Controller
     {
         public IActionResult Index()
         {

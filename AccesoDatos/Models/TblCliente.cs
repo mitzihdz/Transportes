@@ -16,7 +16,7 @@ namespace AccesoDatos.Models
         public string RazonSocial { get; set; }
         public string NombreCorto { get; set; }
         public string Rfc { get; set; }
-        public bool? Estatus { get; set; }
+        public bool? Activo { get; set; }
         public DateTime? Inclusion { get; set; }
 
         public virtual ICollection<TblSolicitud> TblSolicituds { get; set; }

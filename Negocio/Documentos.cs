@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Negocio
 {
-    public class Clientes
+    public class Documentos
     {
         private transportesContext ctx = new transportesContext();
         public Response Response = new Response();
@@ -12,7 +12,7 @@ namespace Negocio
         {
             try
             {
-                List<TblCliente> list = id == null ? ctx.TblClientes.Where(x => x.Activo == true).OrderBy(x => x.RazonSocial).ToList() : ctx.TblClientes.Where(x => x.Id == id).ToList();
+                List<TblDocumento> list = id == null ? ctx.TblDocumentos.Where(x => x.Activo == true).OrderBy(x => x.NombreDocumento).ToList() : ctx.TblDocumentos.Where(x => x.Id == id).ToList();
 
                 Response.Estado = true;
                 Response.Mensaje = "OK";
@@ -27,23 +27,20 @@ namespace Negocio
             return Response;
         }
 
-        public Response Add(TblCliente cliente)
+        public Response Add(TblDocumento documento)
         {
             try
             {
-                cliente.RazonSocial = cliente.RazonSocial.ToUpper();
-                cliente.NombreCorto = cliente.NombreCorto.ToUpper();
-                cliente.Rfc = cliente.Rfc.ToUpper();
-                cliente.Activo = true;
-                cliente.Inclusion = DateTime.Now;
+                documento.NombreDocumento = documento.NombreDocumento.ToUpper();
+                documento.Activo = true;
+                documento.Inclusion = DateTime.Now;
 
-                ctx.TblClientes.Add(cliente);
+                ctx.TblDocumentos.Add(documento);
                 ctx.SaveChanges();
 
                 Response.Estado = true;
-                Response.Mensaje = "Cliente con RFC " +
-                    cliente.Rfc + " Agregado Exitosamente";
-                Response.Respuesta = cliente.Id;
+                Response.Mensaje = "Documento Agregado Exitosamente";
+                Response.Respuesta = documento.Id;
             }
             catch (Exception ex)
             {
@@ -54,23 +51,20 @@ namespace Negocio
             return Response;
         }
 
-        public Response Update(TblCliente cliente)
+        public Response Update(TblDocumento documento)
         {
             try
             {
-                TblCliente tblCliente = ctx.TblClientes.Find(cliente.Id);
+                TblDocumento tblDocumento = ctx.TblDocumentos.Find(documento.Id);
 
-                tblCliente.RazonSocial = cliente.RazonSocial.ToUpper();
-                tblCliente.NombreCorto = cliente.NombreCorto.ToUpper();
-                tblCliente.Rfc = cliente.Rfc.ToUpper();
+                tblDocumento.NombreDocumento = documento.NombreDocumento.ToUpper();
 
-                ctx.Entry(tblCliente).State = EntityState.Modified;
+                ctx.Entry(tblDocumento).State = EntityState.Modified;
                 ctx.SaveChanges();
 
                 Response.Estado = true;
-                Response.Mensaje = "Cliente con RFC " +
-                     cliente.Rfc + " Actualizado Exitosamente";
-                Response.Respuesta = cliente.Id;
+                Response.Mensaje = "Documento Actualizado Exitosamente";
+                Response.Respuesta = documento.Id;
             }
             catch (Exception ex)
             {
@@ -85,15 +79,15 @@ namespace Negocio
         {
             try
             {
-                TblCliente tblCliente = ctx.TblClientes.Find(id);
+                TblDocumento tblDocumento = ctx.TblDocumentos.Find(id);
 
-                tblCliente.Activo = false;
+                tblDocumento.Activo = false;
 
-                ctx.Entry(tblCliente).State = EntityState.Modified;
+                ctx.Entry(tblDocumento).State = EntityState.Modified;
                 ctx.SaveChanges();
 
                 Response.Estado = true;
-                Response.Mensaje = "Cliente Inhabilitado Exitosamente";
+                Response.Mensaje = "Documento Inhabilitado Exitosamente";
             }
             catch (Exception ex)
             {

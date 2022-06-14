@@ -11,6 +11,7 @@ namespace AccesoDatos.Models
         public string Usuario { get; set; }
         public string Contrasena { get; set; }
         public int Perfil { get; set; }
+        public bool? Activo { get; set; }
         public DateTime? Inclusion { get; set; }
     }
 }

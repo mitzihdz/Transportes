@@ -33,7 +33,7 @@ namespace Negocio
             {
                 proveedor.NombreOrazonSocial = proveedor.NombreOrazonSocial.ToUpper();
                 proveedor.Clave = proveedor.Clave.ToUpper();
-                proveedor.Estatus = true;
+                proveedor.Activo = true;
                 proveedor.Inclusion = DateTime.Now;
 
                 ctx.TblProveedores.Add(proveedor);
@@ -85,7 +85,7 @@ namespace Negocio
             {
                 TblProveedore tblProveedor = ctx.TblProveedores.Find(id);
 
-                tblProveedor.Estatus = false;
+                tblProveedor.Activo = false;
 
                 ctx.Entry(tblProveedor).State = EntityState.Modified;
                 ctx.SaveChanges();

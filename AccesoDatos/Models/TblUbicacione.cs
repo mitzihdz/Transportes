@@ -16,6 +16,7 @@ namespace AccesoDatos.Models
         public int Id { get; set; }
         public string Planta { get; set; }
         public string Ruta { get; set; }
+        public bool? Activo { get; set; }
         public DateTime? Inclusion { get; set; }
 
         public virtual ICollection<TblSolicitud> TblSolicitudTblUbicacionesDestinoNavigations { get; set; }

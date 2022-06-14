@@ -15,7 +15,7 @@ namespace AccesoDatos.Models
         public int Id { get; set; }
         public string NombreOrazonSocial { get; set; }
         public string Clave { get; set; }
-        public bool? Estatus { get; set; }
+        public bool? Activo { get; set; }
         public DateTime? Inclusion { get; set; }
 
         public virtual ICollection<TblProveedoresCaja> TblProveedoresCajas { get; set; }

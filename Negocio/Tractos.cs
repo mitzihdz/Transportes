@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Negocio
 {
-    public class Tracto
+    public class Tractos
     {
         private transportesContext ctx = new transportesContext();
         public Response Response = new Response();

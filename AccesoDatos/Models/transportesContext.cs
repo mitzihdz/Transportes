@@ -59,8 +59,9 @@ namespace AccesoDatos.Models
 
                 entity.Property(e => e.Dimensiones)
                     .IsRequired()
-                    .HasMaxLength(200)
-                    .HasColumnName("dimensiones");
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.Inclusion).HasColumnType("datetime");
 
                 entity.Property(e => e.NoEconomico)
                     .IsRequired()
@@ -84,13 +85,12 @@ namespace AccesoDatos.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Estatus)
+                entity.Property(e => e.Activo)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.Inclusion)
                     .HasColumnType("datetime")
-                    .HasColumnName("inclusion")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.NombreCorto)
@@ -115,7 +115,6 @@ namespace AccesoDatos.Models
 
                 entity.Property(e => e.Inclusion)
                     .HasColumnType("datetime")
-                    .HasColumnName("inclusion")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.NombreDocumento)
@@ -131,8 +130,11 @@ namespace AccesoDatos.Models
 
                 entity.Property(e => e.Inclusion)
                     .HasColumnType("datetime")
-                    .HasColumnName("inclusion")
                     .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Ruta)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.TblDocumentosId).HasColumnName("tbl_documentos_id");
 
@@ -232,7 +234,6 @@ namespace AccesoDatos.Models
 
                 entity.Property(e => e.Inclusion)
                     .HasColumnType("datetime")
-                    .HasColumnName("inclusion")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Licencia).HasMaxLength(200);
@@ -290,17 +291,16 @@ namespace AccesoDatos.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.Activo)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
                 entity.Property(e => e.Clave)
                     .IsRequired()
                     .HasMaxLength(200);
 
-                entity.Property(e => e.Estatus)
-                    .IsRequired()
-                    .HasDefaultValueSql("((1))");
-
                 entity.Property(e => e.Inclusion)
                     .HasColumnType("datetime")
-                    .HasColumnName("inclusion")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.NombreOrazonSocial)
@@ -314,6 +314,8 @@ namespace AccesoDatos.Models
                 entity.ToTable("tbl_proveedores_cajas");
 
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Inclusion).HasColumnType("datetime");
 
                 entity.Property(e => e.TblCajasId).HasColumnName("tbl_cajas_id");
 
@@ -426,7 +428,6 @@ namespace AccesoDatos.Models
 
                 entity.Property(e => e.Inclusion)
                     .HasColumnType("datetime")
-                    .HasColumnName("inclusion")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Modelo).HasMaxLength(200);
@@ -444,7 +445,6 @@ namespace AccesoDatos.Models
 
                 entity.Property(e => e.Inclusion)
                     .HasColumnType("datetime")
-                    .HasColumnName("inclusion")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Planta)
@@ -466,7 +466,6 @@ namespace AccesoDatos.Models
 
                 entity.Property(e => e.Inclusion)
                     .HasColumnType("datetime")
-                    .HasColumnName("inclusion")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Usuario)

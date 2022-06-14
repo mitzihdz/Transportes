@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
     
-    var id = $("#idTractor").val();
+    var id = $("#idTracto").val();
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Tractor/Select?id=" + id,
+        url: "https://localhost:7259/api/Tracto/Select?id=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -15,15 +15,15 @@
             $('#txtAnio').val(tractorData[0].anio);
         },
         failure: function (data) {
-            AlertError('Ocurrio un error al consultar el tractor. Contacte al administrador.');
+            AlertError('Ocurrio un error al consultar el tracto. Contacte al administrador.');
         },
         error: function (data) {
-            AlertError('Ocurrio un error al consultar el tractor. Contacte al administrador.');
+            AlertError('Ocurrio un error al consultar el tracto. Contacte al administrador.');
         }
     });
 
 
-    var valTractor = $('#fmTractor').validate({
+    var valTractor = $('#fmTracto').validate({
         rules: {
             Clave: {
                 required: true
@@ -45,7 +45,7 @@
             }
         },
         messages: {
-            Clave: "La clave del tractor es requerida",
+            Clave: "La clave del tracto es requerida",
             NumEconomico:
             {
                 required: "El número económico es requerido",
@@ -84,7 +84,7 @@
             var _anio = $('#txtAnio').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Tractor/Update",
+                url: "https://localhost:7259/api/Tracto/Update",
                 type: "POST",
                 data: JSON.stringify({
                     id: _id,
@@ -96,13 +96,13 @@
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    AlertSuccessOk('El tractor se actualizó correctamente.', '/Tractor');
+                    AlertSuccessOk('El tracto se actualizó correctamente.', '/Tracto');
                 },
                 failure: function (data) {
-                    AlertError('Ocurrio un error al guardar el tractor. Contacte al administrador.');
+                    AlertError('Ocurrio un error al guardar el tracto. Contacte al administrador.');
                 },
                 error: function (data) {
-                    AlertError('Ocurrio un error al guardar el tractor. Contacte al administrador.');
+                    AlertError('Ocurrio un error al guardar el tracto. Contacte al administrador.');
                 }
             });
 

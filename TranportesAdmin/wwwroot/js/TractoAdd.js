@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    var valTractor = $('#fmTractor').validate({
+    var valTractor = $('#fmTracto').validate({
         rules: {
             Clave: {
                 required: true
@@ -22,7 +22,7 @@
             }
         },
         messages: {
-            Clave: "La clave del tractor es requerida",
+            Clave: "La clave del tracto es requerida",
             NumEconomico:
             {
                 required: "El número económico es requerido",
@@ -61,7 +61,7 @@
             var _anio = $('#txtAnio').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Tractor/Add",
+                url: "https://localhost:7259/api/Tracto/Add",
                 type: "POST",
                 data: JSON.stringify({
                     id: 0,
@@ -73,13 +73,13 @@
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    AlertSuccessOk('El tractor se registró correctamente.','/Tractor');
+                    AlertSuccessOk('El tracto se registró correctamente.','/Tractor');
                 },
                 failure: function (data) {
-                    AlertError('Ocurrio un error al guardar el tractor. Contacte al administrador.');
+                    AlertError('Ocurrio un error al guardar el tracto. Contacte al administrador.');
                 },
                 error: function (data) {
-                    AlertError('Ocurrio un error al guardar el tractor. Contacte al administrador.');
+                    AlertError('Ocurrio un error al guardar el tracto. Contacte al administrador.');
                 }
             });
 

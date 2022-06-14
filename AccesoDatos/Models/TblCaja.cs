@@ -20,6 +20,8 @@ namespace AccesoDatos.Models
         public string AnioModelo { get; set; }
         public int? TblMarcaCajasId { get; set; }
         public string Dimensiones { get; set; }
+        public bool? Activo { get; set; }
+        public DateTime? Inclusion { get; set; }
 
         public virtual TblMarcaCaja TblMarcaCajas { get; set; }
         public virtual ICollection<TblPoliza> TblPolizas { get; set; }

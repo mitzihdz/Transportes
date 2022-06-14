@@ -6,20 +6,20 @@
 
 function Delete(id) {
     $.ajax({
-        url: "https://localhost:7259/api/Tractor/Delete/"+id,
+        url: "https://localhost:7259/api/Tracto/Delete/"+id,
         type: "DELETE",
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
         success: function (result) {
-            AlertSuccess('El tractor se eliminó correctamente.');
+            AlertSuccess('El tracto se eliminó correctamente.');
             GetGrid();
         },
         failure: function (data) {
-            AlertError('Ocurrio un error al eliminar el tractor f. Contacte al administrador.');
+            AlertError('Ocurrio un error al eliminar el tracto. Contacte al administrador.');
         },
         error: function (data) {
             debugger
-            AlertError('Ocurrio un error al eliminar el tractor e. Contacte al administrador.');
+            AlertError('Ocurrio un error al eliminar el tracto. Contacte al administrador.');
         }
     });
 }
@@ -27,11 +27,11 @@ function Delete(id) {
 function GetGrid() {
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Tractor/Select",
+        url: "https://localhost:7259/api/Tracto/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            $('#tblTractores > tbody').empty();
+            $('#tblTractos > tbody').empty();
             $.each(data.respuesta, function (i, item) {
                 debugger
                 var rows =
@@ -41,18 +41,18 @@ function GetGrid() {
                     "<td>" + item.placas + "</td>" +
                     "<td>" + item.modelo + "</td>" +
                     "<td>" + item.anio + "</td>" +
-                    "<td><a class='nav_link' href='~/../Tractor/Editar/" + item.id + "'><i class='nav-icon fas fa-edit'></i></a >" +
+                    "<td><a class='nav_link' href='~/../Tracto/Editar/" + item.id + "'><i class='nav-icon fas fa-edit'></i></a >" +
                     "<td><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='far fa-times-circle'></i></a >" +
                     "</tr>";
-                $('#tblTractores > tbody').append(rows);
+                $('#tblTractos > tbody').append(rows);
             });
             console.log(data);
 
-            $("#tblTractores").DataTable({
+            $("#tblTractos").DataTable({
                 "destroy": true,
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print"]
-            }).buttons().container().appendTo('#tblTractores_wrapper .col-md-6:eq(0)');
+            }).buttons().container().appendTo('#tblTractos_wrapper .col-md-6:eq(0)');
         },
         failure: function (data) {
             AlertError('Ocurrio un error al consultar la información. Contacte al administrador.');

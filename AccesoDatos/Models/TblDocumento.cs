@@ -9,6 +9,7 @@ namespace AccesoDatos.Models
     {
         public int Id { get; set; }
         public string NombreDocumento { get; set; }
+        public bool? Activo { get; set; }
         public DateTime? Inclusion { get; set; }
     }
 }

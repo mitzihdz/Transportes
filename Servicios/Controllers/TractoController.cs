@@ -6,9 +6,9 @@ namespace Servicios.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TractorController : ControllerBase
+    public class TractoController : ControllerBase
     {
-        private Tracto tractores = new Tracto();
+        private Tractos tractores = new Tractos();
 
         [HttpGet]
         [Route("Select")]
