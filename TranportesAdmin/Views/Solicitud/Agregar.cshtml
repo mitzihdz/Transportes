@@ -1,0 +1,235 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@section Scripts {
+    <script src="~/js/SolicitudAdd.js"></script>
+    <script src="~/js/Alerts.js"></script>
+    <!-- jquery-validation -->
+    <script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/plugins/jquery-validation/additional-methods.min.js"></script>
+     <!-- DataTables -->
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <!-- DataTables  & Plugins -->
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/plugins/jszip/jszip.min.js"></script>
+    <script src="~/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+}
+<section>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Administración de Solicitudes</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="~/Solicitud">Admin Solicitudes</a></li>
+                        <li class="breadcrumb-item active">Agregar</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+</section>
+
+<section>
+    <!-- Card ADD -->
+    <div id="cardSolicitud" class="card card-default">
+        <form id="fmSolicitud">
+              <div class="card-header">
+                <h3 class="card-title">Información general de la solicitud</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-sort-down"></i>
+                  </button>
+                </div>
+              </div>          
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="txtClave">Cliente *</label>
+                        <input list="clientes" class="form-control form-control-sm" type="text" id="txtCliente" name="Cliente" style="text-transform:uppercase" maxlength="200">
+                        <datalist id="clientes">
+                            <option value="Clientes 1"></option>
+                            <option value="Clientes 2"></option>
+                            <option value="Clientes 3"></option>
+                            <option value="Clientes 4"></option>
+                        </datalist>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="txtFecha">Fecha *</label>
+                            <input class="form-control form-control-sm" type="date" id="txtFecha" name="Fecha" style="text-transform:uppercase" maxlength="200">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                        <label for="txtUbiDes">Ubicación Destino *</label>
+                        <input list="ubicacionDes" class="form-control form-control-sm" type="text" id="txtUbiDes" name="UbiDes" style="text-transform:uppercase" maxlength="200">
+                        <datalist id="ubicacionDes">
+                            <option value="Ubicación Destino 1"></option>
+                            <option value="Ubicación Destino 2"></option>
+                            <option value="Ubicación Destino 3"></option>
+                            <option value="Ubicación Destino 4"></option>
+                        </datalist>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="txtUbiOrigen">Ubicación Origen *</label>
+                            <input list="ubicacionOrigen" class="form-control form-control-sm" type="text" id="txtUbiOrigen" name="UbiOrigen" style="text-transform:uppercase" maxlength="200">
+                            <datalist id="ubicacionOrigen">
+                                <option value="Ubicación Origen 1"></option>
+                                <option value="Ubicación Origen 2"></option>
+                                <option value="Ubicación Origen 3"></option>
+                                <option value="Ubicación Origen 4"></option>
+                            </datalist>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div id="cardSolicitud" class="card card-default collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Detalle de la Solicitud</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-sort-down"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="txtOperador">Operador *</label>
+                                <input list="operador" class="form-control form-control-sm" type="text" id="txtOperador" name="Operador" style="text-transform:uppercase" maxlength="200">
+                                <datalist id="operador">
+                                    <option value="Operador 1"></option>
+                                    <option value="Operador 2"></option>
+                                    <option value="Operador 3"></option>
+                                    <option value="Operador 4"></option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class='form-group'>
+                                <label for="Tractor">Tractor *</label>
+                                <input list="tractor" class="form-control form-control-sm" type="text" id="txtTractor" name="Tractor" style="text-transform:uppercase" maxlength="20">
+                                <datalist id="tractor">
+                                    <option value="Tractor 1"></option>
+                                    <option value="Tractor 2"></option>
+                                    <option value="Tractor 3"></option>
+                                    <option value="Tractor 4"></option>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="CajaUno">Caja *</label>
+                                <input list="cajaUno" class="form-control form-control-sm" type="text" id="txtCajaUno" name="CajaUno" style="text-transform:uppercase" maxlength="20">
+                                <datalist id="cajaUno">
+                                    <option value="Caja 1"></option>
+                                    <option value="Caja 2"></option>
+                                    <option value="Caja 3"></option>
+                                    <option value="Caja 4"></option>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="CajaDos">Caja</label>
+                                <input list="cajaDos" class="form-control form-control-sm" type="text" id="txtCajaDos" name="CajaDos" style="text-transform:uppercase" maxlength="20">
+                                <datalist id="cajaDos">
+                                    <option value="Caja 1"></option>
+                                    <option value="Caja 2"></option>
+                                    <option value="Caja 3"></option>
+                                    <option value="Caja 4"></option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                            &nbsp;
+                        </div>
+                        <div class="col-md-3">
+                            <button id="añadirOperador" class="btn btn-block btn-success btn-xs" type="button">Añadir</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                         <div class="col-12">
+                             <table id="otroOperador" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Operador</th>
+                                        <th>Tractor</th>
+                                        <th>Caja Uno</th>
+                                        <th>Caja Dos</th>
+                                        <th>Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                         </div>
+                    </div>
+                </div>  
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-3">
+                        <a class="btn btn-block btn-default btn-xs" href="~/Solicitud">Cancelar</a>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" id="form1" class="btn btn-block btn-success btn-xs">Agregar</button>
+                    </div>
+                </div>
+              </div>
+         </form>
+     </div>
+</section>
+
+@*<section>
+    <div id="cardDomicilio" class="card card-default collapsed-card">
+        
+        <form id="fmOperador">
+            
+        </form>
+          
+    </div>
+</section>*@
+
+      
+        
+        
+
+
+
+    <!-- Card ADD -->
+        
+        <!-- /.card -->
+                
