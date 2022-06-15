@@ -14,6 +14,8 @@ namespace AccesoDatos.Models
 
         public int Id { get; set; }
         public string Marca { get; set; }
+        public bool? Activo { get; set; }
+        public DateTime? Inclusion { get; set; }
 
         public virtual ICollection<TblCaja> TblCajas { get; set; }
     }

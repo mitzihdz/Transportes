@@ -2,7 +2,7 @@
 
 namespace TranportesAdmin.Controllers
 {
-    public class UbicacionController : Controller
+    public class ProveedorController : Controller
     {
         public IActionResult Index()
         {
@@ -22,7 +22,7 @@ namespace TranportesAdmin.Controllers
         {
             ISession session = HttpContext.Session;
             session.SetString("Route", System.Reflection.MethodBase.GetCurrentMethod().Name);
-            ViewBag.IdUbicacion = id;
+            ViewBag.IdProveedor = id;
             return View();
         }
     }

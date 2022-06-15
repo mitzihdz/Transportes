@@ -90,6 +90,7 @@
                 dataType: "json",
                 success: function (result) {
                     $('#txtOperadorId').val(result.respuesta);
+                    $('#IdOperador').val(result.respuesta);
                     AlertSuccess('El operador se registró correctamente.');
                     $('#cardOperador').addClass('collapsed-card');
                     $('#cardDomicilio').removeClass('collapsed-card');
@@ -205,11 +206,184 @@
     });
 
 
+    //Cajas
+    var valCaja = $('#fmNuevaCaja').validate({
+        rules: {
+            NumEconomico: {
+                required: true,
+                digits: true
+            },
+            Placas: {
+                required: true
+            },
+            Dimension: {
+                required: true
+            },
+            Marca: {
+                required: true
+            },
+            Anio: {
+                required: true,
+                digits: true,
+                maxlength: 4
+            }   
+        },
+        messages: {
+            NumEconomico:
+            {
+                required: "El número económico es requerido",
+                digits: "Formato numérico"
+            },
+            Placas: "Las placas son requeridas",
+            Dimension: "La dimension es requerida",
+            Marca: "La marca es requerida",
+            Anio:
+            {
+                required: "El año es requerido",
+                digits: "Formato numérico",
+                maxlength: "Máximo 5 digitos"
+            }
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
+    });
+
+    $("#BtnNuevaCaja").click(function () {
+        if (valCaja.form()) {
+
+            var _noEconomico = $('#txtNumEconomico').val();
+            var _placas = $('#txtPlacas').val();
+            var _modelo = $('#txtModelo').val();
+            var _marca = $('#txtMarca').val();
+            var _anio = $('#txtAnio').val();
+            
+
+            $.ajax({
+                url: "https://localhost:7259/api/Marca/Add",
+                type: "POST",
+                data: JSON.stringify({
+                    id: 0,
+                    marca: _marca
+                }),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    GetGrid();
+                    AlertSuccess('La marca se registró correctamente.');
+                    $('#modalMarca').modal('toggle');
+                },
+                failure: function (data) {
+                    AlertError('Ocurrio un error al guardar la marca. Contacte al administrador.');
+                },
+                error: function (data) {
+                    AlertError('Ocurrio un error al guardar la marca. Contacte al administrador.');
+                }
+            });
+        }
+    });
+
+
+
+    var valEditMarca = $('#fmEditMarca').validate({
+        rules: {
+            MarcaEdit: {
+                required: true
+            }
+        },
+        messages: {
+            MarcaEdit: "El nombre de la marca es requerido"
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
+    });
+
+    $("#BtnEditaMarca").click(function () {
+        if (valEditMarca.form()) {
+
+            var _id = $('#IdMarca').val();
+            var _marca = $('#txtEditMarca').val();
+
+            $.ajax({
+                url: "https://localhost:7259/api/Marca/Update",
+                type: "POST",
+                data: JSON.stringify({
+                    id: _id,
+                    marca: _marca
+                }),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    GetGrid();
+                    AlertSuccess('La marca se actualizó correctamente.');
+                    $('#modalEditMarca').modal('toggle');
+                },
+                failure: function (data) {
+                    AlertError('Ocurrio un error al actualizar la marca. Contacte al administrador.');
+                },
+                error: function (data) {
+                    AlertError('Ocurrio un error al actualizar la marca. Contacte al administrador.');
+                }
+            });
+        }
+    });
+
 
 
 });
 
+function OpenNew() {
+    $('#modalCaja').modal('show');
+    $('#txtNoEconomico').val('');
+    $('#txtPlacas').val('');
+    $('#txtDimension').val('');
+    $('#ddlMarca').val(0);
+    $('#txtAnio').val('');
+    GetMarcas();
+}
 
+function GetMarcas() {
+
+    $.ajax({
+        type: "GET",
+        url: "https://localhost:7259/api/Marca/Select",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            var marcaData = data.respuesta;
+            $('#ddlMarca').html('');
+            $('#ddlMarca').append('<option value="0">SELECCIONE</option>');
+            $.each(marcaData, function (k, v) {
+                $('#ddlMarca').append('<option value="' + v.id + '">' + v.marca + '</option>');
+            });
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        }
+    });
+
+
+
+    
+}
 
 
 

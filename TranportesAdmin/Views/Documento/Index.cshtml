@@ -1,0 +1,138 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@section Scripts {
+    <script src="~/js/Documento.js"></script>
+    <script src="~/js/Alerts.js"></script>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <!-- DataTables  & Plugins -->
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/plugins/jszip/jszip.min.js"></script>
+    <script src="~/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+    <!-- jquery-validation -->
+    <script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/plugins/jquery-validation/additional-methods.min.js"></script>
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Administración de Documentos</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item">Administración de Documentos</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<div class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title">Listado general de documentos</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-10">
+                &nbsp;    
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-block btn-info btn-sm" onclick="OpenNew();">
+                  Nuevo Documento
+                </button>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+             <div class="col-12">
+                 <table id="tblDocumentos" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Documento</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+             </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalDocument" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Nuevo documento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form id="fmNuevoDoc">
+           <div class="row">
+               <div class="col-md-12">
+                <div class="form-group">
+                    <label for="txtNombre">Nombre Documento</label>
+                    <input class="form-control form-control-sm" type="text" id="txtDocumento" name="Nombre" style="text-transform:uppercase" maxlength="200"> 
+                </div>
+            </div>
+           </div>
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="BtnNuevoDocumento" class="btn btn-primary">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalEditDocument" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Actualiza documento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form id="fmEditDoc">
+           <input type="hidden" id="IdDocumento" />
+           <div class="row">
+               <div class="col-md-12">
+                <div class="form-group">
+                    <label for="txtEditDocumento">Nombre Documento</label>
+                    <input class="form-control form-control-sm" type="text" id="txtEditDocumento" name="NombreEdit" style="text-transform:uppercase" maxlength="200"> 
+                </div>
+            </div>
+           </div>
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="BtnEditaDocumento" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

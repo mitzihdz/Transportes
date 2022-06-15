@@ -211,6 +211,8 @@ namespace AccesoDatos.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.Inclusion).HasColumnType("datetime");
+
                 entity.Property(e => e.Marca)
                     .IsRequired()
                     .HasMaxLength(200);

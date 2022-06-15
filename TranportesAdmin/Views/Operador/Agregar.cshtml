@@ -13,6 +13,25 @@
     <script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="~/plugins/jquery-validation/additional-methods.min.js"></script>
 
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <!-- DataTables  & Plugins -->
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/plugins/jszip/jszip.min.js"></script>
+    <script src="~/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
 }
 
 
@@ -235,4 +254,124 @@
                     
         </div>
         <!-- /.card -->
+
+
+<div id="cardCajas" class="card card-default collapsed-card">
+    <div class="card-header">
+        <h3 class="card-title">Cajas Operador</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <input id="IdOperador" type="hidden" />
+        <div class="row">
+            <div class="col-md-10">
+                &nbsp;    
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-block btn-info btn-sm" onclick="OpenNew();">
+                  Nueva Caja
+                </button>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+             <div class="col-12">
+                 <table id="tblCajas" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-md-2">No. Económico</th>
+                            <th class="col-md-2">Placas</th>
+                            <th class="col-md-2">Marca</th>
+                            <th class="col-md-2">Año</th>
+                            <th class="col-md-2">Dimensiones</th>
+                            
+                            <th class="col-md-1">Editar</th>
+                            <th class="col-md-1">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+             </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-md-9">
+                &nbsp;
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-block btn-success btn-xs" href="~/Operador">Finalizar</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.card -->
+
+
+<div id="modalCaja" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Nueva Caja</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="fmNuevaCaja">
+      <div class="modal-body"> 
+          <div class="row">
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="txtNoEconomico">No. Económico</label>
+                      <input class="form-control form-control-sm" type="text" id="txtNoEconomico" name="NoEconomico" style="text-transform:uppercase" maxlength="200"> 
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="txtPlacas">Placas</label>
+                      <input class="form-control form-control-sm" type="text" id="txtPlacas" name="Placas" style="text-transform:uppercase" maxlength="200"> 
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="txtDimension">Dimensiones</label>
+                      <input class="form-control form-control-sm" type="text" id="txtDimension" name="Dimension" style="text-transform:uppercase" maxlength="200"> 
+                  </div>
+              </div>
+           </div>
+           <div class="row">
+              <div class="col-md-8">
+                  <div class="form-group">
+                      <label for="ddlMarca">Marca</label>
+                      <select class="form-control form-control-sm" id="ddlMarca" name="Marca"></select>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="txtAnio">Año Modelo</label>
+                      <input class="form-control form-control-sm" type="text" id="txtAnio" name="Anio" style="text-transform:uppercase" maxlength="200"> 
+                  </div>
+              </div>
+           </div>
+      </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="BtnNuevaCaja" class="btn btn-primary">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
                 
