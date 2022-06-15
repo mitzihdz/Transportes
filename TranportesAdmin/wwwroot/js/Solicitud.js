@@ -25,7 +25,6 @@ function Delete(id) {
 }
 
 function GetGrid() {
-    var tblClientes = {};
     $.ajax({
         type: "GET",
         url: "https://localhost:7259/api/Solicitud/Select",

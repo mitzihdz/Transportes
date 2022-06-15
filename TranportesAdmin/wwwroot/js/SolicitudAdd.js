@@ -11,9 +11,11 @@ var operadores = [{
     Caja: ''
 }];
 var valSolicitud;
-$(document).ready(function () {
-    $('label.required').append('&nbsp;<strong>*</strong>&nbsp;');
 
+$(document).ready(function () {
+    
+    $('label.required').append('&nbsp;<strong>*</strong>&nbsp;');
+    
     operadores.shift();
     valSolicitud = $('#fmSolicitud').validate({
         rules: {
@@ -35,11 +37,8 @@ $(document).ready(function () {
             Tractor: {
                 required: true
             },
-            CajaUno: {
+            Caja: {
                 required: true
-            },
-            CajaDos: {
-                required: false
             }
         },
         messages: {
@@ -49,7 +48,7 @@ $(document).ready(function () {
             UbiOrigen: "Seleccionar una ubicación de origen es requerida",
             Operador: "Seleccionar un operador es requerido",
             Tractor: "Seleccionar un tractor es requerido",
-            CajaUno: "Seleccionar una caja es requerido"
+            Caja: "Seleccionar una caja es requerido"
         },
         errorElement: 'span',
         errorPlacement: function (error, element) {
@@ -63,9 +62,95 @@ $(document).ready(function () {
             $(element).removeClass('is-invalid');
         }
     });
+    //Get Clientes
+    $.ajax({
+        type: "GET",
+        url: "https://localhost:7259/api/Cliente/Select",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            var clientesData = data.respuesta;
+            console.log('Data ->', data.respuesta);
+            $('#clientes').html('');
+            $.each(clientesData, function (k, v) {
+                $('#clientes').append('<option data-value="' + v.id + '" value="' + v.nombreCorto + '"></option>');
+            });
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        }
+    });
+    //Get Operadores
+    $.ajax({
+        type: "GET",
+        url: "https://localhost:7259/api/Operador/Select",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            var clientesData = data.respuesta;
+            console.log('Data ->', data.respuesta);
+            $('#operador').html('');
+            $.each(clientesData, function (k, v) {
+                $('#operador').append('<option data-value="' + v.id + '" value="' + v.nombre + ' ' + v.apellidoPaterno + ' ' + v.apellidoMaterno + ' ' + '"></option>');
+            });
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        }
+    });
+    //Get Tractos
+    $.ajax({
+        type: "GET",
+        url: "https://localhost:7259/api/Tracto/Select",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            var clientesData = data.respuesta;
+            console.log('Data ->', data.respuesta);
+            $('#tractor').html('');
+            $.each(clientesData, function (k, v) {
+                $('#tractor').append('<option data-value="' + v.id + '" value="' + v.idTracto + '"></option>');
+            });
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        }
+    });
+    //Get Caja
+    $.ajax({
+        type: "GET",
+        url: "https://localhost:7259/api/Caja/Select",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            var clientesData = data.respuesta;
+            console.log('Data ->', data.respuesta);
+            $('#caja').html('');
+            $.each(clientesData, function (k, v) {
+                $('#caja').append('<option data-value="' + v.id + '" value="' + v.noEconomico + '"></option>');
+            });
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        }
+    });
     
+
     
 });
+
 $('#form1').click(function () {
     if (valSolicitud.form()) {
         solicitud.Cliente = $("#txtCliente").val();
@@ -78,6 +163,7 @@ $('#form1').click(function () {
     }
     console.log('obj', solicitud);
 });
+
 $('#añadirOperador').click(function () {
 
     var operador = $("#txtOperador").val();
@@ -177,3 +263,29 @@ $('#añadirOperador').click(function () {
     console.log('operadores', operadores);
    
 });
+
+
+function getClientes() {
+    console.log('llego aqui');
+    $.ajax({
+        type: "GET",
+        url: "https://localhost:7259/api/Cliente/Select",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            var clientesData = data.respuesta;
+            console.log('Data ->', data.respuesta);
+            $('#txtCliente').html('');
+            $('#txtCliente').append('<option value="0">SELECCIONE</option>');
+            $.each(clientesData, function (k, v) {
+                $('#txtCliente').append('<option value="' + v.id + '">' + v.nombreCorto + '</option>');
+            });
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        }
+    });
+}
