@@ -11,7 +11,14 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
     <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css">
+
+
+
+    
 
     <!-- DataTables  & Plugins -->
     <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -28,6 +35,138 @@
     <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 }
+
+
+
+<style>
+
+* {
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   outline: none;
+}
+
+ 
+h1 {
+   text-align: center;
+   font-weight: 300;
+   color: #777
+}
+
+h1 span {
+   font-weight: 600;
+}
+
+.container {
+   width: 80%;
+   padding: 50px 0;
+   margin: 50px auto;
+   position: relative;
+   overflow: hidden;
+}
+
+.container:before {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 50%;
+   margin-left: -1px;
+   width: 2px;
+   height: 100%;
+   background: #CCD1D9;
+   z-index: 1
+}
+
+.timeline-block {
+   width: -webkit-calc(50% + 8px);
+   width: -moz-calc(50% + 8px);
+   width: calc(50% + 8px);
+   display: -webkit-box;
+   display: -webkit-flex;
+   display: -moz-box;
+   display: flex;
+   -webkit-box-pack: justify;
+   -webkit-justify-content: space-between;
+   -moz-box-pack: justify;
+   justify-content: space-between;
+   clear: both;
+}
+
+.timeline-block-right {
+   float: right;
+}
+
+.timeline-block-left {
+   float: left;
+   direction: rtl
+}
+
+.marker {
+   width: 16px;
+   height: 16px;
+   border-radius: 50%;
+   border: 2px solid #F5F7FA;
+   background: #4FC1E9;
+   margin-top: 10px;
+   z-index: 9999
+}
+
+.timeline-content {
+   width: 95%;
+   padding: 0 15px;
+   color: #666
+}
+
+.timeline-content h3 {
+   margin-top: 5px;
+   margin-bottom: 5px;
+   font-size: 25px;
+   font-weight: 500
+}
+
+.timeline-content span {
+   font-size: 15px;
+   color: #a4a4a4;
+}
+
+.timeline-content p {
+   font-size: 14px;
+   line-height: 1.5em;
+   word-spacing: 1px;
+   color: #888;
+}
+
+
+@@media screen and (max-width: 768px) {
+   .container:before {
+      left: 8px;
+      width: 2px;
+   }
+   .timeline-block {
+      width: 100%;
+      margin-bottom: 30px;
+   }
+   .timeline-block-right {
+      float: none;
+   }
+
+   .timeline-block-left {
+      float: none;
+      direction: ltr;
+   }
+}
+
+
+</style>
+
+
+
+ 
+
+
+
+
 <section>
     <div class="content-header">
         <div class="container-fluid">
@@ -124,6 +263,16 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
+
+
+
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class='form-group'>
@@ -142,6 +291,45 @@
                             </div>
                         </div>
                     </div>
+
+
+@*                    <div class="row">
+                        <div class="col-md-12">
+                            <div class='form-group'>
+                                <div class="timeline">
+                                  <div class="events" >
+                                    <ol>
+                                      <ul id="TimeLineContainer">
+                                        <li>
+                                          <a href="#0" class="selected">Early Life</a>
+                                        </li>
+                                        <li>
+                                          <a href="#1">Career</a>
+                                        </li>
+                                        <li>
+                                          <a href="#2">Philosophy</a>
+                                        </li>
+                                        <li>
+                                          <a href="#3">Legacy</a>
+                                        </li>
+                                         <li><a href="#0" class="selected">Franco</a></li>
+                                      </ul>
+                                    </ol>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+*@
+
+
+
+
+
+
+
+
+
                 </div>
                 <div class="card-footer">
                     <div class="row">
@@ -186,6 +374,100 @@
          </form>
      </div>
 </section>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalDestinos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container" id="TimeLineContainerII" >
+
+               <div class="timeline-block timeline-block-right">
+                  <div class="marker"></div>
+                  <div class="timeline-content">
+                     <h3>First Year</h3>
+                     <p>Lorem ipsum </p>
+                     <p>Eliminar &nbsp;  <i class="fa-solid fa-trash-can"></i></p>
+
+
+                  </div>
+               </div>
+
+               <div class="timeline-block timeline-block-right">
+                  <div class="marker"></div>
+                  <div class="timeline-content">
+                     <h3>Seconed Year</h3>
+                     <p>Lorem ipsum </p>
+                  </div>
+               </div>
+
+               <div class="timeline-block timeline-block-right">
+                  <div class="marker"></div>
+                  <div class="timeline-content">
+                     <h3>Third Year</h3>
+                     <p>Lorem ipsum </p>
+                  </div>
+               </div>
+
+               <div class="timeline-block timeline-block-right">
+                  <div class="marker"></div>
+                  <div class="timeline-content">
+                     <h3>Fourth Year</h3>
+                     <p>Lorem ipsum </p>
+                  </div>
+               </div>
+
+               <div class="timeline-block timeline-block-right">
+                  <div class="marker"></div>
+                  <div class="timeline-content">
+                     <h3>Fifth Year</h3>
+                     <p>Lorem ipsum </p>
+                  </div>
+               </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @*<section>
     <div id="cardDomicilio" class="card card-default collapsed-card">

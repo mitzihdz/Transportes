@@ -38,8 +38,8 @@ function GetGrid() {
                     "<tr>" +
                     "<td>" + item.tblClientesId + "</td>" +
                     "<td>" + item.tblClientes.nombreCorto + "</td>" +
-                    "<td>" + item.tblUbicacionesOrigenNavigation.planta + "</td>" +
-                    "<td>" + item.tblUbicacionesDestinoNavigation.planta + "</td>" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='$(\"#ModalDestinos\").modal()'><i class='fa-solid fa-truck'></i></a >" +
+               
                     "<td>" + item.fechaSolicitud + "</td>" +
                     "<td class='text-center'><a class='nav_link' href='~/../Solicitud/Editar/" + item.tblClientesId + "'><i class='nav-icon fas fa-edit'></i></a >" +
                     "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.tblClientesId + ")'><i class='far fa-times-circle'></i></a >" +
