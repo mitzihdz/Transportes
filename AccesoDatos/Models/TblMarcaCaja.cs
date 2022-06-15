@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -17,6 +18,7 @@ namespace AccesoDatos.Models
         public bool? Activo { get; set; }
         public DateTime? Inclusion { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<TblCaja> TblCajas { get; set; }
     }
 }

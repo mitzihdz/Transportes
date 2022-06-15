@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -26,6 +27,7 @@ namespace AccesoDatos.Models
         public virtual TblMarcaCaja TblMarcaCajas { get; set; }
         public virtual ICollection<TblPoliza> TblPolizas { get; set; }
         public virtual ICollection<TblProveedoresCaja> TblProveedoresCajas { get; set; }
+        [JsonIgnore]
         public virtual ICollection<TblSolicitudDetalle> TblSolicitudDetalles { get; set; }
     }
 }

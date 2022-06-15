@@ -30,6 +30,7 @@ namespace AccesoDatos.Models
         public virtual DbSet<TblProveedoresCaja> TblProveedoresCajas { get; set; }
         public virtual DbSet<TblSolicitud> TblSolicituds { get; set; }
         public virtual DbSet<TblSolicitudDetalle> TblSolicitudDetalles { get; set; }
+        public virtual DbSet<TblSolicitudRuta> TblSolicitudRutas { get; set; }
         public virtual DbSet<TblTracto> TblTractos { get; set; }
         public virtual DbSet<TblUbicacione> TblUbicaciones { get; set; }
         public virtual DbSet<TblUsuario> TblUsuarios { get; set; }
@@ -39,7 +40,7 @@ namespace AccesoDatos.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server=(localdb)\\MSSqlLocalDb;user=UsrTrasporte;password=123;database=transportes");
+                optionsBuilder.UseSqlServer("server=(localdb)\\MSSqlLocalDb;user=UsrTransporte;password=123;database=transportes");
             }
         }
 
@@ -353,10 +354,6 @@ namespace AccesoDatos.Models
 
                 entity.Property(e => e.TblEstatusId).HasColumnName("tbl_estatus_id");
 
-                entity.Property(e => e.TblUbicacionesDestino).HasColumnName("tbl_Ubicaciones_destino");
-
-                entity.Property(e => e.TblUbicacionesOrigen).HasColumnName("tbl_Ubicaciones_origen");
-
                 entity.HasOne(d => d.TblClientes)
                     .WithMany(p => p.TblSolicituds)
                     .HasForeignKey(d => d.TblClientesId)
@@ -366,16 +363,6 @@ namespace AccesoDatos.Models
                     .WithMany(p => p.TblSolicituds)
                     .HasForeignKey(d => d.TblEstatusId)
                     .HasConstraintName("FK__tbl_Solic__tbl_e__08B54D69");
-
-                entity.HasOne(d => d.TblUbicacionesDestinoNavigation)
-                    .WithMany(p => p.TblSolicitudTblUbicacionesDestinoNavigations)
-                    .HasForeignKey(d => d.TblUbicacionesDestino)
-                    .HasConstraintName("FK__tbl_Solic__tbl_U__07C12930");
-
-                entity.HasOne(d => d.TblUbicacionesOrigenNavigation)
-                    .WithMany(p => p.TblSolicitudTblUbicacionesOrigenNavigations)
-                    .HasForeignKey(d => d.TblUbicacionesOrigen)
-                    .HasConstraintName("FK__tbl_Solic__tbl_U__06CD04F7");
             });
 
             modelBuilder.Entity<TblSolicitudDetalle>(entity =>
@@ -416,6 +403,33 @@ namespace AccesoDatos.Models
                     .WithMany(p => p.TblSolicitudDetalles)
                     .HasForeignKey(d => d.TblTractoId)
                     .HasConstraintName("FK__tbl_Solic__tbl_t__0C85DE4D");
+            });
+
+            modelBuilder.Entity<TblSolicitudRuta>(entity =>
+            {
+                entity.ToTable("tbl_Solicitud_Rutas");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Inclusion).HasColumnType("datetime");
+
+                entity.Property(e => e.Orden).HasColumnName("orden");
+
+                entity.Property(e => e.TblSolicitudId).HasColumnName("tbl_Solicitud_id");
+
+                entity.Property(e => e.TblUbicacionesId).HasColumnName("tbl_Ubicaciones_id");
+
+                entity.HasOne(d => d.TblSolicitud)
+                    .WithMany(p => p.TblSolicitudRuta)
+                    .HasForeignKey(d => d.TblSolicitudId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tbl_Solicitud_Ruta_tbl_Solicitud");
+
+                entity.HasOne(d => d.TblUbicaciones)
+                    .WithMany(p => p.TblSolicitudRuta)
+                    .HasForeignKey(d => d.TblUbicacionesId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tbl_Solicitud_Ruta_tbl_Ubicaciones");
             });
 
             modelBuilder.Entity<TblTracto>(entity =>

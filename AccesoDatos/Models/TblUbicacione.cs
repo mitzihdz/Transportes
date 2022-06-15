@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -9,8 +10,7 @@ namespace AccesoDatos.Models
     {
         public TblUbicacione()
         {
-            TblSolicitudTblUbicacionesDestinoNavigations = new HashSet<TblSolicitud>();
-            TblSolicitudTblUbicacionesOrigenNavigations = new HashSet<TblSolicitud>();
+            TblSolicitudRuta = new HashSet<TblSolicitudRuta>();
         }
 
         public int Id { get; set; }
@@ -19,7 +19,7 @@ namespace AccesoDatos.Models
         public bool? Activo { get; set; }
         public DateTime? Inclusion { get; set; }
 
-        public virtual ICollection<TblSolicitud> TblSolicitudTblUbicacionesDestinoNavigations { get; set; }
-        public virtual ICollection<TblSolicitud> TblSolicitudTblUbicacionesOrigenNavigations { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<TblSolicitudRuta> TblSolicitudRuta { get; set; }
     }
 }
