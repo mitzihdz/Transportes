@@ -1,0 +1,194 @@
+﻿@page
+@model TranportesAdmin.Views.Solicitud.EditarModel
+@section Scripts {
+    <script src="~/js/SolicitudEdit.js"></script>
+    <script src="~/js/Alerts.js"></script>
+    <!-- jquery-validation -->
+    <script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/plugins/jquery-validation/additional-methods.min.js"></script>
+
+}
+<section>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Administración de Solicitudes</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="~/Solicitud">Admin Solicitudes</a></li>
+                        <li class="breadcrumb-item active">Editar</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+</section>
+
+<section>
+    <!-- Card ADD -->
+    <div id="cardOperador" class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Información general de la solicitud</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-sort-down"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <form id="fmOperador">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="txtClave">Cliente</label>
+                        <input list="clientes" class="form-control form-control-sm" type="text" id="txtCliente" name="Cliente" style="text-transform:uppercase" maxlength="200">
+                        <datalist id="clientes">
+                            <option value="Clientes 1"></option>
+                            <option value="Clientes 2"></option>
+                            <option value="Clientes 3"></option>
+                            <option value="Clientes 4"></option>
+                        </datalist>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="txtFecha">Fecha</label>
+                            <input class="form-control form-control-sm" type="datetime" id="txtFecha" style="text-transform:uppercase" maxlength="200">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                        <label for="txtUbiDes">Ubicación Destino</label>
+                        <input list="ubicacionDes" class="form-control form-control-sm" type="text" id="txtUbiDes" name="UbiDes" style="text-transform:uppercase" maxlength="200">
+                        <datalist id="ubicacionDes">
+                            <option value="Ubicación Destino 1"></option>
+                            <option value="Ubicación Destino 2"></option>
+                            <option value="Ubicación Destino 3"></option>
+                            <option value="Ubicación Destino 4"></option>
+                        </datalist>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="txtUbiOrigen">Ubicación Origen</label>
+                            <input list="ubicacionOrigen" class="form-control form-control-sm" type="text" id="txtUbiOrigen" name="UbiOrigen" style="text-transform:uppercase" maxlength="200">
+                            <datalist id="ubicacionOrigen">
+                                <option value="Ubicación Origen 1"></option>
+                                <option value="Ubicación Origen 2"></option>
+                                <option value="Ubicación Origen 3"></option>
+                                <option value="Ubicación Origen 4"></option>
+                            </datalist>
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </form>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-3">
+                        <a class="btn btn-block btn-default btn-xs" href="~/Solicitud">Cancelar</a>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" id="BtnNuevoOperador" class="btn btn-block btn-success btn-xs">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+<section>
+    <div id="cardDomicilio" class="card card-default collapsed-card">
+        <div class="card-header">
+            <h3 class="card-title">Detalle de la Solicitud</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-sort-down"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <form id="fmDomicilio">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="txtOperador">Operador</label>
+                            <input list="operador" class="form-control form-control-sm" type="text" id="txtOperador" name="Operador" style="text-transform:uppercase" maxlength="200">
+                            <datalist id="operador">
+                                <option value="Operador 1"></option>
+                                <option value="Operador 2"></option>
+                                <option value="Operador 3"></option>
+                                <option value="Operador 4"></option>
+                            </datalist>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Tractor">Tractor</label>
+                            <input list="tractor" class="form-control form-control-sm" type="text" id="txtTractor" name="Tractor" style="text-transform:uppercase" maxlength="20">
+                            <datalist id="tractor">
+                                <option value="Tractor 1"></option>
+                                <option value="Tractor 2"></option>
+                                <option value="Tractor 3"></option>
+                                <option value="Tractor 4"></option>
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Caja">Caja</label>
+                            <input list="caja" class="form-control form-control-sm" type="text" id="txtCaja" name="Caja" style="text-transform:uppercase" maxlength="20">
+                            <datalist id="caja">
+                                <option value="Caja 1"></option>
+                                <option value="Caja 2"></option>
+                                <option value="Caja 3"></option>
+                                <option value="Caja 4"></option>
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Caja2">Caja</label>
+                            <input list="caja2" class="form-control form-control-sm" type="text" id="txtCaja2" name="Caja2" style="text-transform:uppercase" maxlength="20">
+                            <datalist id="caja2">
+                                <option value="Caja 1"></option>
+                                <option value="Caja 2"></option>
+                                <option value="Caja 3"></option>
+                                <option value="Caja 4"></option>
+                            </datalist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-md-6">
+                    &nbsp;
+                </div>
+                <div class="col-md-3">
+                    <a class="btn btn-block btn-default btn-xs" href="~/Solicitud">Cancelar</a>
+                </div>
+                <div class="col-md-3">
+                    <button id="BtnNuevoDomicilio" class="btn btn-block btn-success btn-xs" type="submit">Agregar</button>
+                </div>
+            </div>
+        </div>    
+    </div>
+</section>

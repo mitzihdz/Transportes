@@ -358,7 +358,7 @@ function OpenNew() {
 }
 
 function GetMarcas() {
-
+    console.log('llego aqui');
     $.ajax({
         type: "GET",
         url: "https://localhost:7259/api/Marca/Select",
@@ -366,6 +366,7 @@ function GetMarcas() {
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
             var marcaData = data.respuesta;
+            console.log('Data ->', data.respuesta);
             $('#ddlMarca').html('');
             $('#ddlMarca').append('<option value="0">SELECCIONE</option>');
             $.each(marcaData, function (k, v) {
