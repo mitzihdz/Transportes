@@ -260,19 +260,30 @@
     $("#BtnNuevaCaja").click(function () {
         if (valCaja.form()) {
 
-            var _noEconomico = $('#txtNumEconomico').val();
+            var _noEconomico = $('#txtNoEconomico').val();
             var _placas = $('#txtPlacas').val();
-            var _modelo = $('#txtModelo').val();
-            var _marca = $('#txtMarca').val();
+            var _dimension = $('#txtDimension').val();
+            var _marcaId = $('#ddlMarca').val();
             var _anio = $('#txtAnio').val();
-            
+            var _proveedorId = $('#txtAnio').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Marca/Add",
+                url: "https://localhost:7259/api/Caja/Add",
                 type: "POST",
                 data: JSON.stringify({
                     id: 0,
-                    marca: _marca
+                    noEconomico: _noEconomico,
+                    placas: _placas,
+                    anioModelo: _anio,
+                    tblMarcaCajasId: _marcaId,
+                    dimensiones: _dimension,
+                    tblProveedoresCajas: [
+                        {
+                            id: 0,
+                            tblProveedoresId: _proveedorId,
+                            tblCajasId: 0
+                        }
+                    ]
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {

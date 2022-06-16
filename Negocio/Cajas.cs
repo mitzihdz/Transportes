@@ -33,6 +33,10 @@ namespace Negocio
             {
                 caja.NoEconomico = caja.NoEconomico.ToUpper();
                 caja.Placas = caja.Placas.ToUpper();
+                caja.Activo = true;
+                caja.Inclusion = DateTime.Now;
+                //Para relacion con proveedor
+                caja.TblProveedoresCajas.Single().Inclusion = DateTime.Now;
 
                 ctx.TblCajas.Add(caja);
                 ctx.SaveChanges();

@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @section Scripts {
-    <script src="~/js/Tracto.js"></script>
+    <script src="~/js/Proveedor.js"></script>
     <script src="~/js/Alerts.js"></script>
     <!-- DataTables -->
     <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -28,12 +28,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Administración de tracto camiones</h1>
+                <h1 class="m-0">Administración de proveedores</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item">Administración de Tractos</li>
+                    <li class="breadcrumb-item">Administración de Proveedores</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -42,7 +42,7 @@
 
 <div class="card card-default">
     <div class="card-header">
-        <h3 class="card-title">Listado general de tracto camiones</h3>
+        <h3 class="card-title">Listado general de proveedores</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -51,22 +51,19 @@
                 &nbsp;
             </div>
             <div class="col-md-2">
-                <a class="btn btn-block btn-info btn-sm" href="~/Tracto/Agregar">Nuevo Tracto</a>
+                <a class="btn btn-block btn-info btn-sm" href="~/Proveedor/Agregar">Nuevo Proveedor</a>
             </div>
         </div>
         <br />
         <div class="row">
              <div class="col-12">
-                 <table id="tblTractos" class="table table-bordered table-hover">
+                 <table id="tblProveedores" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>Clave</th>
-                            <th>Núm Económico</th>
-                            <th>Placas</th>
-                            <th>Modelo</th>
-                            <th>Año</th>
-                            <th>Editar</th>
-                            <th>Eliminar</th>
+                            <th class="col-md-2">Clave</th>
+                            <th class="col-md-8">Nombre o Razón Social</th>
+                            <th class="col-md-1">Editar</th>
+                            <th class="col-md-1">Eliminar</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
