@@ -1,6 +1,8 @@
 ﻿$(document).ready(function () {
 
-    $('label.required').append('&nbsp;<strong>*</strong>&nbsp;');
+    $(function () {
+        bsCustomFileInput.init();
+    });
 
     $.validator.addMethod(
         "regex",
@@ -356,6 +358,40 @@
 
 
 
+    /*File Upload*/
+    $("#fileButton").click(function () {
+        var files = $("#fileInput").prop("files");
+        var fileData = new FormData();
+        fileData.append("fileInput", files[0]);
+
+        //for (var i = 0; i < files.length; i++) {
+        //    fileData.append("fileInput", files[i]);
+        //}
+
+        $.ajax({
+            type: "POST",
+            url: "/Operador/UploadFiles",
+            dataType: "json",
+            contentType: false, 
+            processData: false,
+            data: fileData,
+            success: function (result, status, xhr) {
+                alert(result);
+            },
+            error: function (xhr, status, error) {
+                alert(status);
+            }
+        });
+
+        $("#fileInput").val("");
+    });
+
+
+
+
+
+
+
 });
 
 function OpenNew() {
@@ -395,6 +431,32 @@ function GetMarcas() {
 
 
     
+}
+
+function SendFile(file) {
+    var formData = new FormData();
+    formData.append('file', $('#exampleInputFile')[0].files[0]);
+
+    $.ajax({
+        url: "fileUploader.ashx",
+        type: "POST",
+        data: formData,
+        contentType: 'application/json; charset=utf-8',
+        success: function (status) {
+            if (status != 'error') {
+                var myPath = "Files/" + status;
+            }
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al actualizar la marca. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al actualizar la marca. Contacte al administrador.');
+        }
+    });
+
+
+
 }
 
 

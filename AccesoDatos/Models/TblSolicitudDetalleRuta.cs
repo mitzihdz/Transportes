@@ -5,15 +5,17 @@ using System.Collections.Generic;
 
 namespace AccesoDatos.Models
 {
-    public partial class TblSolicitudRuta
+    public partial class TblSolicitudDetalleRuta
     {
         public int Id { get; set; }
         public int TblUbicacionesId { get; set; }
         public int Orden { get; set; }
-        public int TblSolicitudId { get; set; }
+        public int TblEstatusRutaId { get; set; }
+        public int TblSolicitudDetalleId { get; set; }
         public DateTime? Inclusion { get; set; }
 
-        public virtual TblSolicitud TblSolicitud { get; set; }
+        public virtual TblEstatusRuta TblEstatusRuta { get; set; }
+        public virtual TblSolicitudDetalle TblSolicitudDetalle { get; set; }
         public virtual TblUbicacione TblUbicaciones { get; set; }
     }
 }

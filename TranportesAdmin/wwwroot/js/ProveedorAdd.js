@@ -64,7 +64,7 @@
     //Cajas
     var valCaja = $('#fmNuevaCaja').validate({
         rules: {
-            NumEconomico: {
+            NoEconomico: {
                 required: true,
                 digits: true
             },
@@ -160,7 +160,7 @@
 
     var valEditCaja = $('#fmEditCaja').validate({
         rules: {
-            NumEconomicoEdit: {
+            NoEconomico: {
                 required: true,
                 digits: true
             },
@@ -296,13 +296,13 @@ function GetMarcas() {
             var marcaData = data.respuesta;
             
             $('#ddlMarca').html('');
-            $('#ddlMarca').append('<option value="0">SELECCIONE</option>');
+            $('#ddlMarca').append('<option value="">SELECCIONE</option>');
             $.each(marcaData, function (k, v) {
                 $('#ddlMarca').append('<option value="' + v.id + '">' + v.marca + '</option>');
             });
 
             $('#ddlMarcaEdit').html('');
-            $('#ddlMarcaEdit').append('<option value="0">SELECCIONE</option>');
+            $('#ddlMarcaEdit').append('<option value="">SELECCIONE</option>');
             $.each(marcaData, function (k, v) {
                 $('#ddlMarcaEdit').append('<option value="' + v.id + '">' + v.marca + '</option>');
             });

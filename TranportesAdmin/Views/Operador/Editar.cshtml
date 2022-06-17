@@ -30,7 +30,7 @@
 
 
             <!-- Card ADD -->
-        <div id="cardOperador" class="card card-default">
+        <div id="cardOperador" class="card card-default collapsed-card">
           <div class="card-header">
             <h3 class="card-title">Información general del operador</h3>
 
@@ -228,3 +228,51 @@
                     
         </div>
         <!-- /.card -->
+
+<div id="cardDocumentos" class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title">Documentación</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body">
+        <input id="IdOperador" type="hidden" />
+
+        <div class="row">
+            <div class="col-md-5">
+                &nbsp;    
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-block btn-info btn-sm" onclick="OpenNew();">
+                  Nuevo Documento
+                </button>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+             <div class="col-md-7">
+                 <table id="tblDocumentos" style="border:none">
+                    <thead>
+                        <tr>
+                            <th class="col-md-5">Documento</th>                            
+                            <th class="col-md-1">Visualizar</th>
+                            <th class="col-md-1">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+             </div>
+        </div>
+
+    </div>
+    <!-- /.card-body -->
+</div>
+<!-- /.card -->

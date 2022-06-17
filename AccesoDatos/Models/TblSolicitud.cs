@@ -10,7 +10,6 @@ namespace AccesoDatos.Models
         public TblSolicitud()
         {
             TblSolicitudDetalles = new HashSet<TblSolicitudDetalle>();
-            TblSolicitudRuta = new HashSet<TblSolicitudRuta>();
         }
 
         public int Id { get; set; }
@@ -22,6 +21,5 @@ namespace AccesoDatos.Models
         public virtual TblCliente TblClientes { get; set; }
         public virtual TblEstatus TblEstatus { get; set; }
         public virtual ICollection<TblSolicitudDetalle> TblSolicitudDetalles { get; set; }
-        public virtual ICollection<TblSolicitudRuta> TblSolicitudRuta { get; set; }
     }
 }

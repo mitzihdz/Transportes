@@ -23,6 +23,7 @@ namespace AccesoDatos.Models
         public virtual DbSet<TblDocumentosOperadore> TblDocumentosOperadores { get; set; }
         public virtual DbSet<TblDomicilioOper> TblDomicilioOpers { get; set; }
         public virtual DbSet<TblEstatus> TblEstatuses { get; set; }
+        public virtual DbSet<TblEstatusRuta> TblEstatusRutas { get; set; }
         public virtual DbSet<TblMarcaCaja> TblMarcaCajas { get; set; }
         public virtual DbSet<TblOperador> TblOperadors { get; set; }
         public virtual DbSet<TblPoliza> TblPolizas { get; set; }
@@ -30,7 +31,7 @@ namespace AccesoDatos.Models
         public virtual DbSet<TblProveedoresCaja> TblProveedoresCajas { get; set; }
         public virtual DbSet<TblSolicitud> TblSolicituds { get; set; }
         public virtual DbSet<TblSolicitudDetalle> TblSolicitudDetalles { get; set; }
-        public virtual DbSet<TblSolicitudRuta> TblSolicitudRutas { get; set; }
+        public virtual DbSet<TblSolicitudDetalleRuta> TblSolicitudDetalleRutas { get; set; }
         public virtual DbSet<TblTracto> TblTractos { get; set; }
         public virtual DbSet<TblUbicacione> TblUbicaciones { get; set; }
         public virtual DbSet<TblUsuario> TblUsuarios { get; set; }
@@ -77,7 +78,7 @@ namespace AccesoDatos.Models
                 entity.HasOne(d => d.TblMarcaCajas)
                     .WithMany(p => p.TblCajas)
                     .HasForeignKey(d => d.TblMarcaCajasId)
-                    .HasConstraintName("FK__tbl_cajas__tbl_M__75A278F5");
+                    .HasConstraintName("FK__tbl_cajas__tbl_M__6477ECF3");
             });
 
             modelBuilder.Entity<TblCliente>(entity =>
@@ -206,6 +207,20 @@ namespace AccesoDatos.Models
                     .HasDefaultValueSql("(getdate())");
             });
 
+            modelBuilder.Entity<TblEstatusRuta>(entity =>
+            {
+                entity.ToTable("tbl_estatus_rutas");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Estatus)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Inclusion).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<TblMarcaCaja>(entity =>
             {
                 entity.ToTable("tbl_Marca_Cajas");
@@ -280,12 +295,12 @@ namespace AccesoDatos.Models
                 entity.HasOne(d => d.TblCajas)
                     .WithMany(p => p.TblPolizas)
                     .HasForeignKey(d => d.TblCajasId)
-                    .HasConstraintName("FK__tbl_Poliz__tbl_c__1EA48E88");
+                    .HasConstraintName("FK__tbl_Poliz__tbl_c__68487DD7");
 
                 entity.HasOne(d => d.TblTracto)
                     .WithMany(p => p.TblPolizas)
                     .HasForeignKey(d => d.TblTractoId)
-                    .HasConstraintName("FK__tbl_Poliz__tbl_t__1DB06A4F");
+                    .HasConstraintName("FK__tbl_Poliz__tbl_t__693CA210");
             });
 
             modelBuilder.Entity<TblProveedore>(entity =>
@@ -328,13 +343,13 @@ namespace AccesoDatos.Models
                     .WithMany(p => p.TblProveedoresCajas)
                     .HasForeignKey(d => d.TblCajasId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__tbl_prove__tbl_c__797309D9");
+                    .HasConstraintName("FK__tbl_prove__tbl_c__6A30C649");
 
                 entity.HasOne(d => d.TblProveedores)
                     .WithMany(p => p.TblProveedoresCajas)
                     .HasForeignKey(d => d.TblProveedoresId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__tbl_prove__tbl_p__787EE5A0");
+                    .HasConstraintName("FK__tbl_prove__tbl_p__6B24EA82");
             });
 
             modelBuilder.Entity<TblSolicitud>(entity =>
@@ -357,12 +372,12 @@ namespace AccesoDatos.Models
                 entity.HasOne(d => d.TblClientes)
                     .WithMany(p => p.TblSolicituds)
                     .HasForeignKey(d => d.TblClientesId)
-                    .HasConstraintName("FK__tbl_Solic__tbl_c__05D8E0BE");
+                    .HasConstraintName("FK__tbl_Solic__tbl_c__6C190EBB");
 
                 entity.HasOne(d => d.TblEstatus)
                     .WithMany(p => p.TblSolicituds)
                     .HasForeignKey(d => d.TblEstatusId)
-                    .HasConstraintName("FK__tbl_Solic__tbl_e__08B54D69");
+                    .HasConstraintName("FK__tbl_Solic__tbl_e__6D0D32F4");
             });
 
             modelBuilder.Entity<TblSolicitudDetalle>(entity =>
@@ -387,49 +402,55 @@ namespace AccesoDatos.Models
                 entity.HasOne(d => d.TblCajas)
                     .WithMany(p => p.TblSolicitudDetalles)
                     .HasForeignKey(d => d.TblCajasId)
-                    .HasConstraintName("FK__tbl_Solic__tbl_c__0D7A0286");
+                    .HasConstraintName("FK__tbl_Solic__tbl_c__6E01572D");
 
                 entity.HasOne(d => d.TblOperador)
                     .WithMany(p => p.TblSolicitudDetalles)
                     .HasForeignKey(d => d.TblOperadorId)
-                    .HasConstraintName("FK__tbl_Solic__tbl_o__0E6E26BF");
+                    .HasConstraintName("FK__tbl_Solic__tbl_o__6EF57B66");
 
                 entity.HasOne(d => d.TblSolicitud)
                     .WithMany(p => p.TblSolicitudDetalles)
                     .HasForeignKey(d => d.TblSolicitudId)
-                    .HasConstraintName("FK__tbl_Solic__tbl_S__0F624AF8");
+                    .HasConstraintName("FK__tbl_Solic__tbl_S__6FE99F9F");
 
                 entity.HasOne(d => d.TblTracto)
                     .WithMany(p => p.TblSolicitudDetalles)
                     .HasForeignKey(d => d.TblTractoId)
-                    .HasConstraintName("FK__tbl_Solic__tbl_t__0C85DE4D");
+                    .HasConstraintName("FK__tbl_Solic__tbl_t__70DDC3D8");
             });
 
-            modelBuilder.Entity<TblSolicitudRuta>(entity =>
+            modelBuilder.Entity<TblSolicitudDetalleRuta>(entity =>
             {
-                entity.ToTable("tbl_Solicitud_Rutas");
+                entity.ToTable("tbl_Solicitud_detalle_rutas");
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Inclusion).HasColumnType("datetime");
 
-                entity.Property(e => e.Orden).HasColumnName("orden");
+                entity.Property(e => e.TblEstatusRutaId).HasColumnName("tbl_estatus_ruta_id");
 
-                entity.Property(e => e.TblSolicitudId).HasColumnName("tbl_Solicitud_id");
+                entity.Property(e => e.TblSolicitudDetalleId).HasColumnName("tbl_solicitud_detalle_id");
 
                 entity.Property(e => e.TblUbicacionesId).HasColumnName("tbl_Ubicaciones_id");
 
-                entity.HasOne(d => d.TblSolicitud)
-                    .WithMany(p => p.TblSolicitudRuta)
-                    .HasForeignKey(d => d.TblSolicitudId)
+                entity.HasOne(d => d.TblEstatusRuta)
+                    .WithMany(p => p.TblSolicitudDetalleRuta)
+                    .HasForeignKey(d => d.TblEstatusRutaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbl_Solicitud_Ruta_tbl_Solicitud");
+                    .HasConstraintName("FK_tbl_Solicitud_detalle_rutas_tbl_estatus_rutas");
+
+                entity.HasOne(d => d.TblSolicitudDetalle)
+                    .WithMany(p => p.TblSolicitudDetalleRuta)
+                    .HasForeignKey(d => d.TblSolicitudDetalleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tbl_Solicitud_detalle_rutas_tbl_Solicitud_detalle");
 
                 entity.HasOne(d => d.TblUbicaciones)
-                    .WithMany(p => p.TblSolicitudRuta)
+                    .WithMany(p => p.TblSolicitudDetalleRuta)
                     .HasForeignKey(d => d.TblUbicacionesId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbl_Solicitud_Ruta_tbl_Ubicaciones");
+                    .HasConstraintName("FK_tbl_Solicitud_detalle_rutas_tbl_Ubicaciones");
             });
 
             modelBuilder.Entity<TblTracto>(entity =>

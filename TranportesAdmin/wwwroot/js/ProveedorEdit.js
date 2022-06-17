@@ -1,5 +1,26 @@
 ﻿$(document).ready(function () {
 
+    var id = $("#IdProveedor").val();
+    $.ajax({
+        type: "GET",
+        url: "https://localhost:7259/api/Proveedor/Select?id=" + id,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            var proveedorData = data.respuesta;
+            $('#txtClave').val(proveedorData[0].clave);
+            $('#txtNombre').val(proveedorData[0].nombreOrazonSocial);
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al consultar el proveedor. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al consultar el proveedor. Contacte al administrador.');
+        }
+    });
+
+    GetGrid();
+
     var valProveedor = $('#fmProveedor').validate({
         rules: {
             Clave: {
@@ -34,7 +55,7 @@
             var _nombreOrazonSocial = $('#txtNombre').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Proveedor/Add",
+                url: "https://localhost:7259/api/Proveedor/Update",
                 type: "POST",
                 data: JSON.stringify({
                     id: _id,
@@ -44,8 +65,7 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 success: function (result) {
-                    $('#IdProveedor').val(result.respuesta);
-                    AlertSuccess('El proveedor se registró correctamente.');
+                    AlertSuccess('El proveedor se actualizó correctamente.');
                     
                     //$('#cardDomicilio').removeClass('collapsed-card');
                 },
@@ -64,7 +84,7 @@
     //Cajas
     var valCaja = $('#fmNuevaCaja').validate({
         rules: {
-            NumEconomico: {
+            NoEconomico: {
                 required: true,
                 digits: true
             },
@@ -84,7 +104,7 @@
             }   
         },
         messages: {
-            NumEconomico:
+            NoEconomico:
             {
                 required: "El número económico es requerido",
                 digits: "Formato numérico"
@@ -160,7 +180,7 @@
 
     var valEditCaja = $('#fmEditCaja').validate({
         rules: {
-            NumEconomicoEdit: {
+            NoEconomicoEdit: {
                 required: true,
                 digits: true
             },
@@ -180,7 +200,7 @@
             }
         },
         messages: {
-            NumEconomicoEdit:
+            NoEconomicoEdit:
             {
                 required: "El número económico es requerido",
                 digits: "Formato numérico"
@@ -286,7 +306,6 @@ function OpenEdit(id) {
 }
 
 function GetMarcas() {
-    console.log('llego aqui');
     $.ajax({
         type: "GET",
         url: "https://localhost:7259/api/Marca/Select",
@@ -296,13 +315,13 @@ function GetMarcas() {
             var marcaData = data.respuesta;
             
             $('#ddlMarca').html('');
-            $('#ddlMarca').append('<option value="0">SELECCIONE</option>');
+            $('#ddlMarca').append('<option value="">SELECCIONE</option>');
             $.each(marcaData, function (k, v) {
                 $('#ddlMarca').append('<option value="' + v.id + '">' + v.marca + '</option>');
             });
 
             $('#ddlMarcaEdit').html('');
-            $('#ddlMarcaEdit').append('<option value="0">SELECCIONE</option>');
+            $('#ddlMarcaEdit').append('<option value="">SELECCIONE</option>');
             $.each(marcaData, function (k, v) {
                 $('#ddlMarcaEdit').append('<option value="' + v.id + '">' + v.marca + '</option>');
             });
@@ -326,6 +345,7 @@ function GetGrid() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
+            debugger
             $('#tblCajas > tbody').empty();
             $.each(data.respuesta, function (i, item) {
                 var rows =
@@ -346,7 +366,7 @@ function GetGrid() {
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print"]
             }).buttons().container().appendTo('#tblCajas_wrapper .col-md-6:eq(0)');
-
+            //$('#tblCajas')[0].reset();
         },
         failure: function (data) {
             AlertError('Ocurrio un error al consultar la información. Contacte al administrador.');

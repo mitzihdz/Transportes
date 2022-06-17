@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @section Scripts {
-    <script src="~/js/~/js/ProveedorEdit.js"></script>
+    <script src="~/js/ProveedorEdit.js"></script>
     <script src="~/js/Alerts.js"></script>
     <!-- jquery-validation -->
     <script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
@@ -53,7 +53,7 @@
     <!-- /.card-header -->
     <form id="fmProveedor">   
     <div class="card-body">
-        <input id="IdProveedor" type="hidden" />
+        <input id="IdProveedor" type="hidden" value=@ViewBag.IdProveedor />
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
@@ -171,7 +171,7 @@
               <div class="col-md-8">
                   <div class="form-group">
                       <label for="ddlMarca">Marca</label>
-                      <select class="form-control form-control-sm" id="ddlMarca" name="Marca"></select>
+                      <select class="form-control form-control-sm" id="ddlMarca" name="Marca" ></select>
                   </div>
               </div>
               <div class="col-md-4">

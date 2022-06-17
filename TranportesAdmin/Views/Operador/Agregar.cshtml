@@ -13,24 +13,8 @@
     <script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="~/plugins/jquery-validation/additional-methods.min.js"></script>
 
-    <!-- DataTables -->
-    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
-    <!-- DataTables  & Plugins -->
-    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="~/plugins/jszip/jszip.min.js"></script>
-    <script src="~/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="~/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+   <!-- bs-custom-file-input -->
+   <script src="~/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 
 }
 
@@ -256,9 +240,9 @@
         <!-- /.card -->
 
 
-<div id="cardCajas" class="card card-default collapsed-card">
+<div id="cardDocumentos" class="card card-default">
     <div class="card-header">
-        <h3 class="card-title">Cajas Operador</h3>
+        <h3 class="card-title">Documentación</h3>
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                 <i class="fas fa-minus"></i>
@@ -272,29 +256,39 @@
 
     <div class="card-body">
         <input id="IdOperador" type="hidden" />
+
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-5">
                 &nbsp;    
             </div>
             <div class="col-md-2">
                 <button type="button" class="btn btn-block btn-info btn-sm" onclick="OpenNew();">
-                  Nueva Caja
+                  Nuevo Documento
                 </button>
             </div>
         </div>
         <br />
         <div class="row">
-             <div class="col-12">
-                 <table id="tblCajas" class="table table-bordered table-hover">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="fileInput">
+                        <label class="custom-file-label" for="fileInput">Seleccione...</label>
+                    </div>
+                    <div class="input-group-append">
+                        <button type="button" id="fileButton" class="input-group-text" >Subir Documento</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+             <div class="col-md-7">
+                 <table id="tblDocumentos" style="border:none">
                     <thead>
                         <tr>
-                            <th class="col-md-2">No. Económico</th>
-                            <th class="col-md-2">Placas</th>
-                            <th class="col-md-2">Marca</th>
-                            <th class="col-md-2">Año</th>
-                            <th class="col-md-2">Dimensiones</th>
-                            
-                            <th class="col-md-1">Editar</th>
+                            <th class="col-md-5">Documento</th>                            
+                            <th class="col-md-1">Visualizar</th>
                             <th class="col-md-1">Eliminar</th>
                         </tr>
                     </thead>
@@ -302,22 +296,13 @@
                 </table>
              </div>
         </div>
+
     </div>
     <!-- /.card-body -->
-
-    <div class="card-footer">
-        <div class="row">
-            <div class="col-md-9">
-                &nbsp;
-            </div>
-            <div class="col-md-3">
-                <a class="btn btn-block btn-success btn-xs" href="~/Operador">Finalizar</a>
-            </div>
-        </div>
-    </div>
-
 </div>
 <!-- /.card -->
+
+
 
 
 <div id="modalCaja" class="modal" tabindex="-1" role="dialog">

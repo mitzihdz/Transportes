@@ -19,10 +19,11 @@ namespace Negocio
                     .OrderBy(x => x.TblEstatusId).ThenBy(x => x.FechaSolicitud).ToList() 
                     : ctx.TblSolicituds.Include(s => s.TblClientes)
                     .Include(s => s.TblEstatus)
-                    .Include(s => s.TblSolicitudRuta).ThenInclude(r => r.TblUbicaciones)
                     .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblCajas)
                     .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblOperador)
                     .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblTracto)
+                    .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblSolicitudDetalleRuta).ThenInclude(r => r.TblEstatusRuta)
+                    .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblSolicitudDetalleRuta).ThenInclude(r => r.TblUbicaciones)
                     .Where(x => x.Id == id).ToList();
 
                 Response.Estado = true;
@@ -54,25 +55,9 @@ namespace Negocio
                     ctx.TblSolicituds.Add(tblSolicitud);
                     ctx.SaveChanges();
 
-                    //Guarda rutas
-                    List<TblSolicitudRuta> lstSolicitudRuta = new List<TblSolicitudRuta>();
-                    foreach (SolicitudRuta ruta in solicitud.TblSolicitudRuta)
-                    {
-                        TblSolicitudRuta tblSolicitudRuta = new TblSolicitudRuta();
-                        
-                        tblSolicitudRuta.TblUbicacionesId = ruta.TblUbicacionesId;
-                        tblSolicitudRuta.Orden = ruta.Orden;
-                        tblSolicitudRuta.TblSolicitudId = tblSolicitud.Id;
-                        tblSolicitudRuta.Inclusion = DateTime.Now;
-
-                        lstSolicitudRuta.Add(tblSolicitudRuta);
-                    }
-
-                    ctx.TblSolicitudRutas.AddRange(lstSolicitudRuta);
-                    ctx.SaveChanges();
 
                     //Guarda operadores, tracto y caja
-                    List<TblSolicitudDetalle> lstSolicitudDetalles = new List<TblSolicitudDetalle>();
+                    
                     foreach (SolicitudDetalle detalle in solicitud.TblSolicitudDetalles)
                     {
                         TblSolicitudDetalle tblSolicitudDetalle = new TblSolicitudDetalle();
@@ -83,11 +68,25 @@ namespace Negocio
                         tblSolicitudDetalle.TblSolicitudId = tblSolicitud.Id;
                         tblSolicitudDetalle.Inclusion = DateTime.Now;
 
-                        lstSolicitudDetalles.Add(tblSolicitudDetalle);
-                    }
+                        ctx.TblSolicitudDetalles.Add(tblSolicitudDetalle);
+                        ctx.SaveChanges();
 
-                    ctx.TblSolicitudDetalles.AddRange(lstSolicitudDetalles);
-                    ctx.SaveChanges();
+                        //Guarda rutas
+                        foreach (SolicitudDetalleRuta ruta in detalle.TblSolicitudDetalleRuta)
+                        {
+                            TblSolicitudDetalleRuta tblSolicitudRuta = new TblSolicitudDetalleRuta();
+
+                            tblSolicitudRuta.TblUbicacionesId = ruta.TblUbicacionesId;
+                            tblSolicitudRuta.Orden = ruta.Orden;
+                            tblSolicitudRuta.TblEstatusRutaId = 1; //Pendiente
+                            tblSolicitudRuta.TblSolicitudDetalleId = tblSolicitudDetalle.Id;
+                            tblSolicitudRuta.Inclusion = DateTime.Now;
+
+                            ctx.TblSolicitudDetalleRutas.AddRange(tblSolicitudRuta);
+                            ctx.SaveChanges();
+                        }
+                    }
+                    
 
                     //Confirma
                     transaction.Commit();
@@ -124,29 +123,29 @@ namespace Negocio
                     ctx.SaveChanges();
 
                     //Actualiza rutas
-                    List<TblSolicitudRuta> lstSolicitudRuta = ctx.TblSolicitudRutas.Where(x => x.TblSolicitudId == solicitud.Id).ToList();
-                    if(lstSolicitudRuta != null)
-                    {
-                        ctx.TblSolicitudRutas.RemoveRange(lstSolicitudRuta);
-                        ctx.SaveChanges();
-                    }
+                    //List<TblSolicitudRuta> lstSolicitudRuta = ctx.TblSolicitudRutas.Where(x => x.TblSolicitudId == solicitud.Id).ToList();
+                    //if(lstSolicitudRuta != null)
+                    //{
+                    //    ctx.TblSolicitudRutas.RemoveRange(lstSolicitudRuta);
+                    //    ctx.SaveChanges();
+                    //}
 
-                    //Guarda rutas
-                    lstSolicitudRuta = new List<TblSolicitudRuta>();
-                    foreach (SolicitudRuta ruta in solicitud.TblSolicitudRuta)
-                    {
-                        TblSolicitudRuta tblSolicitudRuta = new TblSolicitudRuta();
+                    ////Guarda rutas
+                    //lstSolicitudRuta = new List<TblSolicitudRuta>();
+                    //foreach (SolicitudRuta ruta in solicitud.TblSolicitudRuta)
+                    //{
+                    //    TblSolicitudRuta tblSolicitudRuta = new TblSolicitudRuta();
 
-                        tblSolicitudRuta.TblUbicacionesId = ruta.TblUbicacionesId;
-                        tblSolicitudRuta.Orden = ruta.Orden;
-                        tblSolicitudRuta.TblSolicitudId = tblSolicitud.Id;
-                        tblSolicitudRuta.Inclusion = DateTime.Now;
+                    //    tblSolicitudRuta.TblUbicacionesId = ruta.TblUbicacionesId;
+                    //    tblSolicitudRuta.Orden = ruta.Orden;
+                    //    tblSolicitudRuta.TblSolicitudId = tblSolicitud.Id;
+                    //    tblSolicitudRuta.Inclusion = DateTime.Now;
 
-                        lstSolicitudRuta.Add(tblSolicitudRuta);
-                    }
+                    //    lstSolicitudRuta.Add(tblSolicitudRuta);
+                    //}
 
-                    ctx.TblSolicitudRutas.AddRange(lstSolicitudRuta);
-                    ctx.SaveChanges();
+                    //ctx.TblSolicitudRutas.AddRange(lstSolicitudRuta);
+                    //ctx.SaveChanges();
 
                     //Actualiza operadores, tracto y caja
                     List<TblSolicitudDetalle> lstSolicitudDetalles = ctx.TblSolicitudDetalles.Where(x => x.TblSolicitudId == solicitud.Id).ToList();

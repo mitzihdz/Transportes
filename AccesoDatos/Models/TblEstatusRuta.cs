@@ -6,17 +6,15 @@ using System.Text.Json.Serialization;
 
 namespace AccesoDatos.Models
 {
-    public partial class TblUbicacione
+    public partial class TblEstatusRuta
     {
-        public TblUbicacione()
+        public TblEstatusRuta()
         {
             TblSolicitudDetalleRuta = new HashSet<TblSolicitudDetalleRuta>();
         }
 
         public int Id { get; set; }
-        public string Planta { get; set; }
-        public string Ruta { get; set; }
-        public bool? Activo { get; set; }
+        public string Estatus { get; set; }
         public DateTime? Inclusion { get; set; }
 
         [JsonIgnore]
