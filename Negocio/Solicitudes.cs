@@ -16,6 +16,7 @@ namespace Negocio
 
                 List<TblSolicitud> list = id == null ? ctx.TblSolicituds.Include(s => s.TblClientes)
                     .Include(s => s.TblEstatus)
+                    .Where(x => x.TblEstatusId != 7)//No muestra canceladas
                     .OrderBy(x => x.TblEstatusId).ThenBy(x => x.FechaSolicitud).ToList() 
                     : ctx.TblSolicituds.Include(s => s.TblClientes)
                     .Include(s => s.TblEstatus)
@@ -56,8 +57,7 @@ namespace Negocio
                     ctx.SaveChanges();
 
 
-                    //Guarda operadores, tracto y caja
-                    
+                    //Guarda operadores, tracto y caja 
                     foreach (SolicitudDetalle detalle in solicitud.TblSolicitudDetalles)
                     {
                         TblSolicitudDetalle tblSolicitudDetalle = new TblSolicitudDetalle();
@@ -114,6 +114,27 @@ namespace Negocio
             {
                 try
                 {
+                    //Elimina operadores, tracto y caja
+                    List<TblSolicitudDetalle> lstSolicitudDetalles = ctx.TblSolicitudDetalles.Where(x => x.TblSolicitudId == solicitud.Id).ToList();
+                    if (lstSolicitudDetalles != null)
+                    {
+                        foreach (TblSolicitudDetalle detalle in lstSolicitudDetalles)
+                        {
+                            //Elimina rutas del detalle
+                            List<TblSolicitudDetalleRuta> lstSolicitudRuta = ctx.TblSolicitudDetalleRutas.Where(x => x.TblSolicitudDetalleId == detalle.Id).ToList();
+                            if (lstSolicitudRuta != null)
+                            {
+                                ctx.TblSolicitudDetalleRutas.RemoveRange(lstSolicitudRuta);
+                                ctx.SaveChanges();
+                            }
+                        }
+
+                        //Elimina detalle de solicitud
+                        ctx.TblSolicitudDetalles.RemoveRange(lstSolicitudDetalles);
+                        ctx.SaveChanges();
+                    }
+
+                    //Actualiza solicitud
                     TblSolicitud tblSolicitud = ctx.TblSolicituds.Find(solicitud.Id);
 
                     tblSolicitud.TblClientesId = solicitud.TblClientesId;
@@ -122,41 +143,7 @@ namespace Negocio
                     ctx.Entry(tblSolicitud).State = EntityState.Modified;
                     ctx.SaveChanges();
 
-                    //Actualiza rutas
-                    //List<TblSolicitudRuta> lstSolicitudRuta = ctx.TblSolicitudRutas.Where(x => x.TblSolicitudId == solicitud.Id).ToList();
-                    //if(lstSolicitudRuta != null)
-                    //{
-                    //    ctx.TblSolicitudRutas.RemoveRange(lstSolicitudRuta);
-                    //    ctx.SaveChanges();
-                    //}
-
-                    ////Guarda rutas
-                    //lstSolicitudRuta = new List<TblSolicitudRuta>();
-                    //foreach (SolicitudRuta ruta in solicitud.TblSolicitudRuta)
-                    //{
-                    //    TblSolicitudRuta tblSolicitudRuta = new TblSolicitudRuta();
-
-                    //    tblSolicitudRuta.TblUbicacionesId = ruta.TblUbicacionesId;
-                    //    tblSolicitudRuta.Orden = ruta.Orden;
-                    //    tblSolicitudRuta.TblSolicitudId = tblSolicitud.Id;
-                    //    tblSolicitudRuta.Inclusion = DateTime.Now;
-
-                    //    lstSolicitudRuta.Add(tblSolicitudRuta);
-                    //}
-
-                    //ctx.TblSolicitudRutas.AddRange(lstSolicitudRuta);
-                    //ctx.SaveChanges();
-
-                    //Actualiza operadores, tracto y caja
-                    List<TblSolicitudDetalle> lstSolicitudDetalles = ctx.TblSolicitudDetalles.Where(x => x.TblSolicitudId == solicitud.Id).ToList();
-                    if (lstSolicitudDetalles != null)
-                    {
-                        ctx.TblSolicitudDetalles.RemoveRange(lstSolicitudDetalles);
-                        ctx.SaveChanges();
-                    }
-
-                    //Guarda operadores, tracto y caja
-                    lstSolicitudDetalles = new List<TblSolicitudDetalle>();
+                    //Guarda operadores, tracto y caja 
                     foreach (SolicitudDetalle detalle in solicitud.TblSolicitudDetalles)
                     {
                         TblSolicitudDetalle tblSolicitudDetalle = new TblSolicitudDetalle();
@@ -167,11 +154,24 @@ namespace Negocio
                         tblSolicitudDetalle.TblSolicitudId = tblSolicitud.Id;
                         tblSolicitudDetalle.Inclusion = DateTime.Now;
 
-                        lstSolicitudDetalles.Add(tblSolicitudDetalle);
-                    }
+                        ctx.TblSolicitudDetalles.Add(tblSolicitudDetalle);
+                        ctx.SaveChanges();
 
-                    ctx.TblSolicitudDetalles.AddRange(lstSolicitudDetalles);
-                    ctx.SaveChanges();
+                        //Guarda rutas
+                        foreach (SolicitudDetalleRuta ruta in detalle.TblSolicitudDetalleRuta)
+                        {
+                            TblSolicitudDetalleRuta tblSolicitudRuta = new TblSolicitudDetalleRuta();
+
+                            tblSolicitudRuta.TblUbicacionesId = ruta.TblUbicacionesId;
+                            tblSolicitudRuta.Orden = ruta.Orden;
+                            tblSolicitudRuta.TblEstatusRutaId = 1; //Pendiente
+                            tblSolicitudRuta.TblSolicitudDetalleId = tblSolicitudDetalle.Id;
+                            tblSolicitudRuta.Inclusion = DateTime.Now;
+
+                            ctx.TblSolicitudDetalleRutas.AddRange(tblSolicitudRuta);
+                            ctx.SaveChanges();
+                        }
+                    }
 
                     //Confirma
                     transaction.Commit();
@@ -197,9 +197,15 @@ namespace Negocio
         {
             try
             {
+                TblSolicitud tblSolicitud = ctx.TblSolicituds.Find(id);
+
+                tblSolicitud.TblEstatusId = 7; //Cancelado
+
+                ctx.Entry(tblSolicitud).State = EntityState.Modified;
+                ctx.SaveChanges();
 
                 Response.Estado = true;
-                Response.Mensaje = "Solicitud Inhabilitado Exitosamente";
+                Response.Mensaje = "Solicitud Cancelada Exitosamente";
             }
             catch (Exception ex)
             {
