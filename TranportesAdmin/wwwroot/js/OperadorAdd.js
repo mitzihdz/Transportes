@@ -208,43 +208,19 @@
     });
 
 
-    //Cajas
-    var valCaja = $('#fmNuevaCaja').validate({
+    //Documentos
+    var valDocumento = $('#fmNewDocument').validate({
         rules: {
-            NumEconomico: {
-                required: true,
-                digits: true
-            },
-            Placas: {
+            Documento: {
                 required: true
             },
-            Dimension: {
+            Archivo: {
                 required: true
-            },
-            Marca: {
-                required: true
-            },
-            Anio: {
-                required: true,
-                digits: true,
-                maxlength: 4
             }   
         },
         messages: {
-            NumEconomico:
-            {
-                required: "El número económico es requerido",
-                digits: "Formato numérico"
-            },
-            Placas: "Las placas son requeridas",
-            Dimension: "La dimension es requerida",
-            Marca: "La marca es requerida",
-            Anio:
-            {
-                required: "El año es requerido",
-                digits: "Formato numérico",
-                maxlength: "Máximo 5 digitos"
-            }
+            Documento: "Seleccione el tipo de documento a cargar",
+            Archivo: "Seleccione un archivo",
         },
         errorElement: 'span',
         errorPlacement: function (error, element) {
@@ -258,136 +234,43 @@
             $(element).removeClass('is-invalid');
         }
     });
-
-    $("#BtnNuevaCaja").click(function () {
-        if (valCaja.form()) {
-
-            var _noEconomico = $('#txtNoEconomico').val();
-            var _placas = $('#txtPlacas').val();
-            var _dimension = $('#txtDimension').val();
-            var _marcaId = $('#ddlMarca').val();
-            var _anio = $('#txtAnio').val();
-            var _proveedorId = $('#txtAnio').val();
-
-            $.ajax({
-                url: "https://localhost:7259/api/Caja/Add",
-                type: "POST",
-                data: JSON.stringify({
-                    id: 0,
-                    noEconomico: _noEconomico,
-                    placas: _placas,
-                    anioModelo: _anio,
-                    tblMarcaCajasId: _marcaId,
-                    dimensiones: _dimension,
-                    tblProveedoresCajas: [
-                        {
-                            id: 0,
-                            tblProveedoresId: _proveedorId,
-                            tblCajasId: 0
-                        }
-                    ]
-                }),
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    GetGrid();
-                    AlertSuccess('La marca se registró correctamente.');
-                    $('#modalMarca').modal('toggle');
-                },
-                failure: function (data) {
-                    AlertError('Ocurrio un error al guardar la marca. Contacte al administrador.');
-                },
-                error: function (data) {
-                    AlertError('Ocurrio un error al guardar la marca. Contacte al administrador.');
-                }
-            });
-        }
-    });
-
-
-
-    var valEditMarca = $('#fmEditMarca').validate({
-        rules: {
-            MarcaEdit: {
-                required: true
-            }
-        },
-        messages: {
-            MarcaEdit: "El nombre de la marca es requerido"
-        },
-        errorElement: 'span',
-        errorPlacement: function (error, element) {
-            error.addClass('invalid-feedback');
-            element.closest('.form-group').append(error);
-        },
-        highlight: function (element, errorClass, validClass) {
-            $(element).addClass('is-invalid');
-        },
-        unhighlight: function (element, errorClass, validClass) {
-            $(element).removeClass('is-invalid');
-        }
-    });
-
-    $("#BtnEditaMarca").click(function () {
-        if (valEditMarca.form()) {
-
-            var _id = $('#IdMarca').val();
-            var _marca = $('#txtEditMarca').val();
-
-            $.ajax({
-                url: "https://localhost:7259/api/Marca/Update",
-                type: "POST",
-                data: JSON.stringify({
-                    id: _id,
-                    marca: _marca
-                }),
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    GetGrid();
-                    AlertSuccess('La marca se actualizó correctamente.');
-                    $('#modalEditMarca').modal('toggle');
-                },
-                failure: function (data) {
-                    AlertError('Ocurrio un error al actualizar la marca. Contacte al administrador.');
-                },
-                error: function (data) {
-                    AlertError('Ocurrio un error al actualizar la marca. Contacte al administrador.');
-                }
-            });
-        }
-    });
-
-
 
     /*File Upload*/
     $("#fileButton").click(function () {
-        var files = $("#fileInput").prop("files");
-        var fileData = new FormData();
-        fileData.append("fileInput", files[0]);
+        if (valDocumento.form()) {
 
-        //for (var i = 0; i < files.length; i++) {
-        //    fileData.append("fileInput", files[i]);
-        //}
+            var files = $("#fileInput").prop("files");
+            var idOperador = $('#txtOperadorId').val();
+            var idDocumento = $('#ddlDocumento').val();
+            var name = idOperador + '_' + idDocumento;
+            var fileData = new FormData();
+            fileData.append("fileData", files[0]);
+            fileData.append("name", name);
 
-        $.ajax({
-            type: "POST",
-            url: "/Operador/UploadFiles",
-            dataType: "json",
-            contentType: false, 
-            processData: false,
-            data: fileData,
-            success: function (result, status, xhr) {
-                alert(result);
-            },
-            error: function (xhr, status, error) {
-                alert(status);
-            }
-        });
+            $.ajax({
+                type: "POST",
+                url: "/Operador/UploadFiles",
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                data: fileData,
+                success: function (result, status, xhr) {
+                    if (result.estatus) {
+                        GuardaDocumento(result.file);
+                    }
+                    else
+                        AlertError(result.mensaje);
+                },
+                error: function (xhr, status, error) {
+                    AlertError(status);
+                }
+            });
 
-        $("#fileInput").val("");
+            $("#fileInput").val("");
+            $('#lblFileInput').text('');
+        }
+        
     });
-
-
-
 
 
 
@@ -395,71 +278,127 @@
 });
 
 function OpenNew() {
-    $('#modalCaja').modal('show');
-    $('#txtNoEconomico').val('');
-    $('#txtPlacas').val('');
-    $('#txtDimension').val('');
-    $('#ddlMarca').val(0);
-    $('#txtAnio').val('');
-    GetMarcas();
+    $('#modalDocumento').modal('show');
+    $('#ddlDocumento').val('');
+    $('#fileInput').val('');
+    $('#lblFileInput').text('');
+    GetTipoDocumento();
 }
 
-function GetMarcas() {
-    console.log('llego aqui');
+function GetTipoDocumento() {
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Marca/Select",
+        url: "https://localhost:7259/api/Documento/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
             var marcaData = data.respuesta;
-            console.log('Data ->', data.respuesta);
-            $('#ddlMarca').html('');
-            $('#ddlMarca').append('<option value="0">SELECCIONE</option>');
+            $('#ddlDocumento').html('');
+            $('#ddlDocumento').append('<option value="">SELECCIONE</option>');
             $.each(marcaData, function (k, v) {
-                $('#ddlMarca').append('<option value="' + v.id + '">' + v.marca + '</option>');
+                $('#ddlDocumento').append('<option value="' + v.id + '">' + v.nombreDocumento + '</option>');
             });
         },
         failure: function (data) {
-            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+            AlertError('Ocurrio un error al consultar catálogo documentos. Contacte al administrador.');
         },
         error: function (data) {
-            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+            AlertError('Ocurrio un error al consultar catálogo documentos. Contacte al administrador.');
         }
     });
-
-
-
-    
 }
 
-function SendFile(file) {
-    var formData = new FormData();
-    formData.append('file', $('#exampleInputFile')[0].files[0]);
-
+function GuardaDocumento(name) {
+    var _tblDocumentosId = $('#ddlDocumento').val();
+    var _tblOperadorId = 1;//$('#txtOperadorId').val();
+    
     $.ajax({
-        url: "fileUploader.ashx",
+        url: "https://localhost:7259/api/OperadorDocumento/Add",
         type: "POST",
-        data: formData,
+        data: JSON.stringify({
+            id: 0,
+            tblDocumentosId: _tblDocumentosId,
+            tblOperadorId: _tblOperadorId,
+            ruta: name
+        }),
         contentType: 'application/json; charset=utf-8',
-        success: function (status) {
-            if (status != 'error') {
-                var myPath = "Files/" + status;
-            }
+        success: function (data) {
+            GetGrid();
+            AlertSuccess(data.mensaje);
+            $('#modalDocumento').modal('toggle');
         },
         failure: function (data) {
-            AlertError('Ocurrio un error al actualizar la marca. Contacte al administrador.');
+            AlertError('Ocurrio un error al guardar la marca. Contacte al administrador.');
         },
         error: function (data) {
-            AlertError('Ocurrio un error al actualizar la marca. Contacte al administrador.');
+            AlertError('Ocurrio un error al guardar la marca. Contacte al administrador.');
         }
     });
-
-
-
 }
 
 
+function GetGrid() {
+    var id = 1;//$('#txtOperadorId').val();
+
+    $.ajax({
+        type: "GET",
+        url: "https://localhost:7259/api/OperadorDocumento/Select?idOperador=" + id,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            $('#tblDocumentos > tbody').empty();
+            $.each(data.respuesta, function (i, item) {
+                var rows =
+                    "<tr>" +
+                    "<td>" + item.tblDocumentos.nombreDocumento + "</td>" +
+                    "<td><a class='nav_link' href='#' onclick='View(\"" + item.ruta + "\")'><i class='fas fa-eye'></i></a>" +
+                    "<td><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='far fa-times-circle'></i></a>" +
+                    "</tr>";
+                $('#tblDocumentos > tbody').append(rows);
+            });
+            //console.log(data);
+
+            //$("#tblDocumentos").DataTable({
+            //    "destroy": true,
+            //    "responsive": true, "lengthChange": false, "autoWidth": false,
+            //    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+            //}).buttons().container().appendTo('#tblDocumentos_wrapper .col-md-6:eq(0)');
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al consultar la información. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al consultar la información. Contacte al administrador.');
+        }
+    });
+}
+
+
+function View(ruta) {
+    var url = '/Operador/GetPDF?fileName=' + ruta;
+    window.open(url, '_blank');
+}
+
+
+function Delete(id) {
+    $.ajax({
+        url: "https://localhost:7259/api/OperadorDocumento/Delete/" + id,
+        type: "DELETE",
+        contentType: 'application/json; charset=utf-8',
+        dataType: "json",
+        success: function (result) {
+            GetGrid();
+            AlertSuccess(result.mensaje);
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al eliminar el documento x. Contacte al administrador.');
+        },
+        error: function (data) {
+            debugger
+            AlertError('Ocurrio un error al eliminar el documento. Contacte al administrador.');
+        }
+    });
+}
 
 function Guardar() {
     $('#modalSuccess').modal('show');

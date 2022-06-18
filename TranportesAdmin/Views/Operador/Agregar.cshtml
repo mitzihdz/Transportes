@@ -255,46 +255,28 @@
     <!-- /.card-header -->
 
     <div class="card-body">
-        <input id="IdOperador" type="hidden" />
-
+        @*<input id="IdOperador" type="hidden" />*@
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-2">
                 &nbsp;    
             </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-block btn-info btn-sm" onclick="OpenNew();">
-                  Nuevo Documento
-                </button>
-            </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="fileInput">
-                        <label class="custom-file-label" for="fileInput">Seleccione...</label>
-                    </div>
-                    <div class="input-group-append">
-                        <button type="button" id="fileButton" class="input-group-text" >Subir Documento</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
              <div class="col-md-7">
                  <table id="tblDocumentos" style="border:none">
                     <thead>
                         <tr>
-                            <th class="col-md-5">Documento</th>                            
-                            <th class="col-md-1">Visualizar</th>
-                            <th class="col-md-1">Eliminar</th>
+                            <th class="col-md-5"></th>                            
+                            <th class="col-md-1"></th>
+                            <th class="col-md-1"></th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
              </div>
+             <div class="col-md-2">
+                <button type="button" class="btn btn-block btn-info btn-sm" onclick="OpenNew();">
+                  Nuevo Documento
+                </button>
+            </div>
         </div>
 
     </div>
@@ -305,56 +287,44 @@
 
 
 
-<div id="modalCaja" class="modal" tabindex="-1" role="dialog">
+<div id="modalDocumento" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Nueva Caja</h5>
+        <h5 class="modal-title">Agregar Documento</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form id="fmNuevaCaja">
+      <form id="fmNewDocument">
       <div class="modal-body"> 
-          <div class="row">
-              <div class="col-md-4">
+           <div class="row">
+              <div class="col-md-8">
                   <div class="form-group">
-                      <label for="txtNoEconomico">No. Económico</label>
-                      <input class="form-control form-control-sm" type="text" id="txtNoEconomico" name="NoEconomico" style="text-transform:uppercase" maxlength="200"> 
-                  </div>
-              </div>
-              <div class="col-md-4">
-                  <div class="form-group">
-                      <label for="txtPlacas">Placas</label>
-                      <input class="form-control form-control-sm" type="text" id="txtPlacas" name="Placas" style="text-transform:uppercase" maxlength="200"> 
-                  </div>
-              </div>
-              <div class="col-md-4">
-                  <div class="form-group">
-                      <label for="txtDimension">Dimensiones</label>
-                      <input class="form-control form-control-sm" type="text" id="txtDimension" name="Dimension" style="text-transform:uppercase" maxlength="200"> 
+                      <label for="ddlDocumento">Documento</label>
+                      <select class="form-control form-control-sm" id="ddlDocumento" name="Documento"></select>
                   </div>
               </div>
            </div>
            <div class="row">
-              <div class="col-md-8">
-                  <div class="form-group">
-                      <label for="ddlMarca">Marca</label>
-                      <select class="form-control form-control-sm" id="ddlMarca" name="Marca"></select>
-                  </div>
-              </div>
-              <div class="col-md-4">
-                  <div class="form-group">
-                      <label for="txtAnio">Año Modelo</label>
-                      <input class="form-control form-control-sm" type="text" id="txtAnio" name="Anio" style="text-transform:uppercase" maxlength="200"> 
-                  </div>
-              </div>
+               <div class="form-group">
+                   <div class="col-md-12">
+                       <div class="input-group">
+                           <div class="custom-file">
+                               <input type="file" class="custom-file-input" id="fileInput" name="Archivo">
+                               <label class="custom-file-label" for="fileInput" id="lblFileInput"></label>
+                           </div>
+                           <div class="input-group-append">
+                               <button type="button" id="fileButton" class="input-group-text btn-primary">Subir Documento</button>
+                           </div>
+                       </div>
+                   </div> 
+               </div>
            </div>
       </div>
       </form>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" id="BtnNuevaCaja" class="btn btn-primary">Agregar</button>
       </div>
     </div>
   </div>

@@ -143,12 +143,12 @@ namespace AccesoDatos.Models
                 entity.Property(e => e.TblOperadorId).HasColumnName("tbl_operador_id");
 
                 entity.HasOne(d => d.TblDocumentos)
-                    .WithMany(p => p.TblDocumentosOperadoreTblDocumentos)
+                    .WithMany(p => p.TblDocumentosOperadores)
                     .HasForeignKey(d => d.TblDocumentosId)
                     .HasConstraintName("FK__tbl_docum__tbl_d__18EBB532");
 
                 entity.HasOne(d => d.TblOperador)
-                    .WithMany(p => p.TblDocumentosOperadoreTblOperadors)
+                    .WithMany(p => p.TblDocumentosOperadores)
                     .HasForeignKey(d => d.TblOperadorId)
                     .HasConstraintName("FK__tbl_docum__tbl_o__19DFD96B");
             });

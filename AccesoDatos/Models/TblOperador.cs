@@ -10,8 +10,7 @@ namespace AccesoDatos.Models
     {
         public TblOperador()
         {
-            TblDocumentosOperadoreTblDocumentos = new HashSet<TblDocumentosOperadore>();
-            TblDocumentosOperadoreTblOperadors = new HashSet<TblDocumentosOperadore>();
+            TblDocumentosOperadores = new HashSet<TblDocumentosOperadore>();
             TblDomicilioOpers = new HashSet<TblDomicilioOper>();
             TblSolicitudDetalles = new HashSet<TblSolicitudDetalle>();
         }
@@ -30,9 +29,9 @@ namespace AccesoDatos.Models
         public string Licencia { get; set; }
         public DateTime? Inclusion { get; set; }
 
-        public virtual ICollection<TblDocumentosOperadore> TblDocumentosOperadoreTblDocumentos { get; set; }
-        public virtual ICollection<TblDocumentosOperadore> TblDocumentosOperadoreTblOperadors { get; set; }
+        public virtual ICollection<TblDocumentosOperadore> TblDocumentosOperadores { get; set; }
         public virtual ICollection<TblDomicilioOper> TblDomicilioOpers { get; set; }
+
         [JsonIgnore]
         public virtual ICollection<TblSolicitudDetalle> TblSolicitudDetalles { get; set; }
     }

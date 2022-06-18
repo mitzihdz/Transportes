@@ -13,7 +13,7 @@ namespace AccesoDatos.Models
         public string Ruta { get; set; }
         public DateTime? Inclusion { get; set; }
 
-        public virtual TblOperador TblDocumentos { get; set; }
+        public virtual TblDocumento TblDocumentos { get; set; }
         public virtual TblOperador TblOperador { get; set; }
     }
 }

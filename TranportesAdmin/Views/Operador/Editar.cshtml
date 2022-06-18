@@ -8,6 +8,9 @@
     <script src="~/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="~/plugins/jquery-validation/additional-methods.min.js"></script>
 
+    <!-- bs-custom-file-input -->
+   <script src="~/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
 }
 
     <div class="content-header">
@@ -30,7 +33,7 @@
 
 
             <!-- Card ADD -->
-        <div id="cardOperador" class="card card-default collapsed-card">
+        <div id="cardOperador" class="card card-default">
           <div class="card-header">
             <h3 class="card-title">Información general del operador</h3>
 
@@ -244,35 +247,77 @@
     <!-- /.card-header -->
 
     <div class="card-body">
-        <input id="IdOperador" type="hidden" />
-
+        @*<input id="IdOperador" type="hidden" />*@
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-2">
                 &nbsp;    
             </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-block btn-info btn-sm" onclick="OpenNew();">
-                  Nuevo Documento
-                </button>
-            </div>
-        </div>
-        <br />
-        <div class="row">
              <div class="col-md-7">
                  <table id="tblDocumentos" style="border:none">
                     <thead>
                         <tr>
-                            <th class="col-md-5">Documento</th>                            
-                            <th class="col-md-1">Visualizar</th>
-                            <th class="col-md-1">Eliminar</th>
+                            <th class="col-md-5"></th>                            
+                            <th class="col-md-1"></th>
+                            <th class="col-md-1"></th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
              </div>
+             <div class="col-md-2">
+                <button type="button" class="btn btn-block btn-info btn-sm" onclick="OpenNew();">
+                  Nuevo Documento
+                </button>
+            </div>
         </div>
 
     </div>
     <!-- /.card-body -->
 </div>
 <!-- /.card -->
+
+
+
+
+<div id="modalDocumento" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Agregar Documento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="fmNewDocument">
+      <div class="modal-body"> 
+           <div class="row">
+              <div class="col-md-8">
+                  <div class="form-group">
+                      <label for="ddlDocumento">Documento</label>
+                      <select class="form-control form-control-sm" id="ddlDocumento" name="Documento"></select>
+                  </div>
+              </div>
+           </div>
+           <div class="row">
+               <div class="form-group">
+                   <div class="col-md-12">
+                       <div class="input-group">
+                           <div class="custom-file">
+                               <input type="file" class="custom-file-input" id="fileInput" name="Archivo">
+                               <label class="custom-file-label" for="fileInput" id="lblFileInput"></label>
+                           </div>
+                           <div class="input-group-append">
+                               <button type="button" id="fileButton" class="input-group-text btn-primary">Subir Documento</button>
+                           </div>
+                       </div>
+                   </div> 
+               </div>
+           </div>
+      </div>
+      </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

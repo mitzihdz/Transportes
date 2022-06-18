@@ -117,7 +117,7 @@ namespace Negocio
                 ctx.SaveChanges();
 
                 Response.Estado = true;
-                Response.Mensaje = "Operador Eliminado Exitosamente";
+                Response.Mensaje = "Domicilio Eliminado Exitosamente";
             }
             catch (Exception ex)
             {
