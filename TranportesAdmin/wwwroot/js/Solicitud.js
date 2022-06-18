@@ -40,8 +40,8 @@ function GetGrid() {
                     "<td class='text-center'>" + item.tblClientes.nombreCorto + "</td>" +
                     "<td class='text-center'>" + item.tblEstatus.estatus +"</td >" +
                     "<td class='text-center'>" + item.fechaSolicitud + "</td>" +
-                    "<td class='text-center'><a class='nav_link' href='~/../Solicitud/Editar/" + item.tblClientesId + "'><i class='nav-icon fas fa-edit'></i></a >" +
-                    "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.tblClientesId + ")'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='~/../Solicitud/Editar/" + item.id + "'><i class='nav-icon fas fa-edit'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
                     "</tr>";
                 $('#tblSolicitud > tbody').append(rows);
             });
