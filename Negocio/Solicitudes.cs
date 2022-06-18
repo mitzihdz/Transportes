@@ -216,5 +216,29 @@ namespace Negocio
             return Response;
         }
 
+        public Response UpdateStatus(Solicitud solicitud)
+        {
+            try
+            {
+                TblSolicitud tblSolicitud = ctx.TblSolicituds.Find(solicitud.Id);
+                tblSolicitud.TblEstatusId = solicitud.TblEstatusId;
+
+                ctx.Entry(tblSolicitud).State = EntityState.Modified;
+                ctx.SaveChanges();
+
+                Response.Estado = true;
+                Response.Mensaje = "Solicitud con Folio: " +
+                        tblSolicitud.Id.ToString() + " Actualizada Exitosamente";
+                Response.Respuesta = tblSolicitud.Id;
+            }
+            catch (Exception ex)
+            {
+                Response.Estado = false;
+                Response.Mensaje = ex.Message;
+            }
+
+            return Response;
+        }
+
     }
 }

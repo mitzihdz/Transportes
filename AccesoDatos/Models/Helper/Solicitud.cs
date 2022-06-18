@@ -12,7 +12,7 @@ namespace AccesoDatos.Models
         public int TblClientesId { get; set; }
         public int? TblEstatusId { get; set; }
         public DateTime FechaSolicitud { get; set; }
-        public ICollection<SolicitudDetalle> TblSolicitudDetalles { get; set; }
+        public ICollection<SolicitudDetalle>? TblSolicitudDetalles { get; set; }
     }
     public class SolicitudDetalle
     {

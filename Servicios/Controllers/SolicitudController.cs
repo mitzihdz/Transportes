@@ -37,5 +37,12 @@ namespace Servicios.Controllers
         {
             return solicitudes.Delete(id);
         }
+
+        [HttpPost]
+        [Route("UpdateStatus")]
+        public Response UpdateStatus([FromBody] Solicitud solicitud)
+        {
+            return solicitudes.UpdateStatus(solicitud);
+        }
     }
 }
