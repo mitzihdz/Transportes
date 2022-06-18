@@ -11,15 +11,15 @@ function Delete(id) {
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
         success: function (result) {
-            AlertSuccess('El operador se eliminó correctamente.');
+            AlertSuccess('La solicitud se eliminó correctamente.');
             GetGrid();
         },
         failure: function (data) {
-            AlertError('Ocurrio un error al eliminar el operador. Contacte al administrador.');
+            AlertError('Ocurrio un error al eliminar la solicitud. Contacte al administrador.');
         },
         error: function (data) {
             debugger
-            AlertError('Ocurrio un error al eliminar el operador. Contacte al administrador.');
+            AlertError('Ocurrio un error al eliminar la solicitud. Contacte al administrador.');
         }
     });
 }
@@ -36,13 +36,12 @@ function GetGrid() {
                 
                 var rows =
                     "<tr>" +
-                    "<td>" + item.tblClientesId + "</td>" +
-                    "<td>" + item.tblClientes.nombreCorto + "</td>" +
-                    "<td class='text-center'><a class='nav_link' href='#' onclick='$(\"#ModalDestinos\").modal()'><i class='fa-solid fa-truck'></i></a >" +
-               
-                    "<td>" + item.fechaSolicitud + "</td>" +
+                    "<td class='text-center'>" + item.id + "</td>" +
+                    "<td class='text-center'>" + item.tblClientes.nombreCorto + "</td>" +
+                    "<td class='text-center'>" + item.tblEstatus.estatus +"</td >" +
+                    "<td class='text-center'>" + item.fechaSolicitud + "</td>" +
                     "<td class='text-center'><a class='nav_link' href='~/../Solicitud/Editar/" + item.tblClientesId + "'><i class='nav-icon fas fa-edit'></i></a >" +
-                    "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.tblClientesId + ")'><i class='far fa-times-circle'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.tblClientesId + ")'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
                     "</tr>";
                 $('#tblSolicitud > tbody').append(rows);
             });

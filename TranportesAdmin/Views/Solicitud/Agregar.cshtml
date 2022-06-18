@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css">
-
-
+    <link rel="stylesheet" href="~/css/modalStyles.css" />
+    
 
     
 
@@ -36,136 +36,12 @@
 
 }
 
-
-
 <style>
 
-* {
-   -webkit-box-sizing: border-box;
-   -moz-box-sizing: border-box;
-   box-sizing: border-box;
-   outline: none;
-}
-
- 
-h1 {
-   text-align: center;
-   font-weight: 300;
-   color: #777
-}
-
-h1 span {
-   font-weight: 600;
-}
-
-.container {
-   width: 80%;
-   padding: 50px 0;
-   margin: 50px auto;
-   position: relative;
-   overflow: hidden;
-}
-
-.container:before {
-   content: '';
-   position: absolute;
-   top: 0;
-   left: 50%;
-   margin-left: -1px;
-   width: 2px;
-   height: 100%;
-   background: #CCD1D9;
-   z-index: 1
-}
-
-.timeline-block {
-   width: -webkit-calc(50% + 8px);
-   width: -moz-calc(50% + 8px);
-   width: calc(50% + 8px);
-   display: -webkit-box;
-   display: -webkit-flex;
-   display: -moz-box;
-   display: flex;
-   -webkit-box-pack: justify;
-   -webkit-justify-content: space-between;
-   -moz-box-pack: justify;
-   justify-content: space-between;
-   clear: both;
-}
-
-.timeline-block-right {
-   float: right;
-}
-
-.timeline-block-left {
-   float: left;
-   direction: rtl
-}
-
-.marker {
-   width: 16px;
-   height: 16px;
-   border-radius: 50%;
-   border: 2px solid #F5F7FA;
-   background: #4FC1E9;
-   margin-top: 10px;
-   z-index: 9999
-}
-
-.timeline-content {
-   width: 95%;
-   padding: 0 15px;
-   color: #666
-}
-
-.timeline-content h3 {
-   margin-top: 5px;
-   margin-bottom: 5px;
-   font-size: 25px;
-   font-weight: 500
-}
-
-.timeline-content span {
-   font-size: 15px;
-   color: #a4a4a4;
-}
-
-.timeline-content p {
-   font-size: 14px;
-   line-height: 1.5em;
-   word-spacing: 1px;
-   color: #888;
-}
-
-
-@@media screen and (max-width: 768px) {
-   .container:before {
-      left: 8px;
-      width: 2px;
-   }
-   .timeline-block {
-      width: 100%;
-      margin-bottom: 30px;
-   }
-   .timeline-block-right {
-      float: none;
-   }
-
-   .timeline-block-left {
-      float: none;
-      direction: ltr;
-   }
-}
+    
 
 
 </style>
-
-
-
- 
-
-
-
 
 <section>
     <div class="content-header">
@@ -198,25 +74,8 @@ h1 span {
                   </button>
                 </div>
               </div>          
-              <div class="card-body">
+              @*<div class="card-body">
                 <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="txtClave">Cliente *</label>
-                        <input autocomplete="off" list="clientes" class="form-control form-control-sm" id="txtCliente" name="Cliente" style="text-transform:uppercase" maxlength="200">
-                        <datalist id="clientes">
-
-                        </datalist>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="txtFecha">Fecha *</label>
-                            <input class="form-control form-control-sm" type="date" id="txtFecha" name="Fecha" style="text-transform:uppercase" maxlength="200">
-                        </div>
-                    </div>
                     <div class="col-md-4">
                         <div class="form-group">
                         <label for="txtUbiDes">Ubicación Destino *</label>
@@ -242,19 +101,34 @@ h1 span {
                         </div>
                     </div>
                 </div>
-              </div>
-              <div id="cardSolicitud" class="card card-default collapsed-card">
-                <div class="card-header">
-                    <h3 class="card-title">Detalle de la Solicitud</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-sort-down"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
+              </div>*@
+              <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="txtClave">Cliente *</label>
+                            <input autocomplete="off" list="clientes" class="form-control form-control-sm" id="txtCliente" name="Cliente" style="text-transform:uppercase" maxlength="200">
+                            <datalist id="clientes">
+
+                            </datalist>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="txtFecha">Fecha *</label>
+                                <input class="form-control form-control-sm" type="date" id="txtFecha" name="Fecha" style="text-transform:uppercase" maxlength="200">
+                            </div>
+                       </div>
+                       <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="txtFecha"></label>
+                                 <button type="button" onclick="$('#ModalDestinos').modal('show');" class="btn btn-block btn-success btn-xs mt-2">Agregar Ruta</button>
+                                @*<i onclick="$('#ModalDestinos').modal('show');" style="width: 30px;" class="fa-solid fa-plus-large"></i>*@
+                           </div>
+                        </div>
+                    </div>
+                   @* <div class="row">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="txtOperador">Operador *</label>
                                 <input autocomplete="off" list="operador" class="form-control form-control-sm" type="text" id="txtOperador" name="Operador" style="text-transform:uppercase" maxlength="200">
@@ -262,19 +136,7 @@ h1 span {
                                 </datalist>
                             </div>
                         </div>
-                    </div>
-
-
-
-
-
-
-
-
-
-
-                    <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class='form-group'>
                                 <label for="Tractor">Tractor *</label>
                                 <input autocomplete="off" list="tractor" class="form-control form-control-sm" type="text" id="txtTractor" name="Tractor" style="text-transform:uppercase" maxlength="20">
@@ -282,82 +144,45 @@ h1 span {
                                 </datalist>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label for="CajaUno">Caja *</label>
+                                <label for="Caja">Caja *</label>
                                 <input autocomplete="off" list="caja" class="form-control form-control-sm" type="text" id="txtCaja" name="Caja" style="text-transform:uppercase" maxlength="20">
                                 <datalist id="caja">
                                 </datalist>
                             </div>
                         </div>
                     </div>
-
-
-@*                    <div class="row">
-                        <div class="col-md-12">
-                            <div class='form-group'>
-                                <div class="timeline">
-                                  <div class="events" >
-                                    <ol>
-                                      <ul id="TimeLineContainer">
-                                        <li>
-                                          <a href="#0" class="selected">Early Life</a>
-                                        </li>
-                                        <li>
-                                          <a href="#1">Career</a>
-                                        </li>
-                                        <li>
-                                          <a href="#2">Philosophy</a>
-                                        </li>
-                                        <li>
-                                          <a href="#3">Legacy</a>
-                                        </li>
-                                         <li><a href="#0" class="selected">Franco</a></li>
-                                      </ul>
-                                    </ol>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-*@
-
-
-
-
-
-
-
-
-
-                </div>
-                <div class="card-footer">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
+                             <button type="button" onclick="$('#ModalDestinos').modal('show');" class="btn btn-block btn-success btn-xs">Agregar Ruta</button>
+                        </div>
+                        <div class="col-md-3">
                             &nbsp;
                         </div>
                         <div class="col-md-3">
-                            <button id="añadirOperador" class="btn btn-block btn-success btn-xs" type="button">Añadir</button>
+                            <button id="añadirOperador" class="btn btn-block btn-success btn-xs" type="button">Añadir Operador</button>
                         </div>
-                    </div>
+                    </div>*@
+                </div>
+                <div class="card-footer">
                     <div class="row">
                          <div class="col-12">
                              <table id="otroOperador" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Operador</th>
-                                        <th>Tractor</th>
-                                        <th>Caja Uno</th>
-                                        <th>Caja Dos</th>
-                                        <th>Eliminar</th>
+                                        <th class="text-center">Operador</th>
+                                        <th class="text-center">Tractor</th>
+                                        <th class="text-center">Caja</th>
+                                        <th class="text-center">Ver Ruta</th>
+                                        <th class="text-center">Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
                          </div>
                     </div>
-                </div>  
-              </div>
+                </div>
               <div class="card-footer">
                 <div class="row">
                     <div class="col-md-6">
@@ -372,6 +197,7 @@ h1 span {
                 </div>
               </div>
          </form>
+        
      </div>
 </section>
 
@@ -379,66 +205,193 @@ h1 span {
 
 
 
+
+
+
+
+
 <!-- Modal -->
-<div class="modal fade" id="ModalDestinos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade " id="ModalDestinos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-width" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Ruta</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div class="container" id="TimeLineContainerII" >
-
-               <div class="timeline-block timeline-block-right">
-                  <div class="marker"></div>
-                  <div class="timeline-content">
-                     <h3>First Year</h3>
-                     <p>Lorem ipsum </p>
-                     <p>Eliminar &nbsp;  <i class="fa-solid fa-trash-can"></i></p>
-
-
-                  </div>
-               </div>
-
-               <div class="timeline-block timeline-block-right">
-                  <div class="marker"></div>
-                  <div class="timeline-content">
-                     <h3>Seconed Year</h3>
-                     <p>Lorem ipsum </p>
-                  </div>
-               </div>
-
-               <div class="timeline-block timeline-block-right">
-                  <div class="marker"></div>
-                  <div class="timeline-content">
-                     <h3>Third Year</h3>
-                     <p>Lorem ipsum </p>
-                  </div>
-               </div>
-
-               <div class="timeline-block timeline-block-right">
-                  <div class="marker"></div>
-                  <div class="timeline-content">
-                     <h3>Fourth Year</h3>
-                     <p>Lorem ipsum </p>
-                  </div>
-               </div>
-
-               <div class="timeline-block timeline-block-right">
-                  <div class="marker"></div>
-                  <div class="timeline-content">
-                     <h3>Fifth Year</h3>
-                     <p>Lorem ipsum </p>
-                  </div>
-               </div>
+           <div class="row">
+               <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="txtOperador">Operador *</label>
+                        <input autocomplete="off" list="operador" class="form-control form-control-sm" type="text" id="txtOperador" name="Operador" style="text-transform:uppercase" maxlength="200">
+                        <datalist id="operador">
+                        </datalist>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label for="Tractor">Tracto *</label>
+                        <input autocomplete="off" list="tractor" class="form-control form-control-sm" type="text" id="txtTractor" name="Tractor" style="text-transform:uppercase" maxlength="20">
+                        <datalist id="tractor">
+                        </datalist>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Caja">Caja *</label>
+                        <input autocomplete="off" list="caja" class="form-control form-control-sm" type="text" id="txtCaja" name="Caja" style="text-transform:uppercase" maxlength="20">
+                        <datalist id="caja">
+                        </datalist>
+                    </div>
+                </div>
+                 @*<div class="col-md-3 d-flex justify-content-center">
+                    <div class="form-group">
+                        <button type="button" id="añadirOperador" class="btn btn-primary mt-3">Agregar Operador <i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>*@
+           </div> 
+           <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Destino">Destino *</label>
+                        <input autocomplete="off" list="destino" class="form-control form-control-sm" type="text" id="txtDestino" name="Destino" style="text-transform:uppercase" maxlength="20">
+                        <datalist id="destino">
+                        </datalist>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center">
+                    <div class="form-group">
+                        <button type="button" id="agregarDestino" class="btn btn-primary mt-3">Agregar <i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+           </div>
+           <div class="row">
+                 <div class="container" id="TimeLineContainerII" >
+                    @*<div class="timeline-block timeline-block-right">
+                        <div class="marker"></div>
+                        <div class="timeline-content">
+                            <h3 style="color: white;">First Year</h3>
+                            <p style="color: white;">Lorem ipsum </p>
+                            <p>Eliminar &nbsp;  <i style="color: indianred;" class="fa-solid fa-trash-can"></i></p>
+                        </div>
+                    </div>
+                    <div class="timeline-block timeline-block-right">
+                        <div class="marker"></div>
+                        <div class="timeline-content">
+                            <h3 style="color: white;">First Year</h3>
+                            <p style="color: white;">Lorem ipsum </p>
+                            <p>Eliminar &nbsp;  <i style="color: indianred;" class="fa-solid fa-trash-can"></i></p>
+                        </div>
+                    </div>
+                    <div class="timeline-block timeline-block-right">
+                        <div class="marker"></div>
+                        <div class="timeline-content">
+                            <h3 style="color: white;">First Year</h3>
+                            <p style="color: white;">Lorem ipsum </p>
+                            <p>Eliminar &nbsp;  <i style="color: indianred;" class="fa-solid fa-trash-can"></i></p>
+                        </div>
+                    </div>*@
+                 </div>
             </div>
-      </div>
+       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button id="guardarRuta" type="button" class="btn btn-primary">Guardar Ruta</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade " id="verRuta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-width" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Ruta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           <div class="row">
+               <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="txtOperador">Operador *</label>
+                        <input readonly  autocomplete="off" list="operador2" class="form-control form-control-sm" type="text" id="txtOperador2" name="Operador" style="text-transform:uppercase" maxlength="200">
+                        <datalist id="operador2">
+                        </datalist>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class='form-group'>
+                        <label for="Tractor">Tractor *</label>
+                        <input readonly autocomplete="off" list="tractor2" class="form-control form-control-sm" type="text" id="txtTractor2" name="Tractor" style="text-transform:uppercase" maxlength="20">
+                        <datalist id="tractor2">
+                        </datalist>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Caja">Caja *</label>
+                        <input readonly autocomplete="off" list="caja2" class="form-control form-control-sm" type="text" id="txtCaja2" name="Caja" style="text-transform:uppercase" maxlength="20">
+                        <datalist id="caja2">
+                        </datalist>
+                    </div>
+                </div>
+                 @*<div class="col-md-3 d-flex justify-content-center">
+                    <div class="form-group">
+                        <button type="button" id="añadirOperador" class="btn btn-primary mt-3">Agregar Operador <i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>*@
+           </div> 
+           <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Destino">Destino *</label>
+                        <input autocomplete="off" list="destino2" class="form-control form-control-sm" type="text" id="txtDestino2" name="Destino" style="text-transform:uppercase" maxlength="20">
+                        <datalist id="destino2">
+                        </datalist>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex justify-content-center">
+                    <div class="form-group">
+                        <button type="button" id="agregarDestino2" class="btn btn-primary mt-3">Agregar <i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+           </div>
+           <div class="row">
+                 <div class="container" id="TimeLineContainerII2" >
+                    @*<div class="timeline-block timeline-block-right">
+                        <div class="marker"></div>
+                        <div class="timeline-content">
+                            <h3 style="color: white;">First Year</h3>
+                            <p style="color: white;">Lorem ipsum </p>
+                            <p>Eliminar &nbsp;  <i style="color: indianred;" class="fa-solid fa-trash-can"></i></p>
+                        </div>
+                    </div>
+                    <div class="timeline-block timeline-block-right">
+                        <div class="marker"></div>
+                        <div class="timeline-content">
+                            <h3 style="color: white;">First Year</h3>
+                            <p style="color: white;">Lorem ipsum </p>
+                            <p>Eliminar &nbsp;  <i style="color: indianred;" class="fa-solid fa-trash-can"></i></p>
+                        </div>
+                    </div>
+                    <div class="timeline-block timeline-block-right">
+                        <div class="marker"></div>
+                        <div class="timeline-content">
+                            <h3 style="color: white;">First Year</h3>
+                            <p style="color: white;">Lorem ipsum </p>
+                            <p>Eliminar &nbsp;  <i style="color: indianred;" class="fa-solid fa-trash-can"></i></p>
+                        </div>
+                    </div>*@
+                 </div>
+            </div>
+       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button id="guardarRuta2" type="button" class="btn btn-primary">Editar Ruta</button>
       </div>
     </div>
   </div>
