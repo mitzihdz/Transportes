@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
-    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.1.1/css/all.css">
+
     <link rel="stylesheet" href="~/css/modalStyles.css" />
     
 
@@ -52,9 +52,9 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="~/Solicitud">Admin Solicitudes</a></li>
-                        <li class="breadcrumb-item active">Agregar</li>
+                        <li class="breadcrumb-item"><a class="breadCumCustom" href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a class="breadCumCustom" href="~/Solicitud">Admin Solicitudes</a></li>
+                        <li class="breadcrumb-item breadCumSelected active">Agregar</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -113,16 +113,16 @@
                             </datalist>
                         </div>
                       </div>
-                      <div class="col-md-4">
+                      <div class="col-md-2">
                             <div class="form-group">
                                 <label for="txtFecha">Fecha *</label>
                                 <input class="form-control form-control-sm" type="date" id="txtFecha" name="Fecha" style="text-transform:uppercase" maxlength="200">
                             </div>
                        </div>
-                       <div class="col-md-4">
+                       <div class="col-md-2">
                            <div class="form-group">
-                               <label for="txtFecha"></label>
-                                 <button type="button" onclick="$('#ModalDestinos').modal('show');" class="btn btn-block btn-success btn-xs mt-2">Agregar Ruta</button>
+                               <label for="txtFecha" style="    margin-bottom: 0;">&nbsp;</label>
+                                 <button type="button" onclick="$('#ModalDestinos').modal('show');" class="btn btn-block btn-success mt-2">Agregar Ruta</button>
                                 @*<i onclick="$('#ModalDestinos').modal('show');" style="width: 30px;" class="fa-solid fa-plus-large"></i>*@
                            </div>
                         </div>
@@ -220,8 +220,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-           <div class="row">
+
+
+    <div class="modal-body ct-control">
+                  <div class="row">
                <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtOperador">Operador *</label>
@@ -261,12 +263,23 @@
                         </datalist>
                     </div>
                 </div>
-                <div class="col-md-6 d-flex justify-content-center">
+                <div class="col-md-2 d-flex justify-content-center">
                     <div class="form-group">
-                        <button type="button" id="agregarDestino" class="btn btn-primary mt-3">Agregar <i class="fa-solid fa-plus"></i></button>
+                         <label for="Destino">&nbsp;</label>
+                        <button type="button" id="agregarDestino" class="btn btn-primary mt-3">&nbsp; Agregar Destino <i class="fa-solid fa-plus"></i></button>
                     </div>
                 </div>
+                <div class="col-md-4 d-flex justify-content-center">
+                 
+                </div>
            </div>
+        
+      </div>
+
+
+
+      <div class="modal-body">
+ 
            <div class="row">
                  <div class="container" id="TimeLineContainerII" >
                     @*<div class="timeline-block timeline-block-right">
@@ -274,7 +287,7 @@
                         <div class="timeline-content">
                             <h3 style="color: white;">First Year</h3>
                             <p style="color: white;">Lorem ipsum </p>
-                            <p>Eliminar &nbsp;  <i style="color: indianred;" class="fa-solid fa-trash-can"></i></p>
+                            <p>Eliminar &nbsp;  <i style="" class="fa-solid fa-circle-trash-can"></i></p>
                         </div>
                     </div>
                     <div class="timeline-block timeline-block-right">
@@ -282,7 +295,7 @@
                         <div class="timeline-content">
                             <h3 style="color: white;">First Year</h3>
                             <p style="color: white;">Lorem ipsum </p>
-                            <p>Eliminar &nbsp;  <i style="color: indianred;" class="fa-solid fa-trash-can"></i></p>
+                            <p>Eliminar &nbsp;  <i style="" class="fa-solid fa-circle-trash-can"></i></p>
                         </div>
                     </div>
                     <div class="timeline-block timeline-block-right">
@@ -290,7 +303,7 @@
                         <div class="timeline-content">
                             <h3 style="color: white;">First Year</h3>
                             <p style="color: white;">Lorem ipsum </p>
-                            <p>Eliminar &nbsp;  <i style="color: indianred;" class="fa-solid fa-trash-can"></i></p>
+                            <p>Eliminar &nbsp;  <i style="" class="fa-solid fa-circle-trash-can"></i></p>
                         </div>
                     </div>*@
                  </div>
@@ -367,7 +380,7 @@
                         <div class="timeline-content">
                             <h3 style="color: white;">First Year</h3>
                             <p style="color: white;">Lorem ipsum </p>
-                            <p>Eliminar &nbsp;  <i style="color: indianred;" class="fa-solid fa-trash-can"></i></p>
+                            <p>Eliminar &nbsp;  <i style="" class="fa-solid fa-circle-trash-can"></i></p>
                         </div>
                     </div>
                     <div class="timeline-block timeline-block-right">
@@ -375,7 +388,7 @@
                         <div class="timeline-content">
                             <h3 style="color: white;">First Year</h3>
                             <p style="color: white;">Lorem ipsum </p>
-                            <p>Eliminar &nbsp;  <i style="color: indianred;" class="fa-solid fa-trash-can"></i></p>
+                            <p>Eliminar &nbsp;  <i style="" class="fa-solid fa-circle-trash-can"></i></p>
                         </div>
                     </div>
                     <div class="timeline-block timeline-block-right">
@@ -383,7 +396,7 @@
                         <div class="timeline-content">
                             <h3 style="color: white;">First Year</h3>
                             <p style="color: white;">Lorem ipsum </p>
-                            <p>Eliminar &nbsp;  <i style="color: indianred;" class="fa-solid fa-trash-can"></i></p>
+                            <p>Eliminar &nbsp;  <i style="" class="fa-solid fa-circle-trash-can"></i></p>
                         </div>
                     </div>*@
                  </div>

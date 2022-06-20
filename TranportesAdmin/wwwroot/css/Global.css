@@ -1,0 +1,72 @@
+
+
+
+.breadCumCustom {
+    color: #adb5bd;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.breadCumSelected {
+    color: white !important;
+    font-size: larger !important;
+    font-weight: bolder !important;
+}
+
+.dark-mode .breadcrumb-item + .breadcrumb-item::before, .dark-mode .breadcrumb-item.active {
+    color: #e08e0b;
+}
+
+.dark-mode a:not(.btn):hover {
+    color: #adb5bd;
+}
+
+th {
+    background-color: darkslategray;
+    color: white;
+}
+
+/*td {
+    background-color: #6c757d;
+}
+
+.dark-mode .table-bordered, .dark-mode .table-bordered td, .dark-mode .table-bordered th {
+    border-color: black;
+}
+
+
+    .dark-mode .table-bordered, .dark-mode .table-bordered td, .dark-mode .table-bordered th {
+        border-color: black;
+    }*/
+
+
+.nav-icon {
+    color: ghostwhite;
+    font-size: x-large;
+}
+
+.fa-circle-trash {
+    
+    font-size: x-large;
+}
+
+
+
+ 
+.fa-circle-trash {
+    color: indianred !important;
+}
+
+td {
+    background-color: #454d55;
+ 
+}
+
+.ct-control {
+    background-color: #5a6268;
+    border-radius: 40px;
+    border: none !important;
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-right: 1%;
+}
