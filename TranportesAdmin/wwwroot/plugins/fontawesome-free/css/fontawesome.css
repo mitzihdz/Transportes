@@ -4071,16 +4071,16 @@ readers do not read off random characters that represent icons */
 .fa-transgender-alt:before {
   content: "\f225"; }
 
-.fa-trash:before {
+.fa-circle-trash:before {
   content: "\f1f8"; }
 
-.fa-trash-alt:before {
+.fa-circle-trash-alt:before {
   content: "\f2ed"; }
 
-.fa-trash-restore:before {
+.fa-circle-trash-restore:before {
   content: "\f829"; }
 
-.fa-trash-restore-alt:before {
+.fa-circle-trash-restore-alt:before {
   content: "\f82a"; }
 
 .fa-tree:before {

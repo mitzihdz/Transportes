@@ -221,7 +221,7 @@ var DateTimePicker = function ($, moment) {
       previous: 'fa fa-chevron-left',
       next: 'fa fa-chevron-right',
       today: 'fa fa-calendar-check-o',
-      clear: 'fa fa-trash',
+      clear: 'fa fa-circle-trash',
       close: 'fa fa-times'
     },
     tooltips: {
