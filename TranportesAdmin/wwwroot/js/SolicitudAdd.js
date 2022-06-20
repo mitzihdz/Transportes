@@ -212,7 +212,7 @@ $('#form1').click(function () {
             data: JSON.stringify(solicitud),
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                AlertSuccessOk('El cliente se registró correctamente.', '/Solicitud');
+                AlertSuccessOk('La solicitud se registró correctamente.', '/Solicitud');
 
             },
             failure: function (data) {
