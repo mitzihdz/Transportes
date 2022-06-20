@@ -262,7 +262,7 @@ $('#guardarRuta').click(function () {
                 "<td class='text-center'>" + tractorDataTable + "</td>" +
                 "<td class='text-center'>" + cajaDataTable + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + y + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
-                "<td class='text-center'><a class='nav_link' href='#'><i style='' class='fa-solid fa-circle-trash'></i></a >" +
+                "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + y + ")'><i style='' class='fa-solid fa-circle-trash'></i></a >" +
                 "</tr>";
             $('#otroOperador > tbody').append(rows);
             $("#otroOperador").DataTable({
@@ -323,7 +323,7 @@ $('#guardarRuta').click(function () {
     }
     
 });
-$('#agregarDestino').click(function () {
+function agregarDestino() {
     if ($('#txtDestino').val() != '') {
         x++;
         var cliente = $('#txtCliente').val()
@@ -350,8 +350,29 @@ $('#agregarDestino').click(function () {
     else {
         AlertError('Agrega un destino');
     }
-});
+}
+//$('#agregarDestino').click(function () {
+    
+//});
+function eliminarOperador(id) {
+    console.log(id);
+    console.log('antes de eliminar', tblSolicitudDetalles)
+    tblSolicitudDetalles.splice(id, 1);
+    console.log('despues de eliminar', tblSolicitudDetalles)
+    //$('#otroOperador > tbody').html('');
+    //for (let i = 0; i < tblSolicitudDetalles.length; i++) {
+    //    var rows =
+    //        "<tr class='text-center'>" +
+    //        "<td class='text-center'>" + tblSolicitudDetalles[i].tblOperador.nombre + "</td>" +
+    //        "<td class='text-center'>" + tblSolicitudDetalles[i].tblTracto.idTracto + "</td>" +
+    //        "<td class='text-center'>" + tblSolicitudDetalles[i].tblCajas.noEconomico + "</td>" +
+    //        "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i class='fa-solid fa-truck'></i></a >" +
+    //        "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
+    //        "</tr>";
+    //    $('#otroOperador > tbody').append(rows);
+    //}
 
+}
 function borrarDestino(id) {
     $('#TimeLineContainerII').html('');
     var cliente = $('#txtCliente').val();
@@ -483,7 +504,7 @@ function abrirModalRuta(y) {
     
 }
 //Editar ruta en modal
-$('#agregarDestino2').click(function () {
+function agregarDestino2() {
     if ($('#txtDestino2').val() != '') {
         var cliente = $('#txtCliente').val()
         var destinoId = $('#destino2 option').filter(function () {
@@ -512,7 +533,10 @@ $('#agregarDestino2').click(function () {
     else {
         AlertError('Agrega un destino');
     }
-});
+}
+//$('#agregarDestino2').click(function () {
+    
+//});
 function borrarDestino2(id) {
     if (ruta.tblSolicitudDetalleRuta.length == 1) {
         ruta.tblSolicitudDetalleRuta.pop();
