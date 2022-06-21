@@ -12,7 +12,7 @@ namespace Negocio
         {
             try
             {
-                List<TblUbicacione> list = id == null ? ctx.TblUbicaciones.OrderBy(x => x.Planta).ToList() : ctx.TblUbicaciones.Where(x => x.Id == id).ToList();
+                List<TblUbicacione> list = id == null ? ctx.TblUbicaciones.Where(x => x.Activo == true).OrderBy(x => x.Planta).ToList() : ctx.TblUbicaciones.Where(x => x.Id == id).ToList();
 
                 Response.Estado = true;
                 Response.Mensaje = "OK";
@@ -84,7 +84,7 @@ namespace Negocio
             {
                 TblUbicacione tblUbicacion = ctx.TblUbicaciones.Find(id);
 
-                //tblUbicacion.Estatus = false;
+                tblUbicacion.Activo = false;
 
                 ctx.Entry(tblUbicacion).State = EntityState.Modified;
                 ctx.SaveChanges();
