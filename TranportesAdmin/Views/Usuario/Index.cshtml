@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @section Scripts {
-    <script src="~/js/Ubicacion.js"></script>
+    <script src="~/js/Usuario.js"></script>
     <script src="~/js/Alerts.js"></script>
     <!-- DataTables -->
     <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -32,12 +32,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Administración de Ubicaciones</h1>
+                <h1 class="m-0">Administración de Usuarios</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="~/Home">Home</a></li>
-                    <li class="breadcrumb-item">Administración de Ubicaciones</li>
+                    <li class="breadcrumb-item">Administración de Usuarios</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -46,7 +46,7 @@
 
 <div class="card card-default">
     <div class="card-header">
-        <h3 class="card-title">Listado general de ubicaciones</h3>
+        <h3 class="card-title">Listado general de usuarios</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -56,18 +56,18 @@
             </div>
             <div class="col-md-2">
                 <button type="button" class="btn btn-block btn-info btn-sm" onclick="OpenNew();">
-                  Nueva Ubicación
+                  Nuevo Usuario
                 </button>
             </div>
         </div>
         <br />
         <div class="row">
              <div class="col-12">
-                 <table id="tblUbicaciones" class="table table-bordered table-hover">
+                 <table id="tblUsuarios" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th class="col-md-3">Planta</th>
-                            <th class="col-md-7">Ruta</th>
+                            <th class="col-md-5">Usuario</th>
+                            <th class="col-md-5">Perfil</th>
                             <th class="col-md-1">Editar</th>
                             <th class="col-md-1">Eliminar</th>
                         </tr>
@@ -79,76 +79,108 @@
     </div>
 </div>
 
-<div id="modalUbicacion" class="modal" tabindex="-1" role="dialog">
+<div id="modalUser" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Nuevo ubicación</h5>
+        <h5 class="modal-title">Nuevo usuario</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-       <form id="fmNewUbicacion">
+       <form id="frmNewUser">
            <div class="row">
                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="txtPlanta">Planta</label>
-                        <input class="form-control form-control-sm" type="text" id="txtPlanta" name="Planta" style="text-transform:uppercase" maxlength="100"> 
-                    </div>
-                </div>
+                   <div class="form-group">
+                       <label for="ddlPerfil">Perfil</label>
+                       <select class="form-control form-control-sm" id="ddlPerfil" name="Perfil"></select>               
+                   </div>
+               </div>
            </div>
            <div class="row">
                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="txtRuta">Ruta</label>
-                        <textarea class="form-control form-control-sm" type="text" id="txtRuta" name="Ruta" style="text-transform:uppercase" maxlength="200"></textarea>
-                    </div>
-                </div>
+                   <div class="form-group">
+                        <label for="txtUsuario">Usuario</label>
+                        <input class="form-control form-control-sm" type="text" id="txtUsuario" name="Usuario" style="text-transform:uppercase" maxlength="200">               
+                   </div>
+               </div>
+           </div>
+           <div class="row">
+               <div class="col-md-12">
+                   <div class="form-group">
+                        <label for="txtPassword">Contraseña</label>
+                        <input class="form-control form-control-sm" type="password" id="txtPassword" name="Password" style="text-transform:uppercase" maxlength="200">               
+                   </div>
+               </div>
+           </div>
+           <div class="row">
+               <div class="col-md-12">
+                   <div class="form-group">
+                        <label for="txtConfirmPassword">Confirma Contraseña</label>
+                        <input class="form-control form-control-sm" type="password" id="txtConfirmPassword" name="ConfirmPassword" style="text-transform:uppercase" maxlength="200">               
+                   </div>
+               </div>
            </div>
        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" id="BtnNuevaUbicacion" class="btn btn-primary">Agregar</button>
+        <button type="button" id="BtnNuevoUsuario" class="btn btn-primary">Agregar</button>
       </div>
     </div>
   </div>
 </div>
 
-<div id="modalEditUbicacion" class="modal" tabindex="-1" role="dialog">
+<div id="modalEditUser" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Actualiza ubicación</h5>
+        <h5 class="modal-title">Actualiza usuario</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-       <form id="fmEditUbicacion">
-           <input type="hidden" id="IdUbicacion" />
+       <form id="frmEditUser">
+           <input type="hidden" id="IdUsuario" />
            <div class="row">
                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="txtPlantaEdit">Planta</label>
-                        <input class="form-control form-control-sm" type="text" id="txtPlantaEdit" name="PlantaEdit" style="text-transform:uppercase" maxlength="100"> 
-                    </div>
-                </div>
+                   <div class="form-group">
+                       <label for="ddlPerfil">Perfil</label>
+                       <select class="form-control form-control-sm" id="ddlPerfilEdit" name="PerfilEdit"></select>               
+                   </div>
+               </div>
            </div>
            <div class="row">
                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="txtRutaEdit">Ruta</label>
-                        <textarea class="form-control form-control-sm" type="text" id="txtRutaEdit" name="RutaEdit" style="text-transform:uppercase" maxlength="200"></textarea>
-                    </div>
-                </div>
+                   <div class="form-group">
+                        <label for="txtUsuario">Usuario</label>
+                        <input class="form-control form-control-sm" type="text" id="txtUsuarioEdit" name="UsuarioEdit" style="text-transform:uppercase" maxlength="200">               
+                   </div>
+               </div>
+           </div>
+           <div class="row">
+               <div class="col-md-12">
+                   <div class="form-group">
+                        <label for="txtPassword">Contraseña</label>
+                        <input class="form-control form-control-sm" type="password" id="txtPasswordEdit" name="PasswordEdit" style="text-transform:uppercase" maxlength="200">               
+                   </div>
+               </div>
+           </div>
+           <div class="row">
+               <div class="col-md-12">
+                   <div class="form-group">
+                        <label for="txtConfirmPassword">Confirma Contraseña</label>
+                        <input class="form-control form-control-sm" type="password" id="txtConfirmPasswordEdit" name="ConfirmPasswordEdit" style="text-transform:uppercase" maxlength="200">               
+                   </div>
+               </div>
            </div>
        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" id="BtnEditaUbicacion" class="btn btn-primary">Guardar</button>
+        <button type="button" id="BtnEditaUsuario" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>

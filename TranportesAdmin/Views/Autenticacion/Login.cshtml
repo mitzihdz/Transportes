@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+ }
+ 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transportes Castelan | Inicio de Sesión</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="#">Transportes <b>Castelán</b></a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Ingresa tus credenciales de acceso</p>
+
+      <form id="frmLogin" method="post">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Usuario" id="txtUsuario" name="Usuario">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Contraseña" id="txtPassword" name="Password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-12">
+            <button type="button" id="BtnLogin" class="btn btn-primary btn-block">Inicia sesión</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+      <div class="row">
+          <div class="col-12 text-center">
+              <a href="forgot-password.html">¿Olvidó su contrase&ntilde;a?</a>
+          </div>
+      </div>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+@*<!-- AdminLTE App -->
+<script src="/dist/js/adminlte.min.js"></script>*@
+
+ <!-- jquery-validation -->
+<script src="/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="/plugins/jquery-validation/additional-methods.min.js"></script>
+<script src="/js/Login.js"></script>
+<script src="/js/Alerts.js"></script>
+
+</body>
+</html>
+

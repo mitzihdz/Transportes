@@ -10,8 +10,10 @@ namespace AccesoDatos.Models
         public int Id { get; set; }
         public string Usuario { get; set; }
         public string Contrasena { get; set; }
-        public int Perfil { get; set; }
+        public int TblPerfilId { get; set; }
         public bool? Activo { get; set; }
         public DateTime? Inclusion { get; set; }
+
+        public virtual TblPerfile TblPerfil { get; set; }
     }
 }

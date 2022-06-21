@@ -26,6 +26,7 @@ namespace AccesoDatos.Models
         public virtual DbSet<TblEstatusRuta> TblEstatusRutas { get; set; }
         public virtual DbSet<TblMarcaCaja> TblMarcaCajas { get; set; }
         public virtual DbSet<TblOperador> TblOperadors { get; set; }
+        public virtual DbSet<TblPerfile> TblPerfiles { get; set; }
         public virtual DbSet<TblPoliza> TblPolizas { get; set; }
         public virtual DbSet<TblProveedore> TblProveedores { get; set; }
         public virtual DbSet<TblProveedoresCaja> TblProveedoresCajas { get; set; }
@@ -263,6 +264,20 @@ namespace AccesoDatos.Models
                     .HasColumnName("RFC");
 
                 entity.Property(e => e.Telefono).HasMaxLength(200);
+            });
+
+            modelBuilder.Entity<TblPerfile>(entity =>
+            {
+                entity.ToTable("tbl_Perfiles");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Inclusion).HasColumnType("datetime");
+
+                entity.Property(e => e.Perfil)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<TblPoliza>(entity =>
@@ -505,9 +520,17 @@ namespace AccesoDatos.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.TblPerfilId).HasColumnName("tbl_Perfil_id");
+
                 entity.Property(e => e.Usuario)
                     .IsRequired()
                     .HasMaxLength(200);
+
+                entity.HasOne(d => d.TblPerfil)
+                    .WithMany(p => p.TblUsuarios)
+                    .HasForeignKey(d => d.TblPerfilId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tbl_Usuarios_tbl_Perfiles");
             });
 
             OnModelCreatingPartial(modelBuilder);
