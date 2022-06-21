@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Web;
 
 namespace TranportesAdmin.Controllers
 {
+    [Authorize]
     public class OperadorController : Controller
     {
-        
         public IActionResult Index()
         {
             ISession session = HttpContext.Session;

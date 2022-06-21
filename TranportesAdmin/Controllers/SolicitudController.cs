@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TranportesAdmin.Controllers
 {
+    [Authorize]
     public class SolicitudController : Controller
     {
         public IActionResult Index()

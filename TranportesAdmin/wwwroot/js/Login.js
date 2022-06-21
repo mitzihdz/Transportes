@@ -28,27 +28,51 @@
 
             var _user = $('#txtUsuario').val();
             var _password = $('#txtPassword').val();
+            var formData = new FormData();
+            formData.append("user", _user);
+            formData.append("password", _password);
+
 
             $.ajax({
-                url: "https://localhost:7259/api/Documento/Add",
                 type: "POST",
-                data: JSON.stringify({
-                    id: 0,
-                    nombreDocumento: _nombreDocumento
-                }),
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    GetGrid();
-                    AlertSuccess('El documento se registró correctamente.');
-                    $('#modalDocument').modal('toggle');
+                url: "/Login/Login",
+                ddataType: "json",
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (result, status, xhr) {
+                    if (result.estatus) {
+                        $(location).attr('href', 'Home');
+                    }
+                    else {
+                        AlertError(result.mensaje);
+                    }    
                 },
-                failure: function (data) {
-                    AlertError('Ocurrio un error al guardar el documento. Contacte al administrador.');
-                },
-                error: function (data) {
-                    AlertError('Ocurrio un error al guardar el documento. Contacte al administrador.');
+                error: function (xhr, status, error) {
+                    AlertError(status);
                 }
             });
+
+            //$.ajax({
+            //    url: "https://localhost:7259/api/Autenticacion/Select?user=" + _user + "&password=" + _password,
+            //    type: "GET",
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: function (data) {
+            //        if (data.estado) {
+            //            AlertSuccess(data.mensaje);
+            //        }
+            //        else {
+            //            AlertError(data.mensaje);
+            //        }
+            //    },
+            //    failure: function (data) {
+            //        AlertError('Ocurrio un error al autenticar el usuario. Contacte al administrador.');
+            //    },
+            //    error: function (data) {
+            //        AlertError('Ocurrio un error al autenticar el usuario. Contacte al administrador.');
+            //    }
+            //});
         }
     });
 
