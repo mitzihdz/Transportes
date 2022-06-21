@@ -12,6 +12,7 @@ function Delete(id) {
         dataType: "json",
         success: function (result) {
             AlertSuccess('La solicitud se eliminó correctamente.');
+            $("#tblSolicitud").DataTable().destroy();
             GetGrid();
         },
         failure: function (data) {
