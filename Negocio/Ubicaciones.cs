@@ -33,6 +33,7 @@ namespace Negocio
             {
                 ubicacion.Planta = ubicacion.Planta.ToUpper();
                 ubicacion.Ruta = ubicacion.Ruta.ToUpper();
+                ubicacion.Activo = true;
                 ubicacion.Inclusion = DateTime.Now;
 
                 ctx.TblUbicaciones.Add(ubicacion);
