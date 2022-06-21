@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+    $("form").attr('autocomplete', 'off');
+
     $.validator.addMethod(
         "regex",
         function (value, element, regexp) {

@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+    $("form").attr('autocomplete', 'off');
+
     var valTractor = $('#fmTracto').validate({
         rules: {
             Clave: {

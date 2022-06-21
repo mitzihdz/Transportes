@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+
+    $("form").attr('autocomplete', 'off');
     
     var id = $("#idTracto").val();
     $.ajax({

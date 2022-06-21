@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+    $("form").attr('autocomplete', 'off');
     
     var id = $("#idCliente").val();
     $.ajax({
