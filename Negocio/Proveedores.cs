@@ -12,7 +12,7 @@ namespace Negocio
         {
             try
             {
-                List<TblProveedore> list = id == null ? ctx.TblProveedores.OrderBy(x => x.NombreOrazonSocial).ToList() : ctx.TblProveedores.Where(x => x.Id == id).ToList();
+                List<TblProveedore> list = id == null ? ctx.TblProveedores.Where(x => x.Activo == true).OrderBy(x => x.NombreOrazonSocial).ToList() : ctx.TblProveedores.Where(x => x.Id == id).ToList();
 
                 Response.Estado = true;
                 Response.Mensaje = "OK";
