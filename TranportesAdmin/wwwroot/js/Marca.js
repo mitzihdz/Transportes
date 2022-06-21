@@ -39,6 +39,7 @@
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
+                    $("#tblMarcas").DataTable().destroy();
                     GetGrid();
                     AlertSuccess('La marca se registró correctamente.');
                     $('#modalMarca').modal('toggle');
@@ -92,6 +93,7 @@
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
+                    $("#tblMarcas").DataTable().destroy();
                     GetGrid();
                     AlertSuccess('La marca se actualizó correctamente.');
                     $('#modalEditMarca').modal('toggle');
@@ -126,8 +128,8 @@ function GetGrid() {
                 var rows =
                     "<tr>" +
                     "<td>" + item.marca + "</td>" +
-                    "<td><a class='nav_link' href='#' onclick='OpenEdit("  + item.id + ")'><i class='nav-icon fas fa-edit'></i></a >" +
-                    "<td><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='far fa-times-circle'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='OpenEdit("  + item.id + ")'><i class='nav-icon fas fa-edit'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='fa-solid fa-circle-trash'></i></a >" +
                     "</tr>";
                 $('#tblMarcas > tbody').append(rows);
             });
@@ -180,6 +182,7 @@ function Delete(id) {
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
         success: function (result) {
+            $("#tblMarcas").DataTable().destroy();
             GetGrid();
             AlertSuccess('La marca se eliminó correctamente.');     
         },

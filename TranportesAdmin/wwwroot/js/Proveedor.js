@@ -12,6 +12,7 @@ function Delete(id) {
         dataType: "json",
         success: function (result) {
             AlertSuccess('El proveedor se eliminó correctamente.');
+            $("#tblProveedores").DataTable().destroy();
             GetGrid();
         },
         failure: function (data) {
@@ -33,13 +34,12 @@ function GetGrid() {
         success: function (data) {
             $('#tblProveedores > tbody').empty();
             $.each(data.respuesta, function (i, item) {
-                debugger
                 var rows =
                     "<tr>" +
                     "<td>" + item.clave + "</td>" +
                     "<td>" + item.nombreOrazonSocial + "</td>" + 
-                    "<td><a class='nav_link' href='~/../Proveedor/Editar/" + item.id + "'><i class='nav-icon fas fa-edit'></i></a >" +
-                    "<td><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='far fa-times-circle'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='~/../Proveedor/Editar/" + item.id + "'><i class='nav-icon fas fa-edit'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='fa-solid fa-circle-trash'></i></a >" +
                     "</tr>";
                 $('#tblProveedores > tbody').append(rows);
             });

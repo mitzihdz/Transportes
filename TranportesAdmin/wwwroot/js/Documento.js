@@ -1,9 +1,11 @@
-﻿$(document).ready(function () {
+﻿var valDocumento;
+var valEditDocumento;
+$(document).ready(function () {
     $("form").attr('autocomplete', 'off');
     
     GetGrid();
 
-    var valDocumento = $('#fmNuevoDoc').validate({
+    valDocumento = $('#fmNuevoDoc').validate({
         rules: {
             Nombre: {
                 required: true
@@ -24,38 +26,7 @@
             $(element).removeClass('is-invalid');
         }
     });
-
-    $("#BtnNuevoDocumento").click(function () {
-        if (valDocumento.form()) {
-
-            var _nombreDocumento = $('#txtDocumento').val();
-
-            $.ajax({
-                url: "https://localhost:7259/api/Documento/Add",
-                type: "POST",
-                data: JSON.stringify({
-                    id: 0,
-                    nombreDocumento: _nombreDocumento
-                }),
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    GetGrid();
-                    AlertSuccess('El documento se registró correctamente.');
-                    $('#modalDocument').modal('toggle');
-                },
-                failure: function (data) {
-                    AlertError('Ocurrio un error al guardar el documento. Contacte al administrador.');
-                },
-                error: function (data) {
-                    AlertError('Ocurrio un error al guardar el documento. Contacte al administrador.');
-                }
-            });
-        }
-    });
-
-
-
-    var valEditDocumento = $('#fmEditDoc').validate({
+    valEditDocumento = $('#fmEditDoc').validate({
         rules: {
             NombreEdit: {
                 required: true
@@ -77,44 +48,68 @@
         }
     });
 
-    $("#BtnEditaDocumento").click(function () {
-        if (valEditDocumento.form()) {
+});
+$("#BtnEditaDocumento").click(function () {
+    if (valEditDocumento.form()) {
 
-            var _id = $('#IdDocumento').val();
-            var _nombreDocumento = $('#txtEditDocumento').val();
+        var _id = $('#IdDocumento').val();
+        var _nombreDocumento = $('#txtEditDocumento').val();
 
-            $.ajax({
-                url: "https://localhost:7259/api/Documento/Update",
-                type: "POST",
-                data: JSON.stringify({
-                    id: _id,
-                    nombreDocumento: _nombreDocumento
-                }),
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    GetGrid();
-                    AlertSuccess('El documento se actualizó correctamente.');
-                    $('#modalEditDocument').modal('toggle');
-                },
-                failure: function (data) {
-                    AlertError('Ocurrio un error al actualizar el documento. Contacte al administrador.');
-                },
-                error: function (data) {
-                    AlertError('Ocurrio un error al actualizar el documento. Contacte al administrador.');
-                }
-            });
-        }
-    });
+        $.ajax({
+            url: "https://localhost:7259/api/Documento/Update",
+            type: "POST",
+            data: JSON.stringify({
+                id: _id,
+                nombreDocumento: _nombreDocumento
+            }),
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                AlertSuccess('El documento se actualizó correctamente.');
+                $('#modalEditDocument').modal('toggle');
+                $("#tblDocumentos").DataTable().destroy();
+                GetGrid();
+            },
+            failure: function (data) {
+                AlertError('Ocurrio un error al actualizar el documento. Contacte al administrador.');
+            },
+            error: function (data) {
+                AlertError('Ocurrio un error al actualizar el documento. Contacte al administrador.');
+            }
+        });
+    }
+});
+$("#BtnNuevoDocumento").click(function () {
+    if (valDocumento.form()) {
 
+        var _nombreDocumento = $('#txtDocumento').val();
 
+        $.ajax({
+            url: "https://localhost:7259/api/Documento/Add",
+            type: "POST",
+            data: JSON.stringify({
+                id: 0,
+                nombreDocumento: _nombreDocumento
+            }),
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                AlertSuccess('El documento se registró correctamente.');
+                $('#modalDocument').modal('toggle');
+                $("#tblDocumentos").DataTable().destroy();
+                GetGrid();
+            },
+            failure: function (data) {
+                AlertError('Ocurrio un error al guardar el documento. Contacte al administrador.');
+            },
+            error: function (data) {
+                AlertError('Ocurrio un error al guardar el documento. Contacte al administrador.');
+            }
+        });
 
-
-
-
+    }
 });
 
-
 function GetGrid() {
+    
     $.ajax({
         type: "GET",
         url: "https://localhost:7259/api/Documento/Select",
@@ -126,8 +121,8 @@ function GetGrid() {
                 var rows =
                     "<tr>" +
                     "<td>" + item.nombreDocumento + "</td>" +
-                    "<td><a class='nav_link' href='#' onclick='OpenEdit("  + item.id + ")'><i class='nav-icon fas fa-edit'></i></a >" +
-                    "<td><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='fa-solid fa-circle-trash'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='OpenEdit("  + item.id + ")'><i class='nav-icon fas fa-edit'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='fa-solid fa-circle-trash'></i></a >" +
                     "</tr>";
                 $('#tblDocumentos > tbody').append(rows);
             });
@@ -180,6 +175,7 @@ function Delete(id) {
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
         success: function (result) {
+            $("#tblDocumentos").DataTable().destroy();
             GetGrid();
             AlertSuccess('El documento se eliminó correctamente.');     
         },

@@ -12,6 +12,7 @@ function Delete(id) {
         dataType: "json",
         success: function (result) {
             AlertSuccess('La solicitud se eliminó correctamente.');
+            $("#tblSolicitud").DataTable().destroy();
             GetGrid();
         },
         failure: function (data) {
@@ -36,10 +37,10 @@ function GetGrid() {
                 
                 var rows =
                     "<tr>" +
-                    "<td class='text-center'>" + item.id + "</td>" +
-                    "<td class='text-center'>" + item.tblClientes.nombreCorto + "</td>" +
-                    "<td class='text-center'>" + item.tblEstatus.estatus +"</td >" +
-                    "<td class='text-center'>" + item.fechaSolicitud + "</td>" +
+                    "<td>" + item.id + "</td>" +
+                    "<td>" + item.tblClientes.nombreCorto + "</td>" +
+                    "<td>" + item.tblEstatus.estatus +"</td >" +
+                    "<td>" + item.fechaSolicitud + "</td>" +
                     "<td class='text-center'><a class='nav_link' href='~/../Solicitud/Editar/" + item.id + "'><i class='nav-icon fas fa-edit'></i></a >" +
                     "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i style='' class='fa-solid fa-circle-trash'></i></a >" +
                     "</tr>";

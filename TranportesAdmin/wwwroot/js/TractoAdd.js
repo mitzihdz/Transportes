@@ -75,7 +75,7 @@
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    AlertSuccessOk('El tracto se registró correctamente.','/Tractor');
+                    AlertSuccessOk('El tracto se registró correctamente.','/Tracto');
                 },
                 failure: function (data) {
                     AlertError('Ocurrio un error al guardar el tracto. Contacte al administrador.');

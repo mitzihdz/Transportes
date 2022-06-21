@@ -13,6 +13,7 @@ function Delete(id) {
         dataType: "json",
         success: function (result) {
             AlertSuccess('El tracto se eliminó correctamente.');
+            $("#tblTractos").DataTable().destroy();
             GetGrid();
         },
         failure: function (data) {
@@ -34,7 +35,6 @@ function GetGrid() {
         success: function (data) {
             $('#tblTractos > tbody').empty();
             $.each(data.respuesta, function (i, item) {
-                debugger
                 var rows =
                     "<tr>" +
                     "<td>" + item.idTracto + "</td>" +
@@ -42,8 +42,8 @@ function GetGrid() {
                     "<td>" + item.placas + "</td>" +
                     "<td>" + item.modelo + "</td>" +
                     "<td>" + item.anio + "</td>" +
-                    "<td><a class='nav_link' href='~/../Tracto/Editar/" + item.id + "'><i class='nav-icon fas fa-edit'></i></a >" +
-                    "<td><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='far fa-times-circle'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='~/../Tracto/Editar/" + item.id + "'><i class='nav-icon fas fa-edit'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='fa-solid fa-circle-trash'></i></a >" +
                     "</tr>";
                 $('#tblTractos > tbody').append(rows);
             });

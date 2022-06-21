@@ -46,6 +46,7 @@
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
+                    $("#tblUbicaciones").DataTable().destroy();
                     GetGrid();
                     AlertSuccess(data.mensaje);
                     $('#modalUbicacion').modal('toggle');
@@ -105,6 +106,7 @@
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
+                    $("#tblUbicaciones").DataTable().destroy();
                     GetGrid();
                     AlertSuccess(data.mensaje);
                     $('#modalEditUbicacion').modal('toggle');
@@ -137,8 +139,8 @@ function GetGrid() {
                     "<tr>" +
                     "<td>" + item.planta + "</td>" +
                     "<td>" + item.ruta + "</td>" +
-                    "<td><a class='nav_link' href='#' onclick='OpenEdit("  + item.id + ")'><i class='nav-icon fas fa-edit'></i></a >" +
-                    "<td><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='far fa-times-circle'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='OpenEdit("  + item.id + ")'><i class='nav-icon fas fa-edit'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='fa-solid fa-circle-trash'></i></a >" +
                     "</tr>";
                 $('#tblUbicaciones > tbody').append(rows);
             });
@@ -192,6 +194,7 @@ function Delete(id) {
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
         success: function (result) {
+            $("#tblUbicaciones").DataTable().destroy();
             GetGrid();
             AlertSuccess(result.mensaje);
         },

@@ -47,7 +47,7 @@
                 dataType: "json",
                 success: function (result) {
                     $('#IdProveedor').val(result.respuesta);
-                    AlertSuccess('El proveedor se registró correctamente.');
+                    AlertSuccessOk('El proveedor se registró correctamente.','/Proveedor');
                     
                     //$('#cardDomicilio').removeClass('collapsed-card');
                 },

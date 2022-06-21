@@ -14,6 +14,7 @@ function Delete(id) {
         dataType: "json",
         success: function (result) {
             AlertSuccess('El operador se eliminó correctamente.');
+            $("#tblOperadores").DataTable().destroy();
             GetGrid();
         },
         failure: function (data) {
@@ -35,7 +36,6 @@ function GetGrid() {
         success: function (data) {
             $('#tblOperadores > tbody').empty();
             $.each(data.respuesta, function (i, item) {
-                debugger
                 var rows =
                     "<tr>" +
                     "<td>" + item.idOperador + "</td>" +
@@ -43,8 +43,8 @@ function GetGrid() {
                     "<td>" + item.apellidoPaterno + "</td>" +
                     "<td>" + item.apellidoMaterno + "</td>" +
                     "<td>" + item.rfc + "</td>" +
-                    "<td><a class='nav_link' href='~/../Operador/Editar/" + item.id + "'><i class='nav-icon fas fa-edit'></i></a >" +
-                    "<td><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='far fa-times-circle'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='~/../Operador/Editar/" + item.id + "'><i class='nav-icon fas fa-edit'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i class='fa-solid fa-circle-trash'></i></a >" +
                     "</tr>";
                 $('#tblOperadores > tbody').append(rows);
             });
