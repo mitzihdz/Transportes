@@ -119,7 +119,7 @@ $(document).ready(function () {
             console.log('Data operadores ->', data.respuesta);
             $('#operador').html('');
             $.each(clientesData, function (k, v) {
-                $('#operador').append('<option data-xyz="' + v.id + '" value="' + v.nombre + '"></option>');
+                $('#operador').append('<option data-xyz="' + v.id + '" value="' + v.apellidoPaterno + " " + v.apellidoMaterno + " " +  v.nombre + '"></option>');
             });
         },
         failure: function (data) {
@@ -429,9 +429,9 @@ function abrirModalRuta(y) {
             console.log('Data operadores ->', data.respuesta);
             $('#operador2').html('');
             $.each(clientesData, function (k, v) {
-                $('#operador2').append('<option data-xyz="' + v.id + '" value="' + v.nombre + '"></option>');
+                $('#operador2').append('<option data-xyz="' + v.id + '" value="' + v.apellidoPaterno + " " + v.apellidoMaterno + " " + v.nombre + '"></option>');
                 if (v.id == ruta.tblOperadorId) {
-                    $("#txtOperador2:text").val(v.nombre);
+                    $("#txtOperador2:text").val(v.apellidoPaterno + " " + v.apellidoMaterno + " " + v.nombre);
                 }
             });
         },
