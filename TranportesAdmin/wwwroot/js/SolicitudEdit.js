@@ -34,7 +34,9 @@ var tblSolicitudDetalleRuta = [{
     id: 0,
     tblUbicacionesId: 0,
     tblUbicaciones: {
-        planta: ''
+        id: 0,
+        planta: '',
+        ruta: ''
     },
     tblEstatusId: 0,
     orden: 0,
@@ -208,10 +210,11 @@ function cargarDatos(solicitudData) {
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
             var clientesData = data.respuesta;
+            console.log('Destinos ->', data.respuesta);
             //console.log('Data destinos ->', data.respuesta);
             $('#destino').html('');
             $.each(clientesData, function (k, v) {
-                $('#destino').append('<option data-xyz="' + v.id + '" value="' + v.planta + '"></option>');
+                $('#destino').append('<option data-xyz="' + v.id + "-" + v.ruta + '" value="' + v.planta + '"></option>');
             });
         },
         failure: function (data) {
@@ -363,7 +366,7 @@ function abrirModalRuta(posicion) {
             //console.log('Data destinos ->', data.respuesta);
             $('#destino2').html('');
             $.each(clientesData, function (k, v) {
-                $('#destino2').append('<option data-xyz="' + v.id + '" value="' + v.planta + '"></option>');
+                $('#destino2').append('<option data-xyz="' + v.id + "-" + v.ruta + '" value="' + v.planta +'"></option>');
             });
         },
         failure: function (data) {
@@ -378,23 +381,27 @@ function abrirModalRuta(posicion) {
     var cliente = $('#txtCliente').val();
     for (let i = 0; i < tblSolicitudDetalles2[posicion].tblSolicitudDetalleRuta.length; i++) {
         if (i % 2 != 0) {
-            $('#TimeLineContainerII2').append('<div id="destinoIdModal' + i + '" class="timeline-block timeline-block-right"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalles2[posicion].tblSolicitudDetalleRuta[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + cliente + '</p><label onclick="borrarDestino2(' + i + ')">Eliminar <i style="color: indianred;" class="fa-solid fa-circle-trash"></i></label></div></div>')
+            $('#TimeLineContainerII2').append('<div id="destinoIdModal' + i + '" class="timeline-block timeline-block-right"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalles2[posicion].tblSolicitudDetalleRuta[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + tblSolicitudDetalles2[posicion].tblSolicitudDetalleRuta[i].tblUbicaciones.ruta + '</p> ' + '<p style="color: white;">' + cliente + '</p>' + '<label onclick="borrarDestino2(' + i + ')">Eliminar <i style="color: indianred;" class="fa-solid fa-circle-trash"></i></label></div></div>')
         }
         else {
-            $('#TimeLineContainerII2').append('<div id="destinoIdModal' + i + '" class="timeline-block timeline-block-left"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalles2[posicion].tblSolicitudDetalleRuta[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + cliente + '</p><label onclick="borrarDestino2(' + i + ')">Eliminar <i style="color: indianred;" class="fa-solid fa-circle-trash"></i></label></div></div>')
+            $('#TimeLineContainerII2').append('<div id="destinoIdModal' + i + '" class="timeline-block timeline-block-left"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalles2[posicion].tblSolicitudDetalleRuta[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + tblSolicitudDetalles2[posicion].tblSolicitudDetalleRuta[i].tblUbicaciones.ruta + '</p> ' + '<p style="color: white;">' + cliente + '</p>' + '<label onclick="borrarDestino2(' + i + ')">Eliminar <i style="color: indianred;" class="fa-solid fa-circle-trash"></i></label></div></div>')
         }
     }
     console.log('abriendo modal', z);
     tblSolicitudDetalleRuta2 = tblSolicitudDetalles2[posRuta].tblSolicitudDetalleRuta;
+    
 }
 function agregarDestino2() {
     console.log('clic', tblSolicitudDetalleRuta2)
     if ($('#txtDestino2').val() != '') {
         var cliente = $('#txtCliente').val()
-        var destinoid = $('#destino2 option').filter(function () {
+        var destino = $('#destino2 option').filter(function () {
             return this.value == $('#txtDestino2').val();
         }).data('xyz');
+        var destinoid = destino.substring(0, destino.indexOf("-"));
         var destinonombre = $('#txtDestino2').val();
+        var destinoRuta = destino.substring(destino.indexOf("-") + 1, destino.length);
+        console.log('ruta del destinoid', destinoRuta);
         tblSolicitudDetalleRuta2.push({
             id: 0,
             tblUbicacionesId: destinoid,
@@ -402,7 +409,8 @@ function agregarDestino2() {
             orden: tblSolicitudDetalleRuta2.length - 1,
             tblUbicaciones: {
                 id: 0,
-                planta: destinonombre
+                planta: destinonombre,
+                ruta: destinoRuta
             }
         });
         console.log('Ruta Enviar 2', tblSolicitudDetalleRuta2);
@@ -410,10 +418,10 @@ function agregarDestino2() {
         $('#TimeLineContainerII2').html('');
         for (let i = 0; i < tblSolicitudDetalleRuta2.length; i++) {
             if (i % 2 != 0) {
-                $('#TimeLineContainerII2').append('<div id="destinoidmodal' + i + '" class="timeline-block timeline-block-right"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalleRuta2[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + cliente + '</p><label onclick="borrarDestino2(' + i + ')">eliminar <i style="color: indianred;" class="fa-solid fa-circle-trash"></i></label></div></div>')
+                $('#TimeLineContainerII2').append('<div id="destinoidmodal' + i + '" class="timeline-block timeline-block-right"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalleRuta2[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + tblSolicitudDetalleRuta2[i].tblUbicaciones.ruta + '</p> ' + '<p style="color: white;">' + cliente + '</p>' + '<label onclick="borrarDestino2(' + i + ')">eliminar <i style="color: indianred;" class="fa-solid fa-circle-trash"></i></label></div></div>')
             }
             else {
-                $('#TimeLineContainerII2').append('<div id="destinoidmodal' + i + '" class="timeline-block timeline-block-left"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalleRuta2[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + cliente + '</p><label onclick="borrarDestino2(' + i + ')">eliminar <i style="color: indianred;" class="fa-solid fa-circle-trash"></i></label></div></div>')
+                $('#TimeLineContainerII2').append('<div id="destinoidmodal' + i + '" class="timeline-block timeline-block-left"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalleRuta2[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + tblSolicitudDetalleRuta2[i].tblUbicaciones.ruta + '</p> ' + '<p style="color: white;">' + cliente + '</p>' + '<label onclick="borrarDestino2(' + i + ')">eliminar <i style="color: indianred;" class="fa-solid fa-circle-trash"></i></label></div></div>')
             }
         }
         $('#txtDestino2').val('');
@@ -437,10 +445,10 @@ function borrarDestino2(id) {
         tblSolicitudDetalleRuta2.splice(id, 1);
         for (let i = 0; i < tblSolicitudDetalleRuta2.length; i++) {
             if (i % 2 != 0) {
-                $('#TimeLineContainerII2').append('<div id="destinoId' + i + '" class="timeline-block timeline-block-right"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalleRuta2[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + cliente + '</p><label onclick="borrarDestino2(' + i + ')">Eliminar <i style="color: indianred;" class="fa-solid fa-circle-trash"></i></label></div></div>')
+                $('#TimeLineContainerII2').append('<div id="destinoId' + i + '" class="timeline-block timeline-block-right"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalleRuta2[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + tblSolicitudDetalleRuta2[i].tblUbicaciones.ruta + '</p> ' + '<p style="color: white;">' + cliente + '</p>' + '<label onclick="borrarDestino2(' + i + ')">Eliminar <i style="color: indianred;" class="fa-solid fa-circle-trash"></i></label></div></div>')
             }
             else {
-                $('#TimeLineContainerII2').append('<div id="destinoId' + i + '" class="timeline-block timeline-block-left"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalleRuta2[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + cliente + '</p><label onclick="borrarDestino2(' + i + ')">Eliminar <i style="color: indianred;" class="fa-solid fa-circle-trash"></i></label></div></div>')
+                $('#TimeLineContainerII2').append('<div id="destinoId' + i + '" class="timeline-block timeline-block-left"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalleRuta2[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + tblSolicitudDetalleRuta2[i].tblUbicaciones.ruta + '</p> ' + '<p style="color: white;">' + cliente + '</p>' + '<label onclick="borrarDestino2(' + i + ')">Eliminar <i style="color: indianred;" class="fa-solid fa-circle-trash"></i></label></div></div>')
             }
         }
     }
@@ -461,7 +469,6 @@ $('#guardarRuta2').click(function () {
     tblSolicitudDetalles2[posRuta].tblTracto.idTracto = $('#txtTractor2').val();
     tblSolicitudDetalles2[posRuta].tblCajas.noEconomico = $('#txtCaja2').val();
     console.log('ruta editada', tblSolicitudDetalles2[posRuta]);
-    AlertSuccess("Ruta Editada");
     $("#verRuta").modal('hide');
     $('#otroOperador > tbody').html('');
     for (let i = 0; i < tblSolicitudDetalles2.length; i++) {
@@ -564,7 +571,9 @@ $('#guardarRuta').click(function () {
             id: 0,
             tblUbicacionesId: 0,
             tblUbicaciones: {
-                planta: ''
+                id: 0,
+                planta: '',
+                ruta: ''
             },
             tblEstatusId: 0,
             orden: 0,
@@ -584,25 +593,29 @@ function agregarDestino() {
     if ($('#txtDestino').val() != '') {
         x++;
         var cliente = $('#txtCliente').val()
-        var destinoId = $('#destino option').filter(function () {
+        var destino = $('#destino option').filter(function () {
             return this.value == $('#txtDestino').val();
         }).data('xyz');
+        var destinoid = destino.substring(0, destino.indexOf("-"));
         var destinoNombre = $('#txtDestino').val();
+        var destinoRuta = destino.substring(destino.indexOf("-") + 1, destino.length);
+        console.log('ruta del destinoid', destinoRuta);
         tblSolicitudDetalleRuta.push({
             id: 0,
-            tblUbicacionesId: destinoId,
-            tblUbicaciones: {
-                planta: destinoNombre
-            },
+            tblUbicacionesId: destinoid,
             tblEstatusId: 0,
             orden: x,
-            destino: destinoNombre
+            tblUbicaciones: {
+                id: 0,
+                planta: destinoNombre,
+                ruta: destinoRuta
+            }
         });
         if (x % 2 == 0) {
-            $('#TimeLineContainerII').append('<div id="destinoId' + x + '" class="timeline-block timeline-block-right"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + destinoNombre + '</h3><p style="color: white;">' + cliente + '</p><label onclick="borrarDestino(' + x + ')">Eliminar <i style="" class="fa-solid fa-circle-trash"></i></label></div></div>')
+            $('#TimeLineContainerII').append('<div id="destinoId' + x + '" class="timeline-block timeline-block-right"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + destinoNombre + '</h3><p style="color: white;">' + destinoRuta + '</p> ' + '<p style="color: white;">' + cliente + '</p>' + '<label onclick="borrarDestino(' + x + ')">Eliminar <i style="" class="fa-solid fa-circle-trash"></i></label></div></div>')
         }
         else {
-            $('#TimeLineContainerII').append('<div id="destinoId' + x + '" class="timeline-block timeline-block-left"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + destinoNombre + '</h3><p style="color: white;">' + cliente + '</p><label onclick="borrarDestino(' + x + ')">Eliminar <i style="" class="fa-solid fa-circle-trash"></i></label></div></div>')
+            $('#TimeLineContainerII').append('<div id="destinoId' + x + '" class="timeline-block timeline-block-left"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + destinoNombre + '</h3><p style="color: white;">' + destinoRuta + '</p> ' + '<p style="color: white;">' + cliente + '</p>' + '<label onclick="borrarDestino(' + x + ')">Eliminar <i style="" class="fa-solid fa-circle-trash"></i></label></div></div>')
         }
 
         $('#txtDestino').val('');
@@ -621,12 +634,11 @@ function borrarDestino(id) {
 
     tblSolicitudDetalleRuta.splice(id - 1, 1);
     for (let i = 0; i < tblSolicitudDetalleRuta.length; i++) {
-        tblSolicitudDetalleRuta[i].orden = i + i;
         if (i % 2 != 0) {
-            $('#TimeLineContainerII').append('<div id="destinoId' + i + '" class="timeline-block timeline-block-right"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalleRuta[i].destino + '</h3><p style="color: white;">' + cliente + '</p><label onclick="borrarDestino(' + i + ')">Eliminar <i style="" class="fa-solid fa-circle-trash"></i></label></div></div>')
+            $('#TimeLineContainerII').append('<div id="destinoId' + i + '" class="timeline-block timeline-block-right"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalleRuta[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + tblSolicitudDetalleRuta[i].tblUbicaciones.ruta + '</p> ' + '<p style="color: white;">' + cliente + '</p>' + '<label onclick="borrarDestino(' + i + ')">Eliminar <i style="" class="fa-solid fa-circle-trash"></i></label></div></div>')
         }
         else {
-            $('#TimeLineContainerII').append('<div id="destinoId' + i + '" class="timeline-block timeline-block-left"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalleRuta[i].destino + '</h3><p style="color: white;">' + cliente + '</p><label onclick="borrarDestino(' + i + ')">Eliminar <i style="" class="fa-solid fa-circle-trash"></i></label></div></div>')
+            $('#TimeLineContainerII').append('<div id="destinoId' + i + '" class="timeline-block timeline-block-left"><div class="marker"></div><div class="timeline-content"><h3 style="color: white;">' + tblSolicitudDetalleRuta[i].tblUbicaciones.planta + '</h3><p style="color: white;">' + tblSolicitudDetalleRuta[i].tblUbicaciones.ruta + '</p> ' + '<p style="color: white;">' + cliente + '</p>' + '<label onclick="borrarDestino(' + i + ')">Eliminar <i style="" class="fa-solid fa-circle-trash"></i></label></div></div>')
         }
     }
     x--;
