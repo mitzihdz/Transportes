@@ -27,6 +27,7 @@ namespace TranportesAdmin.Controllers
             {
                 ResponseModel model = new ResponseModel();
                 bool status = false;
+                int idPerfil = 0;
                 string msj = string.Empty;
                 string URL = "https://localhost:7259/api/Autenticacion/Select";
                 string urlParameters = "?user=" + user + "&password=" + password;
@@ -60,6 +61,7 @@ namespace TranportesAdmin.Controllers
                        
                         status = true;
                         msj = model.Mensaje;
+                        idPerfil = model.Respuesta.TblPerfilId;
 
                     }
                     else
@@ -76,7 +78,7 @@ namespace TranportesAdmin.Controllers
 
                 client.Dispose();
 
-                return Json(new { estatus = status, mensaje = msj });
+                return Json(new { estatus = status, mensaje = msj, perfil = idPerfil });
             }
             catch (Exception ex)
             {
