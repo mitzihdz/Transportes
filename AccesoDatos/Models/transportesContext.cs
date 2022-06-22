@@ -408,6 +408,8 @@ namespace AccesoDatos.Models
 
                 entity.Property(e => e.TblCajasId).HasColumnName("tbl_cajas_id");
 
+                entity.Property(e => e.TblEstatusRutaId).HasColumnName("tbl_estatus_ruta_id");
+
                 entity.Property(e => e.TblOperadorId).HasColumnName("tbl_operador_id");
 
                 entity.Property(e => e.TblSolicitudId).HasColumnName("tbl_Solicitud_id");
@@ -418,6 +420,11 @@ namespace AccesoDatos.Models
                     .WithMany(p => p.TblSolicitudDetalles)
                     .HasForeignKey(d => d.TblCajasId)
                     .HasConstraintName("FK__tbl_Solic__tbl_c__6E01572D");
+
+                entity.HasOne(d => d.TblEstatusRuta)
+                    .WithMany(p => p.TblSolicitudDetalles)
+                    .HasForeignKey(d => d.TblEstatusRutaId)
+                    .HasConstraintName("FK_tbl_Solicitud_detalle_tbl_estatus_rutas");
 
                 entity.HasOne(d => d.TblOperador)
                     .WithMany(p => p.TblSolicitudDetalles)
@@ -443,17 +450,9 @@ namespace AccesoDatos.Models
 
                 entity.Property(e => e.Inclusion).HasColumnType("datetime");
 
-                entity.Property(e => e.TblEstatusRutaId).HasColumnName("tbl_estatus_ruta_id");
-
                 entity.Property(e => e.TblSolicitudDetalleId).HasColumnName("tbl_solicitud_detalle_id");
 
                 entity.Property(e => e.TblUbicacionesId).HasColumnName("tbl_Ubicaciones_id");
-
-                entity.HasOne(d => d.TblEstatusRuta)
-                    .WithMany(p => p.TblSolicitudDetalleRuta)
-                    .HasForeignKey(d => d.TblEstatusRutaId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tbl_Solicitud_detalle_rutas_tbl_estatus_rutas");
 
                 entity.HasOne(d => d.TblSolicitudDetalle)
                     .WithMany(p => p.TblSolicitudDetalleRuta)

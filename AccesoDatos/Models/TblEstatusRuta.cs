@@ -10,7 +10,7 @@ namespace AccesoDatos.Models
     {
         public TblEstatusRuta()
         {
-            TblSolicitudDetalleRuta = new HashSet<TblSolicitudDetalleRuta>();
+            TblSolicitudDetalles = new HashSet<TblSolicitudDetalle>();
         }
 
         public int Id { get; set; }
@@ -18,6 +18,6 @@ namespace AccesoDatos.Models
         public DateTime? Inclusion { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<TblSolicitudDetalleRuta> TblSolicitudDetalleRuta { get; set; }
+        public virtual ICollection<TblSolicitudDetalle> TblSolicitudDetalles { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Negocio
                     .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblCajas)
                     .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblOperador)
                     .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblTracto)
-                    .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblSolicitudDetalleRuta).ThenInclude(r => r.TblEstatusRuta)
+                    .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblEstatusRuta)
                     .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblSolicitudDetalleRuta).ThenInclude(r => r.TblUbicaciones)
                     .Where(x => x.Id == id).ToList();
 
@@ -65,6 +65,7 @@ namespace Negocio
                         tblSolicitudDetalle.TblTractoId = detalle.TblTractoId;
                         tblSolicitudDetalle.TblCajasId = detalle.TblCajasId;
                         tblSolicitudDetalle.TblOperadorId = detalle.TblOperadorId;
+                        tblSolicitudDetalle.TblEstatusRutaId = 1; //Pendiente
                         tblSolicitudDetalle.TblSolicitudId = tblSolicitud.Id;
                         tblSolicitudDetalle.Inclusion = DateTime.Now;
 
@@ -78,7 +79,6 @@ namespace Negocio
 
                             tblSolicitudRuta.TblUbicacionesId = ruta.TblUbicacionesId;
                             tblSolicitudRuta.Orden = ruta.Orden;
-                            tblSolicitudRuta.TblEstatusRutaId = 1; //Pendiente
                             tblSolicitudRuta.TblSolicitudDetalleId = tblSolicitudDetalle.Id;
                             tblSolicitudRuta.Inclusion = DateTime.Now;
 
@@ -151,6 +151,7 @@ namespace Negocio
                         tblSolicitudDetalle.TblTractoId = detalle.TblTractoId;
                         tblSolicitudDetalle.TblCajasId = detalle.TblCajasId;
                         tblSolicitudDetalle.TblOperadorId = detalle.TblOperadorId;
+                        tblSolicitudDetalle.TblEstatusRutaId = 1; //Pendiente
                         tblSolicitudDetalle.TblSolicitudId = tblSolicitud.Id;
                         tblSolicitudDetalle.Inclusion = DateTime.Now;
 
@@ -164,7 +165,6 @@ namespace Negocio
 
                             tblSolicitudRuta.TblUbicacionesId = ruta.TblUbicacionesId;
                             tblSolicitudRuta.Orden = ruta.Orden;
-                            tblSolicitudRuta.TblEstatusRutaId = 1; //Pendiente
                             tblSolicitudRuta.TblSolicitudDetalleId = tblSolicitudDetalle.Id;
                             tblSolicitudRuta.Inclusion = DateTime.Now;
 

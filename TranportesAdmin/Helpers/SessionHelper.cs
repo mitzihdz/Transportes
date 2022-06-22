@@ -20,6 +20,11 @@ namespace TranportesAdmin.Helpers
             var r = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.Name);
             return r == null ? "" : r.Value;
         }
+        public static string GetOperadorId(IPrincipal User)
+        {
+            var r = ((ClaimsIdentity)User.Identity).FindFirst(ClaimTypes.Actor);
+            return r == null ? "" : r.Value;
+        }
         public static string GetValue(IPrincipal User, string Property)
         {
             var r = ((ClaimsIdentity)User.Identity).FindFirst(Property);

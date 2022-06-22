@@ -22,7 +22,7 @@ function GetGrid() {
                     "<td>" + item.tblClientes.nombreCorto + "</td>" +
                     "<td>" + item.tblEstatus.estatus +"</td >" +
                     "<td>" + item.fechaSolicitud + "</td>" +
-                    "<td class='text-center'><a class='nav_link' href='~/../Solicitud/Editar/" + item.id + "'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='~/../SolicitudOperador/Editar/" + item.id + "'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
                     "</tr>";
                 $('#tblSolicitud > tbody').append(rows);
             });

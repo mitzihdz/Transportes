@@ -13,7 +13,8 @@ namespace Negocio
             try
             {
                 List<TblSolicitud> list = new List<TblSolicitud>();
-                if(id == null)
+
+                if (id == null)
                 {
                     var query = from sol in ctx.TblSolicituds
                                 join det in ctx.TblSolicitudDetalles on sol.Id equals det.TblSolicitudId
@@ -27,14 +28,59 @@ namespace Negocio
                 {
                     list = ctx.TblSolicituds.Include(s => s.TblClientes)
                     .Include(s => s.TblEstatus)
-                    .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblCajas)
-                    .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblOperador)
-                    .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblTracto)
-                    .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblSolicitudDetalleRuta).ThenInclude(r => r.TblEstatusRuta)
-                    .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblSolicitudDetalleRuta).ThenInclude(r => r.TblUbicaciones)
+                    //.Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblCajas)
+                    //.Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblOperador)
+                    //.Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblTracto)
+                    //.Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblSolicitudDetalleRuta).ThenInclude(r => r.TblEstatusRuta)
+                    //.Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblSolicitudDetalleRuta).ThenInclude(r => r.TblUbicaciones)
                     .Where(x => x.Id == id).ToList();
                 }
-                
+
+                Response.Estado = true;
+                Response.Mensaje = "OK";
+                Response.Respuesta = list;
+            }
+            catch (Exception ex)
+            {
+                Response.Estado = false;
+                Response.Mensaje = ex.Message;
+            }
+
+            return Response;
+        }
+
+        public Response SelectRuta(int idSolicitud, int idOperador)
+        {
+            try
+            {
+                //List<TblSolicitudDetalleRuta> list = new List<TblSolicitudDetalleRuta>();
+
+                //var query = from det in ctx.TblSolicitudDetalles
+                //            join ruta in ctx.TblSolicitudDetalleRutas on det.Id equals ruta.TblSolicitudDetalleId
+                //            where det.TblOperadorId == idOperador & det.TblSolicitudId == idSolicitud
+                //            select new det
+                //            {
+                //                Id = det.Id,
+                //                TblTractoId = det.TblTractoId,
+                //                TblCajasId = det.TblCajasId,
+                //                TblOperadorId = det.TblOperadorId,
+                //                TblSolicitudId = det.TblSolicitudId,
+                //                TblSolicitudDetalleRuta = ruta
+                //            };
+
+
+
+
+
+                //            select ruta;
+
+                //list = query.Include(x => x.TblUbicaciones).Include(x => x.TblEstatusRuta)
+                //    .OrderBy(x => x.Orden).ToList();
+
+                //List<TblSolicitudDetalle> list = query.ToList();
+                List<TblSolicitudDetalle> list = ctx.TblSolicitudDetalles.Include(d => d.TblCajas)
+                    .Include(r => r.TblSolicitudDetalleRuta)
+                    .Where(x => x.TblSolicitudId == idSolicitud & x.TblOperadorId == idOperador).ToList();
 
                 Response.Estado = true;
                 Response.Mensaje = "OK";
@@ -54,7 +100,7 @@ namespace Negocio
             try
             {
                 TblSolicitudDetalleRuta tblSolicitudRuta = ctx.TblSolicitudDetalleRutas.Find(solicitudDetalleRuta.Id);
-                tblSolicitudRuta.TblEstatusRutaId = solicitudDetalleRuta.TblEstatusRutaId.Value;
+                //tblSolicitudRuta.TblEstatusRutaId = solicitudDetalleRuta.TblEstatusRutaId.Value;
 
                 ctx.Entry(tblSolicitudRuta).State = EntityState.Modified;
                 ctx.SaveChanges();

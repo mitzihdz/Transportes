@@ -17,6 +17,13 @@ namespace Servicios.Controllers
             return solicitudes.Select(idOperador, id);
         }
 
+        [HttpGet]
+        [Route("SelectRuta")]
+        public Response GetRutas(int idSolicitud, int idOperador)
+        {
+            return solicitudes.SelectRuta(idSolicitud, idOperador);
+        }
+
         [HttpPost]
         [Route("UpdateStatusRuta")]
         public Response UpdateStatusRuta([FromBody] SolicitudDetalleRuta solicitudRuta)

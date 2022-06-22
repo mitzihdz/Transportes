@@ -10,11 +10,9 @@ namespace AccesoDatos.Models
         public int Id { get; set; }
         public int TblUbicacionesId { get; set; }
         public int Orden { get; set; }
-        public int TblEstatusRutaId { get; set; }
         public int TblSolicitudDetalleId { get; set; }
         public DateTime? Inclusion { get; set; }
 
-        public virtual TblEstatusRuta TblEstatusRuta { get; set; }
         public virtual TblSolicitudDetalle TblSolicitudDetalle { get; set; }
         public virtual TblUbicacione TblUbicaciones { get; set; }
     }
