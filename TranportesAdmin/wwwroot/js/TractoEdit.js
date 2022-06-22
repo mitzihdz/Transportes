@@ -78,7 +78,7 @@
 
     $("#BtnEditaTracto").click(function () {
         if (valTractor.form()) {
-            var _id = $("#idTractor").val();
+            var _id = $("#idTracto").val();
             var _idTracto = $('#txtClave').val();
             var _noEconomico = $('#txtNumEconomico').val();
             var _placas = $('#txtPlacas').val();

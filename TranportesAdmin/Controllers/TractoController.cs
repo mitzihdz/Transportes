@@ -24,7 +24,7 @@ namespace TranportesAdmin.Controllers
         {
             ISession session = HttpContext.Session;
             session.SetString("Route", System.Reflection.MethodBase.GetCurrentMethod().Name);
-            ViewBag.IdTractor = id;
+            ViewBag.IdTracto = id;
             return View();
         }
     }
