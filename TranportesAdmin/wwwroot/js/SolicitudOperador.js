@@ -80,9 +80,6 @@ function GetGrid() {
 
 function OpenEdit(id, idEstatus) {
     GetEstatus(idEstatus);
-
-    $('#ddlEstatusRuta').val(idEstatus);
-
     $("#modalRuta").modal('show');
     //Obtener ruta
     $.ajax({
@@ -111,9 +108,6 @@ function OpenEdit(id, idEstatus) {
     });
 
     $('#IdSolicitudDetalle').val(id);
-  
-
-   
 }
 
 function GetEstatus(idEstatus_)
@@ -138,5 +132,5 @@ function GetEstatus(idEstatus_)
             AlertError('Ocurrio un error al consultar catálogo estatus. Contacte al administrador.');
         }
     });
-    
+
 }

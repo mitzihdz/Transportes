@@ -42,7 +42,10 @@
                 data: formData,
                 success: function (result, status, xhr) {
                     if (result.estatus) {
-                        $(location).attr('href', 'Home');
+                        if (result.perfil == 1)
+                            $(location).attr('href', 'Home');
+                        else
+                            $(location).attr('href', 'SolicitudOperador');
                     }
                     else {
                         AlertError(result.mensaje);
