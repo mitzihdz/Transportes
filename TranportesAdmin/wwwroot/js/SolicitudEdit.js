@@ -93,6 +93,7 @@ function cargarDatos(solicitudData) {
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
+                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
                 "</tr>";
             $('#otroOperador > tbody').append(rows);
@@ -109,6 +110,7 @@ function cargarDatos(solicitudData) {
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
+                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
                 "</tr>";
             $('#otroOperador > tbody').append(rows);
@@ -238,6 +240,7 @@ function eliminarOperador(id) {
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
+            "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
             "</tr>";
         $('#otroOperador > tbody').append(rows);
@@ -478,6 +481,7 @@ $('#guardarRuta2').click(function () {
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
+            "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
             "</tr>";
         $('#otroOperador > tbody').append(rows);
@@ -552,6 +556,7 @@ $('#guardarRuta').click(function () {
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
+                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
                 "</tr>";
             $('#otroOperador > tbody').append(rows);
