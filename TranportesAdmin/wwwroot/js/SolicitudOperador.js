@@ -79,7 +79,10 @@ function GetGrid() {
 
 
 function OpenEdit(id, idEstatus) {
-    GetEstatus();
+    GetEstatus(idEstatus);
+
+    $('#ddlEstatusRuta').val(idEstatus);
+
     $("#modalRuta").modal('show');
     //Obtener ruta
     $.ajax({
@@ -108,11 +111,12 @@ function OpenEdit(id, idEstatus) {
     });
 
     $('#IdSolicitudDetalle').val(id);
-    //$('#ddlEstatusRuta').val(id);
-    $("#ddlEstatusRuta option[value='"+idEstatus+"']").attr("selected", true);
+  
+
+   
 }
 
-function GetEstatus()
+function GetEstatus(idEstatus_)
 {
     $.ajax({
         type: "GET",
@@ -125,6 +129,7 @@ function GetEstatus()
             $.each(statusData, function (k, v) {
                 $('#ddlEstatusRuta').append('<option value="' + v.id + '">' + v.estatus + '</option>');
             });
+            $('#ddlEstatusRuta').val(idEstatus_);
         },
         failure: function (data) {
             AlertError('Ocurrio un error al consultar catálogo estatus. Contacte al administrador.');
@@ -133,5 +138,5 @@ function GetEstatus()
             AlertError('Ocurrio un error al consultar catálogo estatus. Contacte al administrador.');
         }
     });
-
+    
 }
