@@ -26,7 +26,7 @@ namespace Servicios.Controllers
 
         [HttpPost]
         [Route("UpdateStatusRuta")]
-        public Response UpdateStatusRuta([FromBody] SolicitudDetalleRuta solicitudRuta)
+        public Response UpdateStatusRuta([FromBody] SolicitudDetalle solicitudRuta)
         {
             return solicitudes.UpdateStatusRuta(solicitudRuta);
         }

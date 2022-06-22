@@ -20,13 +20,13 @@ namespace AccesoDatos.Models
         public int TblTractoId { get; set; }
         public int TblCajasId { get; set; }
         public int TblOperadorId { get; set; }
+        public int? TblEstatusRutaId { get; set; }
         public ICollection<SolicitudDetalleRuta> TblSolicitudDetalleRuta { get; set; }
     }
     public class SolicitudDetalleRuta
     {
         public int? Id { get; set; }
         public int TblUbicacionesId { get; set; }
-        public int Orden { get; set; }
-        public int? TblEstatusRutaId { get; set; }
+        public int Orden { get; set; }      
     }
 }

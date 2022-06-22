@@ -53,32 +53,8 @@ namespace Negocio
         {
             try
             {
-                //List<TblSolicitudDetalleRuta> list = new List<TblSolicitudDetalleRuta>();
-
-                //var query = from det in ctx.TblSolicitudDetalles
-                //            join ruta in ctx.TblSolicitudDetalleRutas on det.Id equals ruta.TblSolicitudDetalleId
-                //            where det.TblOperadorId == idOperador & det.TblSolicitudId == idSolicitud
-                //            select new det
-                //            {
-                //                Id = det.Id,
-                //                TblTractoId = det.TblTractoId,
-                //                TblCajasId = det.TblCajasId,
-                //                TblOperadorId = det.TblOperadorId,
-                //                TblSolicitudId = det.TblSolicitudId,
-                //                TblSolicitudDetalleRuta = ruta
-                //            };
-
-
-
-
-
-                //            select ruta;
-
-                //list = query.Include(x => x.TblUbicaciones).Include(x => x.TblEstatusRuta)
-                //    .OrderBy(x => x.Orden).ToList();
-
-                //List<TblSolicitudDetalle> list = query.ToList();
                 List<TblSolicitudDetalle> list = ctx.TblSolicitudDetalles.Include(d => d.TblCajas)
+                    .Include(d => d.TblOperador).Include(d => d.TblTracto).Include(d => d.TblEstatusRuta)
                     .Include(r => r.TblSolicitudDetalleRuta)
                     .Where(x => x.TblSolicitudId == idSolicitud & x.TblOperadorId == idOperador).ToList();
 
@@ -95,12 +71,12 @@ namespace Negocio
             return Response;
         }
 
-        public Response UpdateStatusRuta(SolicitudDetalleRuta solicitudDetalleRuta)
+        public Response UpdateStatusRuta(SolicitudDetalle solicitudDetalle)
         {
             try
             {
-                TblSolicitudDetalleRuta tblSolicitudRuta = ctx.TblSolicitudDetalleRutas.Find(solicitudDetalleRuta.Id);
-                //tblSolicitudRuta.TblEstatusRutaId = solicitudDetalleRuta.TblEstatusRutaId.Value;
+                TblSolicitudDetalle tblSolicitudRuta = ctx.TblSolicitudDetalles.Find(solicitudDetalle.Id);
+                tblSolicitudRuta.TblEstatusRutaId = solicitudDetalle.TblEstatusRutaId.Value;
 
                 ctx.Entry(tblSolicitudRuta).State = EntityState.Modified;
                 ctx.SaveChanges();
