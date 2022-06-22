@@ -19,9 +19,9 @@ namespace Servicios.Controllers
 
         [HttpGet]
         [Route("SelectRuta")]
-        public Response GetRutas(int idSolicitud, int idOperador)
+        public Response GetRutas(int idDetalleSolicitud)
         {
-            return solicitudes.SelectRuta(idSolicitud, idOperador);
+            return solicitudes.SelectRuta(idDetalleSolicitud);
         }
 
         [HttpPost]

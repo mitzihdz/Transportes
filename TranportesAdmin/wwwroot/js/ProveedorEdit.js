@@ -67,7 +67,7 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 success: function (result) {
-                    AlertSuccess('El proveedor se actualizó correctamente.');
+                    AlertSuccessOk('El proveedor se actualizó correctamente.', '/Proveedor');
                     
                     //$('#cardDomicilio').removeClass('collapsed-card');
                 },
@@ -164,6 +164,7 @@
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
+                    $("#tblCajas").DataTable().destroy();
                     GetGrid();
                     AlertSuccess('La caja se registró correctamente.');
                     $('#modalNewCaja').modal('toggle');
@@ -253,6 +254,7 @@
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
+                    $("#tblCajas").DataTable().destroy();
                     GetGrid();
                     AlertSuccess('La caja se actualizó correctamente.');
                     $('#modalEditCaja').modal('toggle');
@@ -347,7 +349,6 @@ function GetGrid() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            debugger
             $('#tblCajas > tbody').empty();
             $.each(data.respuesta, function (i, item) {
                 var rows =
@@ -357,8 +358,8 @@ function GetGrid() {
                     "<td>" + item.tblCajas.tblMarcaCajas.marca + "</td>" +
                     "<td>" + item.tblCajas.anioModelo + "</td>" +
                     "<td>" + item.tblCajas.dimensiones + "</td>" +
-                    "<td><a class='nav_link' href='#' onclick='OpenEdit(" + item.tblCajas.id + ")'><i class='nav-icon fas fa-edit'></i></a >" +
-                    "<td><a class='nav_link' href='#' onclick='Delete(" + item.tblCajas.id + ")'><i class='far fa-times-circle'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='OpenEdit(" + item.tblCajas.id + ")'><i class='nav-icon fas fa-edit'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.tblCajas.id + ")'><i  class='fa-solid fa-circle-trash'></i></a >" +
                     "</tr>";
                 $('#tblCajas > tbody').append(rows);
             });
@@ -386,6 +387,7 @@ function Delete(id) {
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
         success: function (result) {
+            $("#tblCajas").DataTable().destroy();
             GetGrid();
             AlertSuccess('La caja se eliminó correctamente.');
         },
