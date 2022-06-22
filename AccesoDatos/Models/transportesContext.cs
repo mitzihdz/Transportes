@@ -503,7 +503,9 @@ namespace AccesoDatos.Models
                     .IsRequired()
                     .HasMaxLength(200);
 
-                entity.Property(e => e.Ruta).IsRequired();
+                entity.Property(e => e.Ruta)
+                    .IsRequired()
+                    .HasMaxLength(200);
             });
 
             modelBuilder.Entity<TblUsuario>(entity =>
@@ -520,11 +522,18 @@ namespace AccesoDatos.Models
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.TblOperadoId).HasColumnName("tbl_Operado_id");
+
                 entity.Property(e => e.TblPerfilId).HasColumnName("tbl_Perfil_id");
 
                 entity.Property(e => e.Usuario)
                     .IsRequired()
                     .HasMaxLength(200);
+
+                entity.HasOne(d => d.TblOperado)
+                    .WithMany(p => p.TblUsuarios)
+                    .HasForeignKey(d => d.TblOperadoId)
+                    .HasConstraintName("FK_tbl_Usuarios_tbl_operador");
 
                 entity.HasOne(d => d.TblPerfil)
                     .WithMany(p => p.TblUsuarios)
