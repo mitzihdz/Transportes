@@ -13,6 +13,7 @@ namespace AccesoDatos.Models
             TblDocumentosOperadores = new HashSet<TblDocumentosOperadore>();
             TblDomicilioOpers = new HashSet<TblDomicilioOper>();
             TblSolicitudDetalles = new HashSet<TblSolicitudDetalle>();
+            TblUsuarios = new HashSet<TblUsuario>();
         }
 
         public int Id { get; set; }
@@ -31,8 +32,9 @@ namespace AccesoDatos.Models
 
         public virtual ICollection<TblDocumentosOperadore> TblDocumentosOperadores { get; set; }
         public virtual ICollection<TblDomicilioOper> TblDomicilioOpers { get; set; }
-
         [JsonIgnore]
         public virtual ICollection<TblSolicitudDetalle> TblSolicitudDetalles { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<TblUsuario> TblUsuarios { get; set; }
     }
 }
