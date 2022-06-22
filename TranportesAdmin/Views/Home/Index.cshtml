@@ -1,10 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    
 }
 
 <div class="text-center">
     <br />
-    <h1 style="    font-weight: bolder;" class="display-4"> BIENVENIDO NUEVAMENTE !! </h1>
+    <h1 style="font-weight: bolder;" class="display-4"> BIENVENIDO NUEVAMENTE !! </h1>
     <br />
     @*<img style="width: 10%;" src="~/dist/img/AdminLTELogobIENVENIDO.png" />*@
 </div>
@@ -25,143 +26,24 @@
                 </div>
             </div>
             <div class="col-md-2">
-                
-                  
-                               <div  >
-                                    <canvas id="myChart"></canvas>
-                               </div>
-              
-                
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
             </div>
-        <div class="col-md-5">
+            <div class="col-md-5">
                 <div style="margin:8%">
                    <canvas id="myChart3"></canvas>
                 </div>
             </div>
         </div>
-       
- 
     </div>
 </div>
 
 
 
 <script>
-    /////////////////////////////////////////////////////////////////
-var data;
-var config;
+    
 
-function pie_initial()
-{
-    data = {
-      labels: [
-        'Red',
-        'Blue',
-        'Yellow'
-      ],
-      datasets: [{
-        label: 'My First Dataset',
-        data: [300, 50, 100],
-        backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)'
-        ],
-        hoverOffset: 4
-      }]
-    };
-
-    config = {
-      type: 'pie',
-      data: data,
-    };
-
-}
-
-    /////////////////////////////////////////////////////////////////
-
-function bar_initial()
-{
-var labels2 = [
-        'a1',
-        'b1',
-        'c1',
-        'd1',
-        'e1',
-        'f1',
-        'g1'
-      ];
- data = {
-  labels: labels2,
-  datasets: [{
-    label: 'My First Dataset',
-    data: [65, 59, 80, 81, 56, 55, 40],
-    backgroundColor: [
-      'rgba(255, 99, 132, 0.2)',
-      'rgba(255, 159, 64, 0.2)',
-      'rgba(255, 205, 86, 0.2)',
-      'rgba(75, 192, 192, 0.2)',
-      'rgba(54, 162, 235, 0.2)',
-      'rgba(153, 102, 255, 0.2)',
-      'rgba(201, 203, 207, 0.2)'
-    ],
-    borderColor: [
-      'rgb(255, 99, 132)',
-      'rgb(255, 159, 64)',
-      'rgb(255, 205, 86)',
-      'rgb(75, 192, 192)',
-      'rgb(54, 162, 235)',
-      'rgb(153, 102, 255)',
-      'rgb(201, 203, 207)'
-    ],
-    borderWidth: 1
-  }]
-};
-
-
-config = {
-  type: 'bar',
-  data: data,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  },
-};
-
-}
-    /////////////////////////////////////////////////////////////////
-
-function line_initial()
-{
- labels2 = [
-        'a1',
-        'b1',
-        'c1',
-        'd1',
-        'e1',
-        'f1',
-        'g1'
-      ];
- data = {
-  labels: labels2,
-  datasets: [{
-    label: 'My First Dataset',
-    data: [65, 59, 80, 81, 56, 55, 40],
-    fill: false,
-    borderColor: 'rgb(75, 192, 192)',
-    tension: 0.1
-  }]
-};
-
-config = {
-  type: 'line',
-  data: data,
-};
-
-}
  
 
 
@@ -171,20 +53,8 @@ config = {
 
 
 @section scripts {
-     <script type="text/javascript">
-        
-            $(document).ready(function(){
-
-                pie_initial();
-                var myChart = new Chart(document.getElementById('myChart'),config);
-                bar_initial();
-                var myChart = new Chart(document.getElementById('myChart2'),config);
-                line_initial();
-                var myChart = new Chart(document.getElementById('myChart3'),config);
-
-            });
-
-     </script>
+     <script src="~/js/Home.js"></script>
+    <script src="~/js/Alerts.js"></script>
 }
 
  
