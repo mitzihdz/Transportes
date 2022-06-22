@@ -3,6 +3,108 @@
 }
 
 <div class="text-center">
+    <br />
     <h1 style="    font-weight: bolder;" class="display-4"> BIENVENIDO NUEVAMENTE !! </h1>
-    <img style="width: 20%;" src="~/dist/img/AdminLTELogobIENVENIDO.png" />
+    <br />
+    <img style="width: 10%;" src="~/dist/img/AdminLTELogobIENVENIDO.png" />
 </div>
+
+
+
+
+<div class="card card-default">
+    <div class="card-header">
+        <h3 class="card-title">Reportes</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                  <canvas id="myChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                   <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+        <div class="col-md-4">
+                <div>
+                   <canvas id="myChart3"></canvas>
+                </div>
+            </div>
+        </div>
+       
+ 
+    </div>
+</div>
+
+
+
+<script>
+    /////////////////////////////////////////////////////////////////
+var data = {
+  labels: [
+    'Red',
+    'Blue',
+    'Yellow'
+  ],
+  datasets: [{
+    label: 'My First Dataset',
+    data: [300, 50, 100],
+    backgroundColor: [
+      'rgba(54, 162, 235, 0.4)',
+      'rgba(153, 102, 255, 0.4)',
+      'rgba(201, 203, 207, 0.4)'
+    ],
+    hoverOffset: 4
+  }]
+};
+
+var config = {
+  type: 'doughnut',
+  data: data,
+};
+
+</script>
+
+
+
+@section scripts {
+     <script type="text/javascript">
+        
+            $(document).ready(function(){
+
+              var myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+              );
+                var myChart1 = new Chart(
+                document.getElementById('myChart2'),
+                config
+              );
+                var myChart2 = new Chart(
+                document.getElementById('myChart3'),
+                config
+              );
+              
+
+            });
+     </script>
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
