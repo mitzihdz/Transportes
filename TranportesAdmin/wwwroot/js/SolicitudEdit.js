@@ -93,7 +93,7 @@ function cargarDatos(solicitudData) {
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
-        
+                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
                 "</tr>";
             $('#otroOperador > tbody').append(rows);
@@ -110,7 +110,7 @@ function cargarDatos(solicitudData) {
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
-         
+                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
                 "</tr>";
             $('#otroOperador > tbody').append(rows);
@@ -235,13 +235,13 @@ function eliminarOperador(id) {
     $('#otroOperador > tbody').html('');
     for (let i = 0; i < tblSolicitudDetalles2.length; i++) {
         var rows =
-            "<tr class='text-center'>" +
+            "<tr>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
-            "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
+            "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
             "</tr>";
         $('#otroOperador > tbody').append(rows);
     }
@@ -482,7 +482,7 @@ $('#guardarRuta2').click(function () {
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
-            "<td class='text-center'><a class='nav_link' href='#'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
+            "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
             "</tr>";
         $('#otroOperador > tbody').append(rows);
     }
@@ -532,49 +532,66 @@ $('#guardarRuta').click(function () {
         var operadorDataTable = $("#txtOperador").val();
         var tractorDataTable = $("#txtTractor").val();
         var cajaDataTable = $("#txtCaja").val();
-        tblSolicitudDetalles2.push({
-            id: 0,
-            tblTractoId: tractor,
-            tblTracto: {
-                idTracto: tractorDataTable
-            },
-            tblCajasId: caja,
-            tblCajas: {
-                noEconomico: cajaDataTable
-            },
-            tblOperadorId: operador,
-            tblOperador: {
-                nombre: operadorDataTable
-            },
-            tblSolicitudDetalleRuta: tblSolicitudDetalleRuta
-        });
+        var nombreCompleto = operadorDataTable.split(" ")
+        console.log('nombre completo', nombreCompleto);
+        if (nombreCompleto.length == 3) {
+            tblSolicitudDetalles2.push({
+                id: 0,
+                tblTractoId: tractor,
+                tblTracto: {
+                    idTracto: tractorDataTable
+                },
+                tblCajasId: caja,
+                tblCajas: {
+                    noEconomico: cajaDataTable
+                },
+                tblOperadorId: operador,
+                tblOperador: {
+                    nombre: nombreCompleto[nombreCompleto.length - 1],
+                    apellidoPaterno: nombreCompleto[0],
+                    apellidoMaterno: nombreCompleto[1]
+                },
+                tblEstatusRuta: {
+                    estatus: 'Pendiente'
+                },
+                tblSolicitudDetalleRuta: tblSolicitudDetalleRuta
+            });
+        }
+        else {
+            tblSolicitudDetalles2.push({
+                id: 0,
+                tblTractoId: tractor,
+                tblTracto: {
+                    idTracto: tractorDataTable
+                },
+                tblCajasId: caja,
+                tblCajas: {
+                    noEconomico: cajaDataTable
+                },
+                tblOperadorId: operador,
+                tblOperador: {
+                    nombre: nombreCompleto[3] + nombreCompleto[nombreCompleto.length - 1],
+                    apellidoPaterno: nombreCompleto[0],
+                    apellidoMaterno: nombreCompleto[1]
+                },
+                tblEstatusRuta: {
+                    estatus: 'Pendiente'
+                },
+                tblSolicitudDetalleRuta: tblSolicitudDetalleRuta
+            });
+        }
         $('#otroOperador > tbody').html('');
         for (let i = 0; i < tblSolicitudDetalles2.length; i++) {
-            if (i == tblSolicitudDetalles2.length - 1) {
-                var rows =
-                    "<tr>" +
-                    "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
-                    "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
-                    "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
-                    "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
-
-                    "<td class='text-center'><a class='nav_link' href='#'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
-                    "</tr>";
-                $('#otroOperador > tbody').append(rows);
-            }
-            else {
-                var rows =
-                    "<tr>" +
-                    "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
-                    "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
-                    "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
-                    "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
-
-                    "<td class='text-center'><a class='nav_link' href='#'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
-                    "</tr>";
-                $('#otroOperador > tbody').append(rows);
-            }
-            
+            var rows =
+                "<tr>" +
+                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
+                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
+                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
+                "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
+                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
+                "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
+                "</tr>";
+            $('#otroOperador > tbody').append(rows);
         }
         console.log("Lego aqui");
         x = 0;
