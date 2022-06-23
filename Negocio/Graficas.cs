@@ -80,11 +80,11 @@ namespace Negocio
                 List<int> Dt = new List<int>();
                 foreach (TblSolicitud item in tblsol)
                 {
-                    List<TblSolicitudDetalle> tbls = ctx.TblSolicitudDetalles.Where(x => x.TblSolicitudId == item.Id).ToList();
+                    List<TblSolicitudDetalle> tbls = ctx.TblSolicitudDetalles.Where(x => x.TblSolicitudId == item.Id ).ToList();
                     String cl = ctx.TblClientes.Where(x=> x.Id == item.TblClientesId).Select(x=> x.NombreCorto).First();
 
                     Lbls.Add("Sol: " + item.Id+ "-" + cl);
-                    int contador = ctx.TblSolicitudDetalleRutas.Where(x => x.TblSolicitudDetalleId == tbls[0].Id).Count();
+                    int contador = tbls.Count;
                     Dt.Add(contador);
                 }
                 graph.data = Dt.ToArray();
