@@ -6,7 +6,7 @@
 
 function Delete(id) {
     $.ajax({
-        url: "https://localhost:7259/api/Proveedor/Delete/"+id,
+        url: server_key + "api/Proveedor/Delete/"+id,
         type: "DELETE",
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
@@ -28,7 +28,7 @@ function Delete(id) {
 function GetGrid() {
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Proveedor/Select",
+        url: server_key + "api/Proveedor/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {

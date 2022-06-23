@@ -63,7 +63,7 @@
             var _anio = $('#txtAnio').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Tracto/Add",
+                url: server_key + "api/Tracto/Add",
                 type: "POST",
                 data: JSON.stringify({
                     id: 0,

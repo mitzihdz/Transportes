@@ -5,7 +5,7 @@
     var id = $("#idTracto").val();
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Tracto/Select?id=" + id,
+        url: server_key + "api/Tracto/Select?id=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -86,7 +86,7 @@
             var _anio = $('#txtAnio').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Tracto/Update",
+                url: server_key + "api/Tracto/Update",
                 type: "POST",
                 data: JSON.stringify({
                     id: _id,

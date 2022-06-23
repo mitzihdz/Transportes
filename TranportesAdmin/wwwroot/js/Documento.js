@@ -56,7 +56,7 @@ $("#BtnEditaDocumento").click(function () {
         var _nombreDocumento = $('#txtEditDocumento').val();
 
         $.ajax({
-            url: "https://localhost:7259/api/Documento/Update",
+            url: server_key + "api/Documento/Update",
             type: "POST",
             data: JSON.stringify({
                 id: _id,
@@ -84,7 +84,7 @@ $("#BtnNuevoDocumento").click(function () {
         var _nombreDocumento = $('#txtDocumento').val();
 
         $.ajax({
-            url: "https://localhost:7259/api/Documento/Add",
+            url: server_key + "api/Documento/Add",
             type: "POST",
             data: JSON.stringify({
                 id: 0,
@@ -112,7 +112,7 @@ function GetGrid() {
     
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Documento/Select",
+        url: server_key + "api/Documento/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
@@ -152,7 +152,7 @@ function OpenEdit(id) {
     $('#IdDocumento').val(id);
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Documento/Select?id=" + id,
+        url: server_key + "api/Documento/Select?id=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -170,7 +170,7 @@ function OpenEdit(id) {
 
 function Delete(id) {
     $.ajax({
-        url: "https://localhost:7259/api/Documento/Delete/" + id,
+        url: server_key + "api/Documento/Delete/" + id,
         type: "DELETE",
         contentType: 'application/json; charset=utf-8',
         dataType: "json",

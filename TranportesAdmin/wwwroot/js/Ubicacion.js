@@ -37,7 +37,7 @@
             var _ruta = $('#txtRuta').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Ubicacion/Add",
+                url: server_key + "api/Ubicacion/Add",
                 type: "POST",
                 data: JSON.stringify({
                     id: 0,
@@ -97,7 +97,7 @@
             var _ruta = $('#txtRutaEdit').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Ubicacion/Update",
+                url: server_key + "api/Ubicacion/Update",
                 type: "POST",
                 data: JSON.stringify({
                     id: _id,
@@ -129,7 +129,7 @@
 function GetGrid() {
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Ubicacion/Select",
+        url: server_key + "api/Ubicacion/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
@@ -170,7 +170,7 @@ function OpenEdit(id) {
     $('#IdUbicacion').val(id);
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Ubicacion/Select?id=" + id,
+        url: server_key + "api/Ubicacion/Select?id=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -189,7 +189,7 @@ function OpenEdit(id) {
 
 function Delete(id) {
     $.ajax({
-        url: "https://localhost:7259/api/Ubicacion/Delete/" + id,
+        url: server_key + "api/Ubicacion/Delete/" + id,
         type: "DELETE",
         contentType: 'application/json; charset=utf-8',
         dataType: "json",

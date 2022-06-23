@@ -4,7 +4,7 @@
     var id = $("#idCliente").val();
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Cliente/Select?id=" + id,
+        url: server_key + "api/Cliente/Select?id=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -40,8 +40,8 @@
                 required: true
             },
             RFC: {
-                required: true,
-                regex: /^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/
+                required: true
+                //regex: /^([A-ZÑ&]{3,4})?(?:-?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01]))?(?:-?)?([A-Z\d]{2})([A\d])$/
             }
         },
         messages: {
@@ -49,8 +49,8 @@
             Identificador: "El identificador es requerido",
             RFC:
             {
-                required: "El RFC es requerido",
-                regex: "El formato del RFC no es correcto"
+                required: "El RFC es requerido"
+                //regex: "El formato del RFC no es correcto"
             }
         },
         errorElement: 'span',
@@ -75,7 +75,7 @@
             var _rfc = $('#txtRFC').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Cliente/Update",
+                url: server_key + "api/Cliente/Update",
                 type: "POST",
                 data: JSON.stringify({
                     id: _id,

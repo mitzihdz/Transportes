@@ -90,7 +90,7 @@ $(document).ready(function () {
     //Get Clientes
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Cliente/Select",
+        url: server_key + "api/Cliente/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -111,7 +111,7 @@ $(document).ready(function () {
     //Get Operadores
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Operador/Select",
+        url: server_key + "api/Operador/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -132,7 +132,7 @@ $(document).ready(function () {
     //Get Tractos
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Tracto/Select",
+        url: server_key + "api/Tracto/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -153,7 +153,7 @@ $(document).ready(function () {
     //Get Caja
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Caja/Select",
+        url: server_key + "api/Caja/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -174,7 +174,7 @@ $(document).ready(function () {
     //Get Destino
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Ubicacion/Select",
+        url: server_key + "api/Ubicacion/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -208,7 +208,7 @@ $('#form1').click(function () {
         
         console.log('solicitud', solicitud);
         $.ajax({
-            url: "https://localhost:7259/api/Solicitud/Add",
+            url: server_key + "api/Solicitud/Add",
             type: "POST",
             data: JSON.stringify(solicitud),
             contentType: 'application/json; charset=utf-8',
@@ -421,7 +421,7 @@ function abrirModalRuta(y) {
     //Get Operadores
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Operador/Select",
+        url: server_key + "api/Operador/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -445,7 +445,7 @@ function abrirModalRuta(y) {
     //Get Tractos
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Tracto/Select",
+        url: server_key + "api/Tracto/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -469,7 +469,7 @@ function abrirModalRuta(y) {
     //Get Caja
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Caja/Select",
+        url: server_key + "api/Caja/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -493,7 +493,7 @@ function abrirModalRuta(y) {
     //Get Destino
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Ubicacion/Select",
+        url: server_key + "api/Ubicacion/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
