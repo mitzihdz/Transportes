@@ -550,16 +550,31 @@ $('#guardarRuta').click(function () {
         });
         $('#otroOperador > tbody').html('');
         for (let i = 0; i < tblSolicitudDetalles2.length; i++) {
-            var rows =
-                "<tr>" +
-                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
-                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
-                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
-                "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
-           
-                "<td class='text-center'><a class='nav_link' href='#'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
-                "</tr>";
-            $('#otroOperador > tbody').append(rows);
+            if (i == tblSolicitudDetalles2.length - 1) {
+                var rows =
+                    "<tr>" +
+                    "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
+                    "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
+                    "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
+
+                    "<td class='text-center'><a class='nav_link' href='#'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
+                    "</tr>";
+                $('#otroOperador > tbody').append(rows);
+            }
+            else {
+                var rows =
+                    "<tr>" +
+                    "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
+                    "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
+                    "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
+                    "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
+
+                    "<td class='text-center'><a class='nav_link' href='#'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
+                    "</tr>";
+                $('#otroOperador > tbody').append(rows);
+            }
+            
         }
         console.log("Lego aqui");
         x = 0;
