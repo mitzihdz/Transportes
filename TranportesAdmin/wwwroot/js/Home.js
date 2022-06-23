@@ -95,18 +95,13 @@ $(document).ready(function () {
 });
 /////////////////////////////////////////////////////////////////
 function pie_initial() {
-
-
     $.ajax({
         type: "GET",
         url: server_key + "api/Graph/SelectSolicitudesCliente",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
-         
-
-
-
+            console.log('Data pie ->', data.respuesta);
             data = {
                 labels: data.respuesta.labels,
                 datasets: [{
@@ -116,11 +111,9 @@ function pie_initial() {
                     hoverOffset: 4
                 }]
             };
-
             config = {
                 type: 'pie',
                 data: data,
-
                 options: {
                     plugins: {
                         legend: {
@@ -134,15 +127,8 @@ function pie_initial() {
                         }
                     }
                 }
-
-
-
-               
             };
-
             var myChart1 = new Chart(document.getElementById('myChart'), config);
-
-
         },
         failure: function (data) {
             AlertError('Ocurrio un error al consultar la lista de clientes. Contacte al administrador.');
@@ -151,11 +137,6 @@ function pie_initial() {
             AlertError('Ocurrio un error al consultar la lista de clientes. Contacte al administrador.');
         }
     });
-    
-
-    
-    
-
 }
 
 /////////////////////////////////////////////////////////////////
@@ -168,7 +149,6 @@ function bar_initial() {
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
             console.log('Data barras ->', data.respuesta);
-             
             data = {
                 labels: data.respuesta.labels,
                 datasets: [{
@@ -187,14 +167,6 @@ function bar_initial() {
                     borderWidth: 1
                 }]
             };
-
-
-           
-
-     
-                
-          
-
             config = {
                 type: 'bar',
                 data: data,
@@ -218,7 +190,6 @@ function bar_initial() {
                     }
                 },
             };
-
             var myChart2 = new Chart(document.getElementById('myChart2'), config);
         },
         failure: function (data) {
@@ -227,8 +198,7 @@ function bar_initial() {
         error: function (data) {
             AlertError('Ocurrio un error al consultar la lista de clientes. Contacte al administrador.');
         }
-    });   
-
+    });
 }
 /////////////////////////////////////////////////////////////////
 
@@ -252,15 +222,10 @@ function line_initial() {
                     
                 }]
             };
-
             config = {
                 type: 'bar',
                 data: data,
                 options: {
-
-                   
-
-
                     indexAxis: 'y',
                     // Elements options apply to all of the options unless overridden in a dataset
                     // In this case, we are setting the border of each horizontal bar to be 2px wide
@@ -269,13 +234,11 @@ function line_initial() {
                             borderWidth: 2,
                         }
                     },
-                  
                     responsive: true,
                     plugins: {
                         legend: {
                             legend: false,
                             display: false
-                             
                         },
                         title: {
                             display: true,
@@ -284,7 +247,6 @@ function line_initial() {
                     }
                 },
             };
-
             actions = [
                 {
                     name: 'Randomize',
@@ -346,11 +308,7 @@ function line_initial() {
                     }
                 }
             ];
-
-
             var myChart3 = new Chart(document.getElementById('myChart3'), config);
-
-
         },
         failure: function (data) {
             AlertError('Ocurrio un error al consultar la lista de clientes. Contacte al administrador.');
@@ -360,11 +318,6 @@ function line_initial() {
         }
     });
 }
-
-
-
-
-
 function desordenar(unArray) {
     var t = unArray.sort(function (a, b) { return (Math.random() - 0.5) });
     return [...t];
