@@ -47,7 +47,13 @@ namespace Negocio
                 foreach (TblCliente item in TblCliente)
                 {
                     Lbls.Add(item.NombreCorto);
-                    int contador = ctx.TblSolicituds.Where(x => x.TblClientesId == item.Id).Count();
+                    int contador = ctx.TblSolicituds.Where(x => 
+                        x.TblClientesId == item.Id
+                        &&
+                        x.TblEstatusId != 7
+                    
+                    ).Count();
+
                     Dt.Add(contador);
                 }
                 graph.data = Dt.ToArray();
@@ -69,7 +75,7 @@ namespace Negocio
             try
             {
                 GraphComplex graph = new GraphComplex();
-                List<TblSolicitud> tblsol = ctx.TblSolicituds.ToList();
+                List<TblSolicitud> tblsol = ctx.TblSolicituds.Where(x=> x.TblEstatusId != 7).ToList();
                 List<String> Lbls = new List<String>();
                 List<int> Dt = new List<int>();
                 foreach (TblSolicitud item in tblsol)
