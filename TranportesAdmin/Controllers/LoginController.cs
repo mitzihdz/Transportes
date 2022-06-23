@@ -21,7 +21,7 @@ namespace TranportesAdmin.Controllers
             }      
         }
 
-        public async Task<IActionResult> Login(string user, string password)
+        public async Task<IActionResult> Login(string url, string user, string password)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace TranportesAdmin.Controllers
                 bool status = false;
                 int idPerfil = 0;
                 string msj = string.Empty;
-                string URL = "https://localhost:7259/api/Autenticacion/Select";
+                string URL = url + "api/Autenticacion/Select";
                 string urlParameters = "?user=" + user + "&password=" + password;
 
                 HttpClient client = new HttpClient();

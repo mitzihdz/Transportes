@@ -99,7 +99,7 @@ function pie_initial() {
 
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Graph/SelectSolicitudesCliente",
+        url: server_key + "api/Graph/SelectSolicitudesCliente",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -163,7 +163,7 @@ function pie_initial() {
 function bar_initial() {
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Graph/SelectSolicitudesClienteRutas",
+        url: server_key + "api/Graph/SelectSolicitudesClienteRutas",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -235,7 +235,7 @@ function bar_initial() {
 function line_initial() {
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Graph/SelectProveedores",
+        url: server_key + "api/Graph/SelectProveedores",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {

@@ -31,7 +31,7 @@
             var _marca = $('#txtMarca').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Marca/Add",
+                url: server_key + "api/Marca/Add",
                 type: "POST",
                 data: JSON.stringify({
                     id: 0,
@@ -85,7 +85,7 @@
             var _marca = $('#txtEditMarca').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Marca/Update",
+                url: server_key + "api/Marca/Update",
                 type: "POST",
                 data: JSON.stringify({
                     id: _id,
@@ -119,7 +119,7 @@
 function GetGrid() {
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Marca/Select",
+        url: server_key + "api/Marca/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
@@ -159,7 +159,7 @@ function OpenEdit(id) {
     $('#IdMarca').val(id);
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Marca/Select?id=" + id,
+        url: server_key + "api/Marca/Select?id=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -177,7 +177,7 @@ function OpenEdit(id) {
 
 function Delete(id) {
     $.ajax({
-        url: "https://localhost:7259/api/Marca/Delete/" + id,
+        url: server_key + "api/Marca/Delete/" + id,
         type: "DELETE",
         contentType: 'application/json; charset=utf-8',
         dataType: "json",

@@ -29,9 +29,9 @@
             var _user = $('#txtUsuario').val();
             var _password = $('#txtPassword').val();
             var formData = new FormData();
+            formData.append("url", server_key);
             formData.append("user", _user);
             formData.append("password", _password);
-
 
             $.ajax({
                 type: "POST",
@@ -57,7 +57,7 @@
             });
 
             //$.ajax({
-            //    url: "https://localhost:7259/api/Autenticacion/Select?user=" + _user + "&password=" + _password,
+            //    url: server_key + "api/Autenticacion/Select?user=" + _user + "&password=" + _password,
             //    type: "GET",
             //    contentType: "application/json; charset=utf-8",
             //    dataType: "json",
@@ -94,7 +94,7 @@
 function GetGrid() {
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Documento/Select",
+        url: server_key + "api/Documento/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
@@ -134,7 +134,7 @@ function OpenEdit(id) {
     $('#IdDocumento').val(id);
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Documento/Select?id=" + id,
+        url: server_key + "api/Documento/Select?id=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -152,7 +152,7 @@ function OpenEdit(id) {
 
 function Delete(id) {
     $.ajax({
-        url: "https://localhost:7259/api/Documento/Delete/" + id,
+        url: server_key + "api/Documento/Delete/" + id,
         type: "DELETE",
         contentType: 'application/json; charset=utf-8',
         dataType: "json",

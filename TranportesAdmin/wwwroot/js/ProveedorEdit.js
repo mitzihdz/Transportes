@@ -5,7 +5,7 @@
     var id = $("#IdProveedor").val();
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Proveedor/Select?id=" + id,
+        url: server_key + "api/Proveedor/Select?id=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -57,7 +57,7 @@
             var _nombreOrazonSocial = $('#txtNombre').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Proveedor/Update",
+                url: server_key + "api/Proveedor/Update",
                 type: "POST",
                 data: JSON.stringify({
                     id: _id,
@@ -145,7 +145,7 @@
             var _proveedorId = $('#IdProveedor').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Caja/Add",
+                url: server_key + "api/Caja/Add",
                 type: "POST",
                 data: JSON.stringify({
                     id: 0,
@@ -242,7 +242,7 @@
             var _anio = $('#txtAnioEdit').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Caja/Update",
+                url: server_key + "api/Caja/Update",
                 type: "POST",
                 data: JSON.stringify({
                     id: _id,
@@ -289,7 +289,7 @@ function OpenEdit(id) {
     $('#IdCaja').val(id);
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Caja/Select?id=" + id,
+        url: server_key + "api/Caja/Select?id=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -312,7 +312,7 @@ function OpenEdit(id) {
 function GetMarcas() {
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Marca/Select",
+        url: server_key + "api/Marca/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -345,7 +345,7 @@ function GetGrid() {
     var idProveedor = $('#IdProveedor').val();
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/ProveedorCaja/Select?id=" + idProveedor,
+        url: server_key + "api/ProveedorCaja/Select?id=" + idProveedor,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
@@ -382,7 +382,7 @@ function GetGrid() {
 
 function Delete(id) {
     $.ajax({
-        url: "https://localhost:7259/api/Caja/Delete/" + id,
+        url: server_key + "api/Caja/Delete/" + id,
         type: "DELETE",
         contentType: 'application/json; charset=utf-8',
         dataType: "json",

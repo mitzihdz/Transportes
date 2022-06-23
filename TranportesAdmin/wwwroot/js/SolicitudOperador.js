@@ -8,7 +8,7 @@
         var _estatus = $('#ddlEstatusRuta').val();
 
         $.ajax({
-            url: "https://localhost:7259/api/SolicitudOperador/UpdateStatusRuta",
+            url: server_key + "api/SolicitudOperador/UpdateStatusRuta",
             type: "POST",
             data: JSON.stringify({
                 id: _id,
@@ -44,7 +44,7 @@ function GetGrid() {
 
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/SolicitudOperador/Select?idOperador=" + idOperador,
+        url: server_key + "api/SolicitudOperador/Select?idOperador=" + idOperador,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
@@ -84,7 +84,7 @@ function OpenEdit(id, idEstatus) {
     //Obtener ruta
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/SolicitudOperador/SelectRuta?idDetalleSolicitud=" + id,
+        url: server_key + "api/SolicitudOperador/SelectRuta?idDetalleSolicitud=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -114,7 +114,7 @@ function GetEstatus(idEstatus_)
 {
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/EstatusRuta/Select",
+        url: server_key + "api/EstatusRuta/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {

@@ -72,7 +72,7 @@
             var _licencia = $('#txtLicencia').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Operador/Add",
+                url: server_key + "api/Operador/Add",
                 type: "POST",
                 data: JSON.stringify({
                     id: 0,
@@ -178,7 +178,7 @@
             var _referencias = $('#txtReferencia').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/OperadorDomicilio/Add",
+                url: server_key + "api/OperadorDomicilio/Add",
                 type: "POST",
                 data: JSON.stringify({
                     id: 0,
@@ -290,7 +290,7 @@ function OpenNew() {
 function GetTipoDocumento() {
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Documento/Select",
+        url: server_key + "api/Documento/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -315,7 +315,7 @@ function GuardaDocumento(name) {
     var _tblOperadorId = 1;//$('#txtOperadorId').val();
     
     $.ajax({
-        url: "https://localhost:7259/api/OperadorDocumento/Add",
+        url: server_key + "api/OperadorDocumento/Add",
         type: "POST",
         data: JSON.stringify({
             id: 0,
@@ -344,7 +344,7 @@ function GetGrid() {
 
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/OperadorDocumento/Select?idOperador=" + id,
+        url: server_key + "api/OperadorDocumento/Select?idOperador=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
@@ -384,7 +384,7 @@ function View(ruta) {
 
 function Delete(id) {
     $.ajax({
-        url: "https://localhost:7259/api/OperadorDocumento/Delete/" + id,
+        url: server_key + "api/OperadorDocumento/Delete/" + id,
         type: "DELETE",
         contentType: 'application/json; charset=utf-8',
         dataType: "json",

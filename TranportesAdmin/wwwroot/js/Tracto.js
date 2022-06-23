@@ -7,7 +7,7 @@
 
 function Delete(id) {
     $.ajax({
-        url: "https://localhost:7259/api/Tracto/Delete/"+id,
+        url: server_key + "api/Tracto/Delete/"+id,
         type: "DELETE",
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
@@ -29,7 +29,7 @@ function Delete(id) {
 function GetGrid() {
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Tracto/Select",
+        url: server_key + "api/Tracto/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {

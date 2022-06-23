@@ -4,7 +4,7 @@
     var id = $("#idCliente").val();
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Cliente/Select?id=" + id,
+        url: server_key + "api/Cliente/Select?id=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -75,7 +75,7 @@
             var _rfc = $('#txtRFC').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Cliente/Update",
+                url: server_key + "api/Cliente/Update",
                 type: "POST",
                 data: JSON.stringify({
                     id: _id,

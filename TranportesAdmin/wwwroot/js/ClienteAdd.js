@@ -54,7 +54,7 @@
             var _rfc = $('#txtRFC').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Cliente/Add",
+                url: server_key + "api/Cliente/Add",
                 type: "POST",
                 data: JSON.stringify({
                     id: 0,

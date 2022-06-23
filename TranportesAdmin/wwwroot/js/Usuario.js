@@ -55,7 +55,7 @@
             var _contrasena = $('#txtPassword').val();          
 
             $.ajax({
-                url: "https://localhost:7259/api/Usuario/Add",
+                url: server_key + "api/Usuario/Add",
                 type: "POST",
                 data: JSON.stringify({
                     id: 0,
@@ -128,7 +128,7 @@
             var _contrasena = $('#txtPasswordEdit').val();
 
             $.ajax({
-                url: "https://localhost:7259/api/Usuario/Update",
+                url: server_key + "api/Usuario/Update",
                 type: "POST",
                 data: JSON.stringify({
                     id: _id,
@@ -167,7 +167,7 @@ function OpenEdit(id) {
     $('#IdUsuario').val(id);
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Usuario/Select?id=" + id,
+        url: server_key + "api/Usuario/Select?id=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -185,7 +185,7 @@ function OpenEdit(id) {
 
 function Delete(id) {
     $.ajax({
-        url: "https://localhost:7259/api/Usuario/Delete/" + id,
+        url: server_key + "api/Usuario/Delete/" + id,
         type: "DELETE",
         contentType: 'application/json; charset=utf-8',
         dataType: "json",
@@ -206,7 +206,7 @@ function Delete(id) {
 function GetGrid() {
     $.ajax({
         type: "GET",
-        url: "https://localhost:7259/api/Usuario/Select",
+        url: server_key + "api/Usuario/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
