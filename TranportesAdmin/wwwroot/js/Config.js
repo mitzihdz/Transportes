@@ -1,1 +1,1 @@
-﻿var server_key = "https://localhost:7259/"
+﻿var server_key = "https://localhost:7259/";

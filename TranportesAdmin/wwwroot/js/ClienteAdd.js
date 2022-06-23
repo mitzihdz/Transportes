@@ -19,8 +19,8 @@
                 required: true
             },
             RFC: {
-                required: true
-                //regex: /^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$/
+                required: true,
+                regex: /^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$/i
             }
         },
         messages: {
@@ -28,8 +28,8 @@
             Identificador: "El identificador es requerido",
             RFC:
             {
-                required: "El RFC es requerido"
-                //regex: "El formato del RFC no es correcto"
+                required: "El RFC es requerido",
+                regex: "El formato del RFC no es correcto"
             }
         },
         errorElement: 'span',
