@@ -19,7 +19,7 @@ namespace Negocio
                 foreach (TblProveedore item in proveedores)
                 {
                     Lbls.Add(item.NombreOrazonSocial);
-                    int contador = ctx.TblProveedoresCajas.Where(x=> x.TblProveedoresId == item.Id).Count();
+                    int contador = ctx.TblProveedoresCajas.Where(x=> x.TblProveedoresId == item.Id && x.TblCajas.Activo == true).Count();
                     Dt.Add(contador);
                 }
                 graph.data = Dt.ToArray();
