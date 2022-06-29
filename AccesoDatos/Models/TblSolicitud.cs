@@ -15,7 +15,9 @@ namespace AccesoDatos.Models
         public int Id { get; set; }
         public int? TblClientesId { get; set; }
         public int? TblEstatusId { get; set; }
-        public DateTime FechaSolicitud { get; set; }
+        public string OrdenServicio { get; set; }
+        public DateTime FechaInicio { get; set; }
+        public DateTime? FechaFin { get; set; }
         public DateTime? Inclusion { get; set; }
 
         public virtual TblCliente TblClientes { get; set; }

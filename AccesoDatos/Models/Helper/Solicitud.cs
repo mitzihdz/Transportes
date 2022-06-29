@@ -11,7 +11,9 @@ namespace AccesoDatos.Models
         public int? Id { get; set; }
         public int TblClientesId { get; set; }
         public int? TblEstatusId { get; set; }
-        public DateTime FechaSolicitud { get; set; }
+        public string OrdenServicio { get; set; }
+        public DateTime FechaInicio { get; set; }
+        public DateTime FechaFin { get; set; }
         public ICollection<SolicitudDetalle>? TblSolicitudDetalles { get; set; }
     }
     public class SolicitudDetalle
@@ -21,6 +23,8 @@ namespace AccesoDatos.Models
         public int TblCajasId { get; set; }
         public int TblOperadorId { get; set; }
         public int? TblEstatusRutaId { get; set; }
+        public DateTime FechaInicio { get; set; }
+        public DateTime FechaFin { get; set; }
         public ICollection<SolicitudDetalleRuta> TblSolicitudDetalleRuta { get; set; }
     }
     public class SolicitudDetalleRuta

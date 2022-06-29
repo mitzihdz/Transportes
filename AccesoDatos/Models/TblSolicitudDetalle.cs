@@ -17,6 +17,8 @@ namespace AccesoDatos.Models
         public int? TblCajasId { get; set; }
         public int? TblOperadorId { get; set; }
         public int? TblEstatusRutaId { get; set; }
+        public DateTime? FechaInicio { get; set; }
+        public DateTime? FechaFin { get; set; }
         public int? TblSolicitudId { get; set; }
         public DateTime? Inclusion { get; set; }
 

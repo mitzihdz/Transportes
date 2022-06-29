@@ -12,12 +12,10 @@ namespace Negocio
         {
             try
             {
-                //List<TblSolicitudDetalle> list = id == null ? ctx.TblSolicitudDetalles.Include(s => s.TblSolicitud).OrderBy(x => x.TblSolicitud.TblEstatusId).ThenBy(x => x.TblSolicitud.FechaSolicitud).ToList() : ctx.TblSolicitudDetalles.Where(x => x.TblSolicitudId == id).ToList();
-
                 List<TblSolicitud> list = id == null ? ctx.TblSolicituds.Include(s => s.TblClientes)
                     .Include(s => s.TblEstatus)
                     .Where(x => x.TblEstatusId != 7)//No muestra canceladas
-                    .OrderBy(x => x.TblEstatusId).ThenBy(x => x.FechaSolicitud).ToList() 
+                    .OrderBy(x => x.TblEstatusId).ToList() 
                     : ctx.TblSolicituds.Include(s => s.TblClientes)
                     .Include(s => s.TblEstatus)
                     .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblCajas)
@@ -50,7 +48,9 @@ namespace Negocio
 
                     tblSolicitud.TblClientesId = solicitud.TblClientesId;
                     tblSolicitud.TblEstatusId = 1;//Solicitado
-                    tblSolicitud.FechaSolicitud = solicitud.FechaSolicitud;
+                    tblSolicitud.OrdenServicio = solicitud.OrdenServicio;
+                    tblSolicitud.FechaInicio = solicitud.FechaInicio;
+                    tblSolicitud.FechaFin = solicitud.FechaFin;
                     tblSolicitud.Inclusion = DateTime.Now;
 
                     ctx.TblSolicituds.Add(tblSolicitud);
@@ -66,6 +66,8 @@ namespace Negocio
                         tblSolicitudDetalle.TblCajasId = detalle.TblCajasId;
                         tblSolicitudDetalle.TblOperadorId = detalle.TblOperadorId;
                         tblSolicitudDetalle.TblEstatusRutaId = 1; //Pendiente
+                        tblSolicitudDetalle.FechaInicio = detalle.FechaInicio;
+                        tblSolicitudDetalle.FechaFin = detalle.FechaFin;
                         tblSolicitudDetalle.TblSolicitudId = tblSolicitud.Id;
                         tblSolicitudDetalle.Inclusion = DateTime.Now;
 
@@ -138,7 +140,9 @@ namespace Negocio
                     TblSolicitud tblSolicitud = ctx.TblSolicituds.Find(solicitud.Id);
 
                     tblSolicitud.TblClientesId = solicitud.TblClientesId;
-                    tblSolicitud.FechaSolicitud = solicitud.FechaSolicitud;
+                    tblSolicitud.OrdenServicio = solicitud.OrdenServicio;
+                    tblSolicitud.FechaInicio = solicitud.FechaInicio;
+                    tblSolicitud.FechaFin = solicitud.FechaFin;
 
                     ctx.Entry(tblSolicitud).State = EntityState.Modified;
                     ctx.SaveChanges();
@@ -152,6 +156,8 @@ namespace Negocio
                         tblSolicitudDetalle.TblCajasId = detalle.TblCajasId;
                         tblSolicitudDetalle.TblOperadorId = detalle.TblOperadorId;
                         tblSolicitudDetalle.TblEstatusRutaId = 1; //Pendiente
+                        tblSolicitudDetalle.FechaInicio = detalle.FechaInicio;
+                        tblSolicitudDetalle.FechaFin = detalle.FechaFin;
                         tblSolicitudDetalle.TblSolicitudId = tblSolicitud.Id;
                         tblSolicitudDetalle.Inclusion = DateTime.Now;
 
