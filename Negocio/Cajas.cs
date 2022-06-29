@@ -27,6 +27,31 @@ namespace Negocio
             return Response;
         }
 
+        public Response Select(DateTime fechaInicio, DateTime fechaFin)
+        {
+            try
+            {
+                var listCajas = ctx.TblSolicitudDetalles
+                                .Where(d => d.TblSolicitud.TblEstatusId <= 3
+                                && (d.FechaInicio >= fechaInicio & d.FechaInicio <= fechaFin
+                                || d.FechaFin >= fechaInicio & d.FechaFin <= fechaFin))
+                                .Select(c => c.TblCajasId).ToList();
+
+                List<TblCaja> list = ctx.TblCajas.Where(x => x.Activo == true && !listCajas.Contains(x.Id)).OrderBy(x => x.NoEconomico).ToList();
+
+                Response.Estado = true;
+                Response.Mensaje = "OK";
+                Response.Respuesta = list;
+            }
+            catch (Exception ex)
+            {
+                Response.Estado = false;
+                Response.Mensaje = ex.Message;
+            }
+
+            return Response;
+        }
+
         public Response Add(TblCaja caja)
         {
             try

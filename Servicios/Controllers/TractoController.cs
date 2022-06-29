@@ -17,6 +17,13 @@ namespace Servicios.Controllers
             return tractores.Select(id);
         }
 
+        [HttpGet]
+        [Route("SelectCat")]
+        public Response GetCat(DateTime fechaInicio, DateTime fechaFin)
+        {
+            return tractores.Select(fechaInicio, fechaFin);
+        }
+
         [HttpPost]
         [Route("Add")]
         public Response Add([FromBody] TblTracto tractor)

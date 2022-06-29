@@ -60,6 +60,28 @@ namespace Negocio
                     //Guarda operadores, tracto y caja 
                     foreach (SolicitudDetalle detalle in solicitud.TblSolicitudDetalles)
                     {
+                        //Valida disponibilidad de operador, tracto y cajas
+                        List<TblSolicitudDetalle> listado = ctx.TblSolicitudDetalles
+                                                       .Where(d =>
+                            //d => d.TblSolicitud.TblEstatusId <= 3 && (
+                            d.FechaInicio >= detalle.FechaInicio & d.FechaInicio <= detalle.FechaFin
+                                                       || d.FechaFin >= detalle.FechaInicio & d.FechaFin <= detalle.FechaFin//)
+                                                       ).ToList();
+
+                        List<TblSolicitudDetalle> operadores = listado.Where(o => o.TblOperadorId == detalle.TblOperadorId).ToList();
+                        List<TblSolicitudDetalle> tractos = listado.Where(o => o.TblTractoId == detalle.TblTractoId).ToList();
+                        List<TblSolicitudDetalle> cajas = listado.Where(o => o.TblCajasId == detalle.TblCajasId).ToList();
+
+                        if(operadores.Count > 0)
+                            throw new Exception("El operador no se encuentra disponible en el rango de fechas seleccionado, favor de validar.");
+
+                        if (tractos.Count > 0)
+                            throw new Exception("El tracto no se encuentra disponible en el rango de fechas seleccionado, favor de validar.");
+
+                        if (cajas.Count > 0)
+                            throw new Exception("La caja no se encuentra disponible en el rango de fechas seleccionado, favor de validar.");
+
+
                         TblSolicitudDetalle tblSolicitudDetalle = new TblSolicitudDetalle();
 
                         tblSolicitudDetalle.TblTractoId = detalle.TblTractoId;
@@ -150,6 +172,26 @@ namespace Negocio
                     //Guarda operadores, tracto y caja 
                     foreach (SolicitudDetalle detalle in solicitud.TblSolicitudDetalles)
                     {
+                        //Valida disponibilidad de operador, tracto y cajas
+                        List<TblSolicitudDetalle> listado = ctx.TblSolicitudDetalles
+                                                       .Where(d => d.TblSolicitud.TblEstatusId <= 3
+                                                       && (d.FechaInicio >= detalle.FechaInicio & d.FechaInicio <= detalle.FechaFin
+                                                       || d.FechaFin >= detalle.FechaInicio & d.FechaFin <= detalle.FechaFin)).ToList();
+
+                        List<TblSolicitudDetalle> operadores = listado.Where(o => o.TblOperadorId == detalle.TblOperadorId).ToList();
+                        List<TblSolicitudDetalle> tractos = listado.Where(o => o.TblTractoId == detalle.TblTractoId).ToList();
+                        List<TblSolicitudDetalle> cajas = listado.Where(o => o.TblCajasId == detalle.TblCajasId).ToList();
+
+                        if (operadores.Count > 0)
+                            throw new Exception("El operador no se encuentra disponible en el rango de fechas seleccionado, favor de validar.");
+
+                        if (tractos.Count > 0)
+                            throw new Exception("El tracto no se encuentra disponible en el rango de fechas seleccionado, favor de validar.");
+
+                        if (cajas.Count > 0)
+                            throw new Exception("La caja no se encuentra disponible en el rango de fechas seleccionado, favor de validar.");
+
+
                         TblSolicitudDetalle tblSolicitudDetalle = new TblSolicitudDetalle();
 
                         tblSolicitudDetalle.TblTractoId = detalle.TblTractoId;

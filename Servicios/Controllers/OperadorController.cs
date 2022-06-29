@@ -17,6 +17,13 @@ namespace Servicios.Controllers
             return operadores.Select(id);
         }
 
+        [HttpGet]
+        [Route("SelectCat")]
+        public Response GetCat(DateTime fechaInicio, DateTime fechaFin)
+        {
+            return operadores.Select(fechaInicio, fechaFin);
+        }
+
         [HttpPost]
         [Route("Add")]
         public Response Add([FromBody] TblOperador operador)

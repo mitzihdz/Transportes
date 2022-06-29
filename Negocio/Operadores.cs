@@ -43,6 +43,31 @@ namespace Negocio
             return Response;
         }
 
+        public Response Select(DateTime fechaInicio, DateTime fechaFin)
+        {
+            try
+            {
+                var listOperadores = ctx.TblSolicitudDetalles
+                               .Where(d => d.TblSolicitud.TblEstatusId <= 3
+                               && (d.FechaInicio >= fechaInicio & d.FechaInicio <= fechaFin
+                               || d.FechaFin >= fechaInicio & d.FechaFin <= fechaFin))
+                               .Select(t => t.TblOperadorId).ToList();
+
+                List<TblOperador> list = ctx.TblOperadors.Where(x => x.Activo == true && !listOperadores.Contains(x.Id)).OrderBy(x => x.ApellidoPaterno).ToList();
+
+                Response.Estado = true;
+                Response.Mensaje = "OK";
+                Response.Respuesta = list;
+            }
+            catch (Exception ex)
+            {
+                Response.Estado = false;
+                Response.Mensaje = ex.Message;
+            }
+
+            return Response;
+        }
+
         public Response Add(TblOperador operador)
         {
             try

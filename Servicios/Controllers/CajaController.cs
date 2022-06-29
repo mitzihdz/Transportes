@@ -17,6 +17,13 @@ namespace Servicios.Controllers
             return cajas.Select(id);
         }
 
+        [HttpGet]
+        [Route("SelectCat")]
+        public Response GetCat(DateTime fechaInicio, DateTime fechaFin)
+        {
+            return cajas.Select(fechaInicio, fechaFin);
+        }
+
         [HttpPost]
         [Route("Add")]
         public Response Add([FromBody] TblCaja caja)
