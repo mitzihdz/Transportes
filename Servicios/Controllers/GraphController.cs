@@ -30,5 +30,12 @@ namespace Servicios.Controllers
             return Grph_.SelectProveedores();
         }
 
+        [HttpGet]
+        [Route("SelectReporteRutas")]
+        public Response SelectReporteRutas()
+        {
+            return Grph_.SelectReporteRutas();
+        }
+
     }
 }

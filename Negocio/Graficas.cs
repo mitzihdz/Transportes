@@ -8,6 +8,34 @@ namespace Negocio
         private transportesContext ctx = new transportesContext();
         public Response Response = new Response();
 
+        public Response SelectReporteRutas()
+        {
+            try
+            {
+                GraphComplex graph = new GraphComplex();
+                List<TblEstatusRuta> estatus = ctx.TblEstatusRutas.ToList();
+                List<String> Lbls = new List<String>();
+                List<int> Dt = new List<int>();
+                foreach (TblEstatusRuta item in estatus)
+                {
+                    Lbls.Add(item.Estatus);
+                    int contador = ctx.TblSolicitudDetalles.Where(x => x.TblEstatusRutaId == item.Id && x.TblSolicitud.TblEstatusId != 7).Count();
+                    Dt.Add(contador);
+                }
+                graph.data = Dt.ToArray();
+                graph.labels = Lbls.ToArray();
+                Response.Estado = true;
+                Response.Mensaje = "OK";
+                Response.Respuesta = graph;
+            }
+            catch (Exception ex)
+            {
+                Response.Estado = false;
+                Response.Mensaje = ex.Message;
+            }
+            return Response;
+        }
+
         public Response SelectProveedores()
         {
             try
