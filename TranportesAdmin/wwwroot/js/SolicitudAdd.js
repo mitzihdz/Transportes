@@ -2,12 +2,16 @@
     id: 0,
     tblClientesId: 0,
     tblEstatusId: 0,
-    fechaSolicitud: 0,
+    fechaInicio: '',
+    fechaFin: '',
+    ordenServicio: '',
     tblSolicitudDetalles: [{
         id: 0,
         tblTractoId: 0,
         tblCajasId: 0,
         tblOperadorId: 0,
+        fechaInicio: '',
+        fechaFin: '',
         tblSolicitudDetalleRuta: [{
             id: 0,
             tblUbicacionesId: 0,
@@ -22,6 +26,8 @@ var tblSolicitudDetalles = [{
     tblTractoId: 0,
     tblCajasId: 0,
     tblOperadorId: 0,
+    fechaInicio: '',
+    fechaFin: '',
     tblSolicitudDetalleRuta: [{
         id: 0,
         tblUbicacionesId: 0,
@@ -54,7 +60,13 @@ $(document).ready(function () {
             Cliente: {
                 required: true
             },
-            Fecha: {
+            Orden: {
+                required: true
+            },
+            FechaInicio: {
+                required: true
+            },
+            FechaFin: {
                 required: true
             },
             Operador: {
@@ -69,7 +81,9 @@ $(document).ready(function () {
         },
         messages: {
             Cliente: "Seleccionar un cliente es requerido",
-            Fecha: "Seleccionar una fecha es requerida",
+            Orden: "El numero de orden de servicio es requerida",
+            FechaInicio: "Seleccionar una fecha es requerida",
+            FechaFin: "Seleccionar una fecha es requerida",
             Operador: "Seleccionar un operador es requerido",
             Tractor: "Seleccionar un tractor es requerido",
             Caja: "Seleccionar una caja es requerido"
@@ -201,7 +215,9 @@ $('#form1').click(function () {
         solicitud.tblClientesId = $('#clientes option').filter(function () {
             return this.value == $('#txtCliente').val();
         }).data('xyz');
-        solicitud.fechaSolicitud = $("#txtFecha").val();
+        solicitud.fechaInicio = $("#txtFechaInicio").val();
+        solicitud.fechaFin = $("#txtFechaFin").val();
+        solicitud.ordenServicio = $("#txtOrden").val();
         for (let i = 0; i < tblSolicitudDetalles.length; i++) {
             solicitud.tblSolicitudDetalles[i] = tblSolicitudDetalles[i];
         }
@@ -213,8 +229,13 @@ $('#form1').click(function () {
             data: JSON.stringify(solicitud),
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                AlertSuccessOk('La solicitud se registró correctamente.', '/Solicitud');
-
+                console.log('respuesta del server', data);
+                if (data.estado) {
+                    AlertSuccessOk(data.mensaje, '/Solicitud');
+                }
+                else {
+                    AlertError(data.mensaje);
+                }
             },
             failure: function (data) {
                 AlertError('Ocurrio un error al guardar el cliente. Contacte al administrador.');
@@ -225,8 +246,6 @@ $('#form1').click(function () {
                 $('#form1').attr('href', "~/Solicitud");
             }
         });
-       
-        console.log('obj', solicitud);
         
     }
     else {
@@ -246,31 +265,40 @@ $('#guardarRuta').click(function () {
         var caja = $('#caja option').filter(function () {
             return this.value == $('#txtCaja').val();
         }).data('xyz');
-        var operadorDataTable = $("#txtOperador").val();
-        var tractorDataTable = $("#txtTractor").val();
-        var cajaDataTable = $("#txtCaja").val();
+        var diaInicio = $("#txtFechaInicioRuta").val().substr(8, 2);
+        var mesInicio = $("#txtFechaInicioRuta").val().substr(5, 2);
+        var añoInicio = $("#txtFechaInicioRuta").val().substr(0, 4);
+        var diaFin = $("#txtFechaFinRuta").val().substr(8, 2);
+        var mesFin = $("#txtFechaFinRuta").val().substr(5, 2);
+        var añoFin = $("#txtFechaFinRuta").val().substr(0, 4);
+        //var operadorDataTable = $("#txtOperador").val();
+        //var tractorDataTable = $("#txtTractor").val();
+        //var cajaDataTable = $("#txtCaja").val();
         if (tblSolicitudDetalles.length == 0) {
             tblSolicitudDetalles.push({
                 id: 0,
+                fechaInicio: $("#txtFechaInicioRuta").val(),
+                fechaFin: $("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
                 tblCajasId: caja,
                 tblOperadorId: operador,
                 tblTracto: {
-                    idTracto: tractorDataTable
+                    idTracto: $("#txtTractor").val()
                 },
                 tblCajas: {
-                    noEconomico: cajaDataTable
+                    noEconomico: $("#txtCaja").val()
                 },
                 tblOperador: {
-                    nombre: operadorDataTable
+                    nombre: $("#txtOperador").val()
                 },
                 tblSolicitudDetalleRuta: tblSolicitudDetalleRuta
             });            
             var rows =
                 "<tr class='text-center'>" +
-                "<td class='text-center'>" + operadorDataTable + "</td>" +
-                "<td class='text-center'>" + tractorDataTable + "</td>" +
-                "<td class='text-center'>" + cajaDataTable + "</td>" +
+                "<td class='text-center'>" + $("#txtOperador").val() + "</td>" +
+                "<td class='text-center'>" + $("#txtTractor").val() + "</td>" +
+                "<td class='text-center'>" + $("#txtCaja").val() + "</td>" +
+                "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + y + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + y + ")'><i style='' class='fa-solid fa-circle-trash'></i></a >" +
                 "</tr>";
@@ -289,25 +317,28 @@ $('#guardarRuta').click(function () {
         else {
             tblSolicitudDetalles.push({
                 id: 0,
+                fechaInicio: $("#txtFechaInicioRuta").val(),
+                fechaFin: $("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
                 tblCajasId: caja,
                 tblOperadorId: operador,
                 tblTracto: {
-                    idTracto: tractorDataTable
+                    idTracto: $("#txtTractor").val()
                 },
                 tblCajas: {
-                    noEconomico: cajaDataTable
+                    noEconomico: $("#txtCaja").val()
                 },
                 tblOperador: {
-                    nombre: operadorDataTable
+                    nombre: $("#txtOperador").val()
                 },
                 tblSolicitudDetalleRuta: tblSolicitudDetalleRuta
             });
             var rows =
                 "<tr>" +
-                "<td class='text-center'>" + operadorDataTable + "</td>" +
-                "<td class='text-center'>" + tractorDataTable + "</td>" +
-                "<td class='text-center'>" + cajaDataTable + "</td>" +
+                "<td class='text-center'>" + $("#txtOperador").val() + "</td>" +
+                "<td class='text-center'>" + $("#txtTractor").val() + "</td>" +
+                "<td class='text-center'>" + $("#txtCaja").val() + "</td>" +
+                "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + y +")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + y + ")'><i style='' class='fa-solid fa-circle-trash'></i></a >" +
                 "</tr>";
@@ -321,6 +352,8 @@ $('#guardarRuta').click(function () {
         $('#txtOperador').val('');
         $('#txtTractor').val('');
         $('#txtCaja').val('');
+        $("#txtFechaInicioRuta").val('');
+        $("#txtFechaFinRuta").val('');
         $('#TimeLineContainerII').html('');
         AlertSuccess("Ruta Agregada");
         $("#ModalDestinos").modal('hide');
@@ -383,11 +416,18 @@ function eliminarOperador(id) {
     console.log('despues de eliminar', tblSolicitudDetalles)
     $('#otroOperador > tbody').html('');
     for (let i = 0; i < tblSolicitudDetalles.length; i++) {
+        var diaInicio = tblSolicitudDetalles[i].fechaInicio.substr(8, 2);
+        var mesInicio = tblSolicitudDetalles[i].fechaInicio.substr(5, 2);
+        var añoInicio = tblSolicitudDetalles[i].fechaInicio.substr(0, 4);
+        var diaFin = tblSolicitudDetalles[i].fechaFin.substr(8, 2);
+        var mesFin = tblSolicitudDetalles[i].fechaFin.substr(5, 2);
+        var añoFin = tblSolicitudDetalles[i].fechaFin.substr(0, 4);
         var rows =
             "<tr class='text-center'>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].tblOperador.nombre + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].tblTracto.idTracto + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].tblCajas.noEconomico + "</td>" +
+            "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
             "</tr>";
@@ -419,6 +459,14 @@ function abrirModalRuta(y) {
     ruta = tblSolicitudDetalles[y];
     console.log('pasando detalles', ruta);
     //Get Operadores
+    var diaInicio = ruta.fechaInicio.substr(8, 2);
+    var mesInicio = ruta.fechaInicio.substr(5, 2);
+    var añoInicio = ruta.fechaInicio.substr(0, 4);
+    var diaFin = ruta.fechaFin.substr(8, 2);
+    var mesFin = ruta.fechaFin.substr(5, 2);
+    var añoFin = ruta.fechaFin.substr(0, 4);
+    $("#txtFechaInicioRuta2").attr("value", añoInicio + '-' + mesInicio + '-' + diaInicio);
+    $("#txtFechaFinRuta2").attr("value", añoFin + '-' + mesFin + '-' + diaFin);
     $.ajax({
         type: "GET",
         url: server_key + "api/Operador/Select",

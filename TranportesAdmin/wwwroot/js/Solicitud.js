@@ -32,15 +32,21 @@ function GetGrid() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
+            console.log('solicitudes', data.respuesta)
             $('#tblSolicitud > tbody').empty();
             $.each(data.respuesta, function (i, item) {
-                
+                var diaInicio = item.fechaInicio.substr(8, 2);
+                var mesInicio = item.fechaInicio.substr(5, 2);
+                var añoInicio = item.fechaInicio.substr(0, 4);
+                var diaFin = item.fechaFin.substr(8, 2);
+                var mesFin = item.fechaFin.substr(5, 2);
+                var añoFin = item.fechaFin.substr(0, 4);
                 var rows =
                     "<tr>" +
-                    "<td>" + item.id + "</td>" +
+                    "<td>" + item.ordenServicio + "</td>" +
                     "<td>" + item.tblClientes.nombreCorto + "</td>" +
-                    "<td>" + item.tblEstatus.estatus +"</td >" +
-                    "<td>" + item.fechaSolicitud + "</td>" +
+                    "<td>" + item.tblEstatus.estatus + "</td >" +
+                    "<td>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
                     "<td class='text-center'><a class='nav_link' href='~/../Solicitud/Editar/" + item.id + "'><i class='nav-icon fas fa-edit'></i></a >" +
                     "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.id + ")'><i style='' class='fa-solid fa-circle-trash'></i></a >" +
                     "</tr>";

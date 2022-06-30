@@ -2,12 +2,16 @@
     id: 0,
     tblClientesId: 0,
     tblEstatusId: 0,
-    fechaSolicitud: 0,
+    fechaInicio: '',
+    fechaFin: '',
+    ordenServicio: '',
     tblSolicitudDetalles: [{
         id: 0,
         tblTractoId: 0,
         tblCajasId: 0,
         tblOperadorId: 0,
+        fechaInicio: '',
+        fechaFin: '',
         tblSolicitudDetalleRuta: [{
             id: 0,
             tblUbicacionesId: 0,
@@ -22,6 +26,8 @@ var tblSolicitudDetalles = [{
     tblTractoId: 0,
     tblCajasId: 0,
     tblOperadorId: 0,
+    fechaInicio: '',
+    fechaFin: '',
     tblSolicitudDetalleRuta: [{
         id: 0,
         tblUbicacionesId: 0,
@@ -62,10 +68,15 @@ $(document).ready(function () {
         success: function (data) {
             console.log('data->', data);
             //console.log('solicitud', solicitud);
-            var dia = data.respuesta[0].fechaSolicitud.substr(8, 2);
-            var mes = data.respuesta[0].fechaSolicitud.substr(5, 2);
-            var año = data.respuesta[0].fechaSolicitud.substr(0, 4);
-            $("#txtFecha").attr("value", año + '-' + mes + '-' + dia);
+            var diaInicio = data.respuesta[0].fechaInicio.substr(8, 2);
+            var mesInicio = data.respuesta[0].fechaInicio.substr(5, 2);
+            var añoInicio = data.respuesta[0].fechaInicio.substr(0, 4);
+            var diaFin = data.respuesta[0].fechaFin.substr(8, 2);
+            var mesFin = data.respuesta[0].fechaFin.substr(5, 2);
+            var añoFin = data.respuesta[0].fechaFin.substr(0, 4);
+            $("#txtFechaInicio").attr("value", añoInicio + '-' + mesInicio + '-' + diaInicio);
+            $("#txtFechaFin").attr("value", añoFin + '-' + mesFin + '-' + diaFin);
+            $("#txtOrden").val(data.respuesta[0].ordenServicio)
             cargarDatos(data.respuesta[0]);
         },
         failure: function (data) {
@@ -86,37 +97,29 @@ function cargarDatos(solicitudData) {
     console.log('detalles', tblSolicitudDetalles2);
     
     for (let i = 0; i < tblSolicitudDetalles2.length; i++) {
-        if (tblSolicitudDetalles2.length == 0) {
-            var rows =
-                "<tr" +
-                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
-                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
-                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
-                "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
-                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
-                "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
-                "</tr>";
-            $('#otroOperador > tbody').append(rows);
-            $("#otroOperador").DataTable({
-                "destroy": true,
-                "responsive": true, "lengthChange": false, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print"]
-            }).buttons().container().appendTo('#otroOperador_wrapper .col-md-6:eq(0)');
-        }
-        else {
-            var rows =
-                "<tr class='text-center'>" +
-                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
-                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
-                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
-                "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
-                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
-                "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
-                "</tr>";
-            $('#otroOperador > tbody').append(rows);
-        }
-        
+        var diaInicio = tblSolicitudDetalles2[i].fechaInicio.substr(8, 2);
+        var mesInicio = tblSolicitudDetalles2[i].fechaInicio.substr(5, 2);
+        var añoInicio = tblSolicitudDetalles2[i].fechaInicio.substr(0, 4);
+        var diaFin = tblSolicitudDetalles2[i].fechaFin.substr(8, 2);
+        var mesFin = tblSolicitudDetalles2[i].fechaFin.substr(5, 2);
+        var añoFin = tblSolicitudDetalles2[i].fechaFin.substr(0, 4);
+        var rows =
+            "<tr>" +
+            "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
+            "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
+            "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
+            "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
+            "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
+            "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
+            "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
+            "</tr>";
+        $('#otroOperador > tbody').append(rows);
     }
+    $("#otroOperador").DataTable({
+        "destroy": true,
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    }).buttons().container().appendTo('#otroOperador_wrapper .col-md-6:eq(0)');
     //Get Clientes
     $.ajax({
         type: "GET",
@@ -234,17 +237,29 @@ function eliminarOperador(id) {
     console.log('despues de eliminar', tblSolicitudDetalles2)
     $('#otroOperador > tbody').html('');
     for (let i = 0; i < tblSolicitudDetalles2.length; i++) {
+        var diaInicio = tblSolicitudDetalles2[i].fechaInicio.substr(8, 2);
+        var mesInicio = tblSolicitudDetalles2[i].fechaInicio.substr(5, 2);
+        var añoInicio = tblSolicitudDetalles2[i].fechaInicio.substr(0, 4);
+        var diaFin = tblSolicitudDetalles2[i].fechaFin.substr(8, 2);
+        var mesFin = tblSolicitudDetalles2[i].fechaFin.substr(5, 2);
+        var añoFin = tblSolicitudDetalles2[i].fechaFin.substr(0, 4);
         var rows =
             "<tr>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
+            "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
-            "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
+            "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
             "</tr>";
         $('#otroOperador > tbody').append(rows);
     }
+    //$("#otroOperador").DataTable({
+    //    "destroy": true,
+    //    "responsive": true, "lengthChange": false, "autoWidth": false,
+    //    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    //}).buttons().container().appendTo('#otroOperador_wrapper .col-md-6:eq(0)');
 
 }
 //actualizar
@@ -253,7 +268,9 @@ $('#form1').click(function () {
     solicitud.tblClientesId = $('#clientes option').filter(function () {
         return this.value == $('#txtCliente').val();
     }).data('xyz');
-    solicitud.fechaSolicitud = $("#txtFecha").val();
+    solicitud.ordenServicio = $("#txtOrden").val();
+    solicitud.fechaInicio = $("#txtFechaInicio").val();
+    solicitud.fechaFin = $("#txtFechaFin").val();
     for (let i = 0; i < tblSolicitudDetalles.length; i++) {
         solicitud.tblSolicitudDetalles[i] = tblSolicitudDetalles2[i];
     }
@@ -265,8 +282,13 @@ $('#form1').click(function () {
         data: JSON.stringify(solicitud),
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
-            AlertSuccessOk('La solicitud se edito correctamente.', '/Solicitud');
-
+            console.log('respuesta del server', data);
+            if (data.estado) {
+                AlertSuccessOk(data.mensaje, '/Solicitud');
+            }
+            else {
+                AlertError(data.mensaje);
+            }
         },
         failure: function (data) {
             AlertError('Ocurrio un error al guardar el cliente. Contacte al administrador.');
@@ -286,6 +308,14 @@ function abrirModalRuta(posicion) {
     posRuta = posicion;
     console.log('posicion',posicion);
     $("#verRuta").modal('show');
+    var diaInicio = tblSolicitudDetalles2[posicion].fechaInicio.substr(8, 2);
+    var mesInicio = tblSolicitudDetalles2[posicion].fechaInicio.substr(5, 2);
+    var añoInicio = tblSolicitudDetalles2[posicion].fechaInicio.substr(0, 4);
+    var diaFin = tblSolicitudDetalles2[posicion].fechaFin.substr(8, 2);
+    var mesFin = tblSolicitudDetalles2[posicion].fechaFin.substr(5, 2);
+    var añoFin = tblSolicitudDetalles2[posicion].fechaFin.substr(0, 4);
+    $("#txtFechaInicioRuta2").attr("value", añoInicio + '-' + mesInicio + '-' + diaInicio);
+    $("#txtFechaFinRuta2").attr("value", añoFin + '-' + mesFin + '-' + diaFin);
     //Get Operadores
     $.ajax({
         type: "GET",
@@ -471,21 +501,35 @@ $('#guardarRuta2').click(function () {
     tblSolicitudDetalles2[posRuta].tblOperador.nombre = $('#txtOperador2').val();
     tblSolicitudDetalles2[posRuta].tblTracto.idTracto = $('#txtTractor2').val();
     tblSolicitudDetalles2[posRuta].tblCajas.noEconomico = $('#txtCaja2').val();
+    tblSolicitudDetalles2[posRuta].fechaInicio = $('#txtFechaInicioRuta2').val();
+    tblSolicitudDetalles2[posRuta].fechaFin = $('#txtFechaFinRuta2').val();
     console.log('ruta editada', tblSolicitudDetalles2[posRuta]);
     $("#verRuta").modal('hide');
     $('#otroOperador > tbody').html('');
     for (let i = 0; i < tblSolicitudDetalles2.length; i++) {
+        var diaInicio = tblSolicitudDetalles2[i].fechaInicio.substr(8, 2);
+        var mesInicio = tblSolicitudDetalles2[i].fechaInicio.substr(5, 2);
+        var añoInicio = tblSolicitudDetalles2[i].fechaInicio.substr(0, 4);
+        var diaFin = tblSolicitudDetalles2[i].fechaFin.substr(8, 2);
+        var mesFin = tblSolicitudDetalles2[i].fechaFin.substr(5, 2);
+        var añoFin = tblSolicitudDetalles2[i].fechaFin.substr(0, 4);
         var rows =
             "<tr>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
+            "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
-            "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
+            "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
             "</tr>";
         $('#otroOperador > tbody').append(rows);
     }
+    //$("#otroOperador").DataTable({
+    //    "destroy": true,
+    //    "responsive": true, "lengthChange": false, "autoWidth": false,
+    //    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    //}).buttons().container().appendTo('#otroOperador_wrapper .col-md-6:eq(0)');
 })
 //agregar ruta
 $('#guardarRuta').click(function () {
@@ -537,6 +581,8 @@ $('#guardarRuta').click(function () {
         if (nombreCompleto.length == 3) {
             tblSolicitudDetalles2.push({
                 id: 0,
+                fechaInicio: $("#txtFechaInicioRuta").val(),
+                fechaFin: $("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
                 tblTracto: {
                     idTracto: tractorDataTable
@@ -560,6 +606,8 @@ $('#guardarRuta').click(function () {
         else {
             tblSolicitudDetalles2.push({
                 id: 0,
+                fechaInicio: $("#txtFechaInicioRuta").val(),
+                fechaFin: $("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
                 tblTracto: {
                     idTracto: tractorDataTable
@@ -582,17 +630,29 @@ $('#guardarRuta').click(function () {
         }
         $('#otroOperador > tbody').html('');
         for (let i = 0; i < tblSolicitudDetalles2.length; i++) {
+            var diaInicio = tblSolicitudDetalles2[i].fechaInicio.substr(8, 2);
+            var mesInicio = tblSolicitudDetalles2[i].fechaInicio.substr(5, 2);
+            var añoInicio = tblSolicitudDetalles2[i].fechaInicio.substr(0, 4);
+            var diaFin = tblSolicitudDetalles2[i].fechaFin.substr(8, 2);
+            var mesFin = tblSolicitudDetalles2[i].fechaFin.substr(5, 2);
+            var añoFin = tblSolicitudDetalles2[i].fechaFin.substr(0, 4);
             var rows =
                 "<tr>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
+                "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
-                "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-trash'></i></a >" +
+                "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
                 "</tr>";
             $('#otroOperador > tbody').append(rows);
         }
+        //$("#otroOperador").DataTable({
+        //    "destroy": true,
+        //    "responsive": true, "lengthChange": false, "autoWidth": false,
+        //    "buttons": ["copy", "csv", "excel", "pdf", "print"]
+        //}).buttons().container().appendTo('#otroOperador_wrapper .col-md-6:eq(0)');
         console.log("Lego aqui");
         x = 0;
         y++;
@@ -600,6 +660,8 @@ $('#guardarRuta').click(function () {
         $('#txtOperador').val('');
         $('#txtTractor').val('');
         $('#txtCaja').val('');
+        $("#txtFechaInicioRuta").val('');
+        $("#txtFechaFinRuta").val('');
         $('#TimeLineContainerII').html('');
         AlertSuccess("Ruta Agregada");
         $("#ModalDestinos").modal('hide');
