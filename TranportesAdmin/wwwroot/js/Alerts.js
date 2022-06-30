@@ -20,6 +20,15 @@ function AlertSuccess(Message) {
         timer: 3000
     })
 }
+function AlertWarning(Message) {
+    Swal.fire({
+        //position: 'top-end',
+        icon: 'warning',
+        title: Message,
+        showConfirmButton: false,
+        timer: 6000
+    })
+}
 
 function AlertError(Message) {
     Swal.fire({
