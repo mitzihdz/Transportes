@@ -48,7 +48,7 @@ namespace Negocio
 
                     tblSolicitud.TblClientesId = solicitud.TblClientesId;
                     tblSolicitud.TblEstatusId = 1;//Solicitado
-                    tblSolicitud.OrdenServicio = solicitud.OrdenServicio;
+                    tblSolicitud.OrdenServicio = solicitud.OrdenServicio.ToUpper();
                     tblSolicitud.FechaInicio = solicitud.FechaInicio;
                     tblSolicitud.FechaFin = solicitud.FechaFin;
                     tblSolicitud.Inclusion = DateTime.Now;
@@ -62,10 +62,9 @@ namespace Negocio
                     {
                         //Valida disponibilidad de operador, tracto y cajas
                         List<TblSolicitudDetalle> listado = ctx.TblSolicitudDetalles
-                                                       .Where(d =>
-                            //d => d.TblSolicitud.TblEstatusId <= 3 && (
-                            d.FechaInicio >= detalle.FechaInicio & d.FechaInicio <= detalle.FechaFin
-                                                       || d.FechaFin >= detalle.FechaInicio & d.FechaFin <= detalle.FechaFin//)
+                                                       .Where(d =>  d.TblSolicitud.TblEstatusId <= 3 && (
+                                                        d.FechaInicio >= detalle.FechaInicio & d.FechaInicio <= detalle.FechaFin
+                                                       || d.FechaFin >= detalle.FechaInicio & d.FechaFin <= detalle.FechaFin)
                                                        ).ToList();
 
                         List<TblSolicitudDetalle> operadores = listado.Where(o => o.TblOperadorId == detalle.TblOperadorId).ToList();
@@ -116,8 +115,8 @@ namespace Negocio
                     transaction.Commit();
 
                     Response.Estado = true;
-                    Response.Mensaje = "Solicitud con Folio: " +
-                        tblSolicitud.Id.ToString() + " Creada Exitosamente";
+                    Response.Mensaje = "Solicitud con Orden de Servicio: " +
+                        tblSolicitud.OrdenServicio.ToString() + " Creada Exitosamente";
                     Response.Respuesta = tblSolicitud.Id;
                 }
                 catch (Exception ex)
@@ -162,7 +161,7 @@ namespace Negocio
                     TblSolicitud tblSolicitud = ctx.TblSolicituds.Find(solicitud.Id);
 
                     tblSolicitud.TblClientesId = solicitud.TblClientesId;
-                    tblSolicitud.OrdenServicio = solicitud.OrdenServicio;
+                    tblSolicitud.OrdenServicio = solicitud.OrdenServicio.ToUpper();
                     tblSolicitud.FechaInicio = solicitud.FechaInicio;
                     tblSolicitud.FechaFin = solicitud.FechaFin;
 
@@ -225,8 +224,8 @@ namespace Negocio
                     transaction.Commit();
 
                     Response.Estado = true;
-                    Response.Mensaje = "Solicitud con Folio: " +
-                        tblSolicitud.Id.ToString() + " Actualizada Exitosamente";
+                    Response.Mensaje = "Solicitud con Orden de Servicio: " +
+                        tblSolicitud.OrdenServicio.ToString() + " Actualizada Exitosamente";
                     Response.Respuesta = tblSolicitud.Id;
                 }
                 catch (Exception ex)

@@ -12,7 +12,9 @@ namespace Negocio
         {
             try
             {
-                List<TblSolicitudDetalle> list = ctx.TblSolicitudDetalles.Include(d => d.TblCajas)
+                List<TblSolicitudDetalle> list = ctx.TblSolicitudDetalles
+                    .Include(s => s.TblSolicitud)
+                    .Include(d => d.TblCajas)
                     .Include(d => d.TblOperador).Include(d => d.TblTracto).Include(d => d.TblEstatusRuta)
                     .Include(r => r.TblSolicitudDetalleRuta)
                     .Where(x => x.TblOperadorId == idOperador).ToList();

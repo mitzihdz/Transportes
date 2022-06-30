@@ -50,11 +50,21 @@ function GetGrid() {
         success: function (data) {
             $('#tblSolicitud > tbody').empty();
             $.each(data.respuesta, function (i, item) {
+                var fechaInicio = "//";
+                var fechaFin = "//";
+                if (item.fechaInicio) {
+                    fechaInicio = item.fechaInicio.substr(8, 2) + "/" + item.fechaInicio.substr(5, 2) + "/" + item.fechaInicio.substr(0, 4);
+                }
+                if (item.fechaFin) {
+                    fechaFin = item.fechaFin.substr(8, 2) + "/" + item.fechaFin.substr(5, 2) + "/" + item.fechaFin.substr(0, 4);
+                }
                 var rows =
                     "<tr>" +
-                    "<td>" + item.tblSolicitudId + "</td>" +
+                    "<td>" + item.tblSolicitud.ordenServicio + "</td>" +
                     "<td>" + item.tblTracto.idTracto + "</td >" +
                     "<td>" + item.tblCajas.noEconomico + "</td >" +
+                    "<td>" + fechaInicio + "</td >" +
+                    "<td>" + fechaFin + "</td >" +
                     "<td>" + item.tblEstatusRuta.estatus + "</td >" +
                     "<td class='text-center'><a class='nav_link'  href='#' onclick='OpenEdit(" + item.id + ", " + item.tblEstatusRutaId + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
                     "</tr>";
@@ -89,6 +99,8 @@ function OpenEdit(id, idEstatus) {
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
             var rutaData = data.respuesta;
+            //$("#txtFechaInicio").val(rutaData.fechaInicio);
+            //$("#txtFechaFin").val(rutaData.fechaFin);
             $('#TimeLineContainer').html('');
             $.each(rutaData, function (i, rutaData) {
                 if (i % 2 != 0) {
