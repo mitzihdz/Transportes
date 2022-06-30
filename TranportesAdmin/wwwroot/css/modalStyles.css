@@ -4,7 +4,13 @@
     box-sizing: border-box;
     outline: none;
 }
-
+.loginBody {
+    background-image: url("../dist/img/loginBanner.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity:0.8;
+}
 
 h1 {
     color: white;
