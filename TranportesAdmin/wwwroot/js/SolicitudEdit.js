@@ -106,7 +106,7 @@ function cargarDatos(solicitudData) {
         var rows =
             "<tr>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
-            "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
+            "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.noEconomico + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
             "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
@@ -268,7 +268,7 @@ function consultarDisponibilidad() {
                     console.log('Data tractos ->', data.respuesta);
                     $('#tractor').html('');
                     $.each(clientesData, function (k, v) {
-                        $('#tractor').append('<option data-xyz="' + v.id + '" value="' + v.idTracto + '"></option>');
+                        $('#tractor').append('<option data-xyz="' + v.id + '" value="' + v.noEconomico + '"></option>');
                     });
                 },
                 failure: function (data) {
@@ -326,7 +326,7 @@ function eliminarOperador(id) {
         var rows =
             "<tr>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
-            "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
+            "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.noEconomico + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
             "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
@@ -431,9 +431,9 @@ function abrirModalRuta(posicion) {
             //console.log('Data tractos ->', data.respuesta);
             $('#tractor2').html('');
             $.each(clientesData, function (k, v) {
-                $('#tractor2').append('<option data-xyz="' + v.id + '" value="' + v.idTracto + '"></option>');
+                $('#tractor2').append('<option data-xyz="' + v.id + '" value="' + v.noEconomico + '"></option>');
                 if (v.id == tblSolicitudDetalles2[posicion].tblTractoId) {
-                    $("#txtTractor2").val(v.idTracto);
+                    $("#txtTractor2").val(v.noEconomico);
                 }
             });
         },
@@ -579,7 +579,7 @@ $('#guardarRuta2').click(function () {
         return this.value == $('#txtCaja2').val();
     }).data('xyz');
     tblSolicitudDetalles2[posRuta].tblOperador.nombre = $('#txtOperador2').val();
-    tblSolicitudDetalles2[posRuta].tblTracto.idTracto = $('#txtTractor2').val();
+    tblSolicitudDetalles2[posRuta].tblTracto.noEconomico = $('#txtTractor2').val();
     tblSolicitudDetalles2[posRuta].tblCajas.noEconomico = $('#txtCaja2').val();
     tblSolicitudDetalles2[posRuta].fechaInicio = $('#txtFechaInicioRuta2').val();
     tblSolicitudDetalles2[posRuta].fechaFin = $('#txtFechaFinRuta2').val();
@@ -596,7 +596,7 @@ $('#guardarRuta2').click(function () {
         var rows =
             "<tr>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
-            "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
+            "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.noEconomico + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
             "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
@@ -665,7 +665,7 @@ $('#guardarRuta').click(function () {
                 fechaFin: $("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
                 tblTracto: {
-                    idTracto: tractorDataTable
+                    noEconomico: tractorDataTable
                 },
                 tblCajasId: caja,
                 tblCajas: {
@@ -690,7 +690,7 @@ $('#guardarRuta').click(function () {
                 fechaFin: $("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
                 tblTracto: {
-                    idTracto: tractorDataTable
+                    noEconomico: tractorDataTable
                 },
                 tblCajasId: caja,
                 tblCajas: {
@@ -719,7 +719,7 @@ $('#guardarRuta').click(function () {
             var rows =
                 "<tr>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
-                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.idTracto + "</td>" +
+                "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.noEconomico + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
                 "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +

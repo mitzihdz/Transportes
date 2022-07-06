@@ -153,7 +153,7 @@ function GetGrid() {
                     "<td>" + item.tblSolicitud.ordenServicio + "</td>" +
                     "<td>" + item.tblSolicitud.tblClientes.nombreCorto + "</td>" +
                     "<td>" + item.tblOperador.apellidoPaterno + " " + item.tblOperador.apellidoMaterno + " " + item.tblOperador.nombre + "</td>" +
-                    "<td>" + item.tblTracto.idTracto + "</td>" +
+                    "<td>" + item.tblTracto.noEconomico + "</td>" +
                     "<td>" + item.tblCajas.noEconomico + "</td>" +
                     "<td>" + item.tblEstatusRuta.estatus + "</td>" +
                     "</tr>";

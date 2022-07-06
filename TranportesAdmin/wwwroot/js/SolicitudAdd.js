@@ -183,7 +183,7 @@ function consultarDisponibilidad() {
                     console.log('Data tractos ->', data.respuesta);
                     $('#tractor').html('');
                     $.each(clientesData, function (k, v) {
-                        $('#tractor').append('<option data-xyz="' + v.id + '" value="' + v.idTracto + '"></option>');
+                        $('#tractor').append('<option data-xyz="' + v.id + '" value="' + v.noEconomico + '"></option>');
                     });
                 },
                 failure: function (data) {
@@ -302,7 +302,7 @@ $('#guardarRuta').click(function () {
                 tblCajasId: caja,
                 tblOperadorId: operador,
                 tblTracto: {
-                    idTracto: $("#txtTractor").val()
+                    noEconomico: $("#txtTractor").val()
                 },
                 tblCajas: {
                     noEconomico: $("#txtCaja").val()
@@ -342,7 +342,7 @@ $('#guardarRuta').click(function () {
                 tblCajasId: caja,
                 tblOperadorId: operador,
                 tblTracto: {
-                    idTracto: $("#txtTractor").val()
+                    noEconomico: $("#txtTractor").val()
                 },
                 tblCajas: {
                     noEconomico: $("#txtCaja").val()
@@ -444,7 +444,7 @@ function eliminarOperador(id) {
         var rows =
             "<tr class='text-center'>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].tblOperador.nombre + "</td>" +
-            "<td class='text-center'>" + tblSolicitudDetalles[i].tblTracto.idTracto + "</td>" +
+            "<td class='text-center'>" + tblSolicitudDetalles[i].tblTracto.noEconomico + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].tblCajas.noEconomico + "</td>" +
             "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
@@ -520,9 +520,9 @@ function abrirModalRuta(y) {
             console.log('Data tractos ->', data.respuesta);
             $('#tractor2').html('');
             $.each(clientesData, function (k, v) {
-                $('#tractor2').append('<option data-xyz="' + v.id + '" value="' + v.idTracto + '"></option>');
+                $('#tractor2').append('<option data-xyz="' + v.id + '" value="' + v.noEconomico + '"></option>');
                 if (v.id == ruta.tblTractoId) {
-                    $("#txtTractor2:text").val(v.idTracto);
+                    $("#txtTractor2:text").val(v.noEconomico);
                 }
             });
         },
