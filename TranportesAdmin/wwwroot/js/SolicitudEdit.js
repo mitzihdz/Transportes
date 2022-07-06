@@ -144,69 +144,69 @@ function cargarDatos(solicitudData) {
             AlertError('Ocurrio un error al consultar la lista de clientes. Contacte al administrador.');
         }
     });
-    ////Get Operadores
-    //$.ajax({
-    //    type: "GET",
-    //    url: server_key + "api/Operador/Select",
-    //    contentType: "application/json; charset=utf-8",
-    //    dataType: "json",
-    //    success: function (data, textStatus, jqXHR) {
-    //        var clientesData = data.respuesta;
-    //        //console.log('Data operadores ->', data.respuesta);
-    //        $('#operador').html('');
-    //        $.each(clientesData, function (k, v) {
-    //            $('#operador').append('<option data-xyz="' + v.id + '" value="' + v.apellidoPaterno + " " + v.apellidoMaterno + " " + v.nombre + '"></option>');
-    //        });
-    //    },
-    //    failure: function (data) {
-    //        AlertError('Ocurrio un error al consultar la lista de operadores. Contacte al administrador.');
-    //    },
-    //    error: function (data) {
-    //        AlertError('Ocurrio un error al consultar la lista de operadores. Contacte al administrador.');
-    //    }
-    //});
-    ////Get Tractos
-    //$.ajax({
-    //    type: "GET",
-    //    url: server_key + "api/Tracto/Select",
-    //    contentType: "application/json; charset=utf-8",
-    //    dataType: "json",
-    //    success: function (data, textStatus, jqXHR) {
-    //        var clientesData = data.respuesta;
-    //        //console.log('Data tractos ->', data.respuesta);
-    //        $('#tractor').html('');
-    //        $.each(clientesData, function (k, v) {
-    //            $('#tractor').append('<option data-xyz="' + v.id + '" value="' + v.idTracto + '"></option>');
-    //        });
-    //    },
-    //    failure: function (data) {
-    //        AlertError('Ocurrio un error al consultar la lista de tractos. Contacte al administrador.');
-    //    },
-    //    error: function (data) {
-    //        AlertError('Ocurrio un error al consultar la lista de tractos. Contacte al administrador.');
-    //    }
-    //});
-    ////Get Caja
-    //$.ajax({
-    //    type: "GET",
-    //    url: server_key + "api/Caja/Select",
-    //    contentType: "application/json; charset=utf-8",
-    //    dataType: "json",
-    //    success: function (data, textStatus, jqXHR) {
-    //        var clientesData = data.respuesta;
-    //        //console.log('Data cajas ->', data.respuesta);
-    //        $('#caja').html('');
-    //        $.each(clientesData, function (k, v) {
-    //            $('#caja').append('<option data-xyz="' + v.id + '" value="' + v.noEconomico + '"></option>');
-    //        });
-    //    },
-    //    failure: function (data) {
-    //        AlertError('Ocurrio un error al consultar la lista de cajas. Contacte al administrador.');
-    //    },
-    //    error: function (data) {
-    //        AlertError('Ocurrio un error al consultar la lista de cajas. Contacte al administrador.');
-    //    }
-    //});
+    //Get Operadores
+    $.ajax({
+        type: "GET",
+        url: server_key + "api/Operador/Select",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            var clientesData = data.respuesta;
+            //console.log('Data operadores ->', data.respuesta);
+            $('#operador').html('');
+            $.each(clientesData, function (k, v) {
+                $('#operador').append('<option data-xyz="' + v.id + '" value="' + v.apellidoPaterno + " " + v.apellidoMaterno + " " + v.nombre + '"></option>');
+            });
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al consultar la lista de operadores. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al consultar la lista de operadores. Contacte al administrador.');
+        }
+    });
+    //Get Tractos
+    $.ajax({
+        type: "GET",
+        url: server_key + "api/Tracto/Select",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            var clientesData = data.respuesta;
+            //console.log('Data tractos ->', data.respuesta);
+            $('#tractor').html('');
+            $.each(clientesData, function (k, v) {
+                $('#tractor').append('<option data-xyz="' + v.id + '" value="' + v.noEconomico + '"></option>');
+            });
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al consultar la lista de tractos. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al consultar la lista de tractos. Contacte al administrador.');
+        }
+    });
+    //Get Caja
+    $.ajax({
+        type: "GET",
+        url: server_key + "api/Caja/Select",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            var clientesData = data.respuesta;
+            //console.log('Data cajas ->', data.respuesta);
+            $('#caja').html('');
+            $.each(clientesData, function (k, v) {
+                $('#caja').append('<option data-xyz="' + v.id + '" value="' + v.noEconomico + '"></option>');
+            });
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al consultar la lista de cajas. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al consultar la lista de cajas. Contacte al administrador.');
+        }
+    });
     //Get Destino
     $.ajax({
         type: "GET",
@@ -231,85 +231,85 @@ function cargarDatos(solicitudData) {
     });
 }
 //Consultar disponibilidad
-function consultarDisponibilidad() {
-    if ($("#txtFechaInicioRuta").val().length != 0 && $("#txtFechaFinRuta").val().length != 0) {
-        if ($("#txtFechaFinRuta").val() >= $("#txtFechaInicioRuta").val()) {
-            console.log($("#txtFechaInicioRuta").val(), 'inicio');
-            console.log($("#txtFechaFinRuta").val(), 'fin');
-            //Get Operadores
-            $.ajax({
-                type: "GET",
-                url: server_key + "api/Operador/SelectCat?fechaInicio=" + $("#txtFechaInicioRuta").val() + "&fechaFin=" + $("#txtFechaFinRuta").val(),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data, textStatus, jqXHR) {
-                    var clientesData = data.respuesta;
-                    console.log('Data operadores ->', data.respuesta);
-                    $('#operador').html('');
-                    $.each(clientesData, function (k, v) {
-                        $('#operador').append('<option data-xyz="' + v.id + '" value="' + v.apellidoPaterno + " " + v.apellidoMaterno + " " + v.nombre + '"></option>');
-                    });
-                },
-                failure: function (data) {
-                    AlertError('Ocurrio un error al consultar la lista de operadores. Contacte al administrador.');
-                },
-                error: function (data) {
-                    AlertError('Ocurrio un error al consultar la lista de operadores. Contacte al administrador.');
-                }
-            });
-            //Get Tractos
-            $.ajax({
-                type: "GET",
-                url: server_key + "api/Tracto/SelectCat?fechaInicio=" + $("#txtFechaInicioRuta").val() + "&fechaFin=" + $("#txtFechaFinRuta").val(),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data, textStatus, jqXHR) {
-                    var clientesData = data.respuesta;
-                    console.log('Data tractos ->', data.respuesta);
-                    $('#tractor').html('');
-                    $.each(clientesData, function (k, v) {
-                        $('#tractor').append('<option data-xyz="' + v.id + '" value="' + v.noEconomico + '"></option>');
-                    });
-                },
-                failure: function (data) {
-                    AlertError('Ocurrio un error al consultar la lista de tractos. Contacte al administrador.');
-                },
-                error: function (data) {
-                    AlertError('Ocurrio un error al consultar la lista de tractos. Contacte al administrador.');
-                }
-            });
-            //Get Caja
-            $.ajax({
-                type: "GET",
-                url: server_key + "api/Caja/SelectCat?fechaInicio=" + $("#txtFechaInicioRuta").val() + "&fechaFin=" + $("#txtFechaFinRuta").val(),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data, textStatus, jqXHR) {
-                    var clientesData = data.respuesta;
-                    console.log('Data cajas ->', data.respuesta);
-                    $('#caja').html('');
-                    $.each(clientesData, function (k, v) {
-                        $('#caja').append('<option data-xyz="' + v.id + '" value="' + v.noEconomico + '"></option>');
-                    });
-                },
-                failure: function (data) {
-                    AlertError('Ocurrio un error al consultar la lista de cajas. Contacte al administrador.');
-                },
-                error: function (data) {
-                    AlertError('Ocurrio un error al consultar la lista de cajas. Contacte al administrador.');
-                }
-            });
-        }
-        else {
-            AlertWarning("la fecha de fin tiene que ser mayor a la fecha de inicio");
-            console.log('la fecha de fin tiene que ser mayor a la fecha de inicio');
-        }
-    }
-    else {
-        console.log('ingresa ambas fechas');
-    }
+//function consultarDisponibilidad() {
+//    if ($("#txtFechaInicioRuta").val().length != 0 && $("#txtFechaFinRuta").val().length != 0) {
+//        if ($("#txtFechaFinRuta").val() >= $("#txtFechaInicioRuta").val()) {
+//            console.log($("#txtFechaInicioRuta").val(), 'inicio');
+//            console.log($("#txtFechaFinRuta").val(), 'fin');
+//            //Get Operadores
+//            $.ajax({
+//                type: "GET",
+//                url: server_key + "api/Operador/SelectCat?fechaInicio=" + $("#txtFechaInicioRuta").val() + "&fechaFin=" + $("#txtFechaFinRuta").val(),
+//                contentType: "application/json; charset=utf-8",
+//                dataType: "json",
+//                success: function (data, textStatus, jqXHR) {
+//                    var clientesData = data.respuesta;
+//                    console.log('Data operadores ->', data.respuesta);
+//                    $('#operador').html('');
+//                    $.each(clientesData, function (k, v) {
+//                        $('#operador').append('<option data-xyz="' + v.id + '" value="' + v.apellidoPaterno + " " + v.apellidoMaterno + " " + v.nombre + '"></option>');
+//                    });
+//                },
+//                failure: function (data) {
+//                    AlertError('Ocurrio un error al consultar la lista de operadores. Contacte al administrador.');
+//                },
+//                error: function (data) {
+//                    AlertError('Ocurrio un error al consultar la lista de operadores. Contacte al administrador.');
+//                }
+//            });
+//            //Get Tractos
+//            $.ajax({
+//                type: "GET",
+//                url: server_key + "api/Tracto/SelectCat?fechaInicio=" + $("#txtFechaInicioRuta").val() + "&fechaFin=" + $("#txtFechaFinRuta").val(),
+//                contentType: "application/json; charset=utf-8",
+//                dataType: "json",
+//                success: function (data, textStatus, jqXHR) {
+//                    var clientesData = data.respuesta;
+//                    console.log('Data tractos ->', data.respuesta);
+//                    $('#tractor').html('');
+//                    $.each(clientesData, function (k, v) {
+//                        $('#tractor').append('<option data-xyz="' + v.id + '" value="' + v.noEconomico + '"></option>');
+//                    });
+//                },
+//                failure: function (data) {
+//                    AlertError('Ocurrio un error al consultar la lista de tractos. Contacte al administrador.');
+//                },
+//                error: function (data) {
+//                    AlertError('Ocurrio un error al consultar la lista de tractos. Contacte al administrador.');
+//                }
+//            });
+//            //Get Caja
+//            $.ajax({
+//                type: "GET",
+//                url: server_key + "api/Caja/SelectCat?fechaInicio=" + $("#txtFechaInicioRuta").val() + "&fechaFin=" + $("#txtFechaFinRuta").val(),
+//                contentType: "application/json; charset=utf-8",
+//                dataType: "json",
+//                success: function (data, textStatus, jqXHR) {
+//                    var clientesData = data.respuesta;
+//                    console.log('Data cajas ->', data.respuesta);
+//                    $('#caja').html('');
+//                    $.each(clientesData, function (k, v) {
+//                        $('#caja').append('<option data-xyz="' + v.id + '" value="' + v.noEconomico + '"></option>');
+//                    });
+//                },
+//                failure: function (data) {
+//                    AlertError('Ocurrio un error al consultar la lista de cajas. Contacte al administrador.');
+//                },
+//                error: function (data) {
+//                    AlertError('Ocurrio un error al consultar la lista de cajas. Contacte al administrador.');
+//                }
+//            });
+//        }
+//        else {
+//            AlertWarning("la fecha de fin tiene que ser mayor a la fecha de inicio");
+//            console.log('la fecha de fin tiene que ser mayor a la fecha de inicio');
+//        }
+//    }
+//    else {
+//        console.log('ingresa ambas fechas');
+//    }
 
-}
+//}
 //eliminar operador
 function eliminarOperador(id) {
     console.log('antes de eliminar',tblSolicitudDetalles2)
