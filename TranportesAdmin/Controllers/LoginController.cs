@@ -51,7 +51,7 @@ namespace TranportesAdmin.Controllers
                         identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, model.Respuesta.Id.ToString()));
                         identity.AddClaim(new Claim(ClaimTypes.Name, model.Respuesta.Usuario));
                         identity.AddClaim(new Claim(ClaimTypes.Role, model.Respuesta.TblPerfilId.ToString()));
-                        identity.AddClaim(new Claim(ClaimTypes.Actor, model.Respuesta.TblOperadoId == null? "" : model.Respuesta.TblOperadoId.Value.ToString()));
+                        //identity.AddClaim(new Claim(ClaimTypes.Actor, model.Respuesta.TblOperadoId == null? "" : model.Respuesta.TblOperadoId.Value.ToString()));
 
                         var principal = new ClaimsPrincipal(identity);
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,

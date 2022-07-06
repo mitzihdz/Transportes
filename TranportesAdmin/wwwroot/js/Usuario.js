@@ -8,6 +8,9 @@
 
     var valUsuario = $('#frmNewUser').validate({
         rules: {
+            Perfil: {
+                required: true
+            },
             Usuario: {
                 required: true
             },
@@ -22,6 +25,7 @@
             }
         },
         messages: {
+            Perfil: "El perfil es requerido",
             Usuario: "El usuario es requerido",
             Password:
             {
@@ -52,7 +56,8 @@
         if (valUsuario.form()) {
 
             var _usuario = $('#txtUsuario').val();
-            var _contrasena = $('#txtPassword').val();          
+            var _contrasena = $('#txtPassword').val();
+            var _tblPerfilId = $('#ddlPerfil').val();
 
             $.ajax({
                 url: server_key + "api/Usuario/Add",
@@ -61,7 +66,7 @@
                     id: 0,
                     usuario: _usuario,
                     contrasena: _contrasena,
-                    tblPerfilId: 0
+                    tblPerfilId: _tblPerfilId
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
@@ -84,6 +89,9 @@
 
     var valEditUsuario = $('#frmEditUser').validate({
         rules: {
+            PerfilEdit: {
+                required: true
+            },
             UsuarioEdit: {
                 required: true
             },
@@ -96,6 +104,7 @@
             }
         },
         messages: {
+            PerfilEdit: "El perfil es requerido",
             UsuarioEdit: "El usuario es requerido",
             PasswordEdit:
             {
@@ -126,6 +135,7 @@
             var _id = $('#IdUsuario').val();
             var _usuario = $('#txtUsuarioEdit').val();
             var _contrasena = $('#txtPasswordEdit').val();
+            var _tblPerfilId = $('#ddlPerfilEdit').val();
 
             $.ajax({
                 url: server_key + "api/Usuario/Update",
@@ -134,7 +144,7 @@
                     id: _id,
                     usuario: _usuario,
                     contrasena: _contrasena,
-                    tblPerfilId: 0
+                    tblPerfilId: _tblPerfilId
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
@@ -157,12 +167,15 @@
 
 function OpenNew() {
     $('#modalUser').modal('show');
+    $('#ddlPerfil').val('');
     $('#txtUsuario').val('');
     $('#txtPassword').val('');
     $('#txtConfirmPassword').val('');
+    GetPerfiles();
 }
 
 function OpenEdit(id) {
+    GetPerfiles();
     $('#modalEditUser').modal('show');
     $('#IdUsuario').val(id);
     $.ajax({
@@ -172,6 +185,7 @@ function OpenEdit(id) {
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
             var userData = data.respuesta;
+            $('#ddlPerfilEdit').val(userData[0].tblPerfilId);
             $('#txtUsuarioEdit').val(userData[0].usuario);
         },
         failure: function (data) {
@@ -234,6 +248,32 @@ function GetGrid() {
         },
         error: function (data) {
             AlertError('Ocurrio un error al consultar la información. Contacte al administrador.');
+        }
+    });
+}
+
+function GetPerfiles() {
+    $.ajax({
+        type: "GET",
+        url: server_key + "api/Perfil/Select",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            var marcaData = data.respuesta;
+            $('#ddlPerfil').html('');
+            $('#ddlPerfil').append('<option value="">SELECCIONE</option>');
+            $('#ddlPerfilEdit').html('');
+            $('#ddlPerfilEdit').append('<option value="">SELECCIONE</option>');
+            $.each(marcaData, function (k, v) {
+                $('#ddlPerfil').append('<option value="' + v.id + '">' + v.perfil + '</option>');
+                $('#ddlPerfilEdit').append('<option value="' + v.id + '">' + v.perfil + '</option>');
+            });
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al consultar catálogo perfiles. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al consultar catálogo perfiles. Contacte al administrador.');
         }
     });
 }

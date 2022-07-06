@@ -86,18 +86,21 @@ namespace Negocio
                 ctx.TblOperadors.Add(operador);
                 ctx.SaveChanges();
 
-                //Se agrega el usuario operador
-                TblUsuario usuario = new TblUsuario();
+                #region Usuario
+                //Se cancela funcionalidad
+                ////Se agrega el usuario operador
+                //TblUsuario usuario = new TblUsuario();
 
-                usuario.Usuario = operador.IdOperador.Trim().ToUpper();
-                usuario.Contrasena = SS.Encrypt(SS.Base64Encode(operador.IdOperador.Trim().ToUpper()));
-                usuario.TblPerfilId = 2; //Perfil Operador
-                usuario.TblOperadoId = operador.Id;
-                usuario.Activo = true;
-                usuario.Inclusion = DateTime.Now;
+                //usuario.Usuario = operador.IdOperador.Trim().ToUpper();
+                //usuario.Contrasena = SS.Encrypt(SS.Base64Encode(operador.IdOperador.Trim().ToUpper()));
+                //usuario.TblPerfilId = 2; //Perfil Operador
+                //usuario.TblOperadoId = operador.Id;
+                //usuario.Activo = true;
+                //usuario.Inclusion = DateTime.Now;
 
-                ctx.TblUsuarios.Add(usuario);
-                ctx.SaveChanges();
+                //ctx.TblUsuarios.Add(usuario);
+                //ctx.SaveChanges();
+                #endregion
 
                 Response.Estado = true;
                 Response.Mensaje = "Operador " +
@@ -159,16 +162,19 @@ namespace Negocio
                 ctx.Entry(tblOperador).State = EntityState.Modified;
                 ctx.SaveChanges();
 
-                //Se inactiva usuario
-                TblUsuario tblUsuario = ctx.TblUsuarios.Where(x => x.TblOperadoId == id).FirstOrDefault();
+                #region Usuario
+                //Se cancela funcionalidad
+                ////Se inactiva usuario
+                //TblUsuario tblUsuario = ctx.TblUsuarios.Where(x => x.TblOperadoId == id).FirstOrDefault();
 
-                if(tblUsuario != null)
-                {
-                    tblUsuario.Activo = false;
+                //if(tblUsuario != null)
+                //{
+                //    tblUsuario.Activo = false;
 
-                    ctx.Entry(tblUsuario).State = EntityState.Modified;
-                    ctx.SaveChanges();
-                }    
+                //    ctx.Entry(tblUsuario).State = EntityState.Modified;
+                //    ctx.SaveChanges();
+                //}    
+                #endregion
 
                 Response.Estado = true;
                 Response.Mensaje = "Operador Inhabilitado Exitosamente";

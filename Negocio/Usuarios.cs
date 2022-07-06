@@ -34,7 +34,6 @@ namespace Negocio
             {
                 usuario.Usuario = usuario.Usuario.ToUpper();
                 usuario.Contrasena = SS.Encrypt(SS.Base64Encode(usuario.Contrasena));
-                usuario.TblPerfilId = 1; //Administrador
                 usuario.Activo = true;
                 usuario.Inclusion = DateTime.Now;
 
@@ -62,6 +61,7 @@ namespace Negocio
                 TblUsuario tblUsuario = ctx.TblUsuarios.Find(usuario.Id);
 
                 tblUsuario.Usuario = usuario.Usuario.ToUpper();
+                tblUsuario.TblPerfilId = usuario.TblPerfilId;
                 if (!string.IsNullOrEmpty(usuario.Contrasena))
                     tblUsuario.Contrasena = SS.Encrypt(SS.Base64Encode(usuario.Contrasena));
 

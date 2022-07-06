@@ -44,7 +44,7 @@ function GetGrid() {
 
     $.ajax({
         type: "GET",
-        url: server_key + "api/SolicitudOperador/Select?idOperador=" + idOperador,
+        url: server_key + "api/SolicitudOperador/Select",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
@@ -61,7 +61,8 @@ function GetGrid() {
                 var rows =
                     "<tr>" +
                     "<td>" + item.tblSolicitud.ordenServicio + "</td>" +
-                    "<td>" + item.tblTracto.idTracto + "</td >" +
+                    "<td>" + item.tblOperador.nombre + " " + item.tblOperador.apellidoPaterno + " " + item.tblOperador.apellidoMaterno + "</td >" +
+                    "<td>" + item.tblTracto.noEconomico + "</td >" +
                     "<td>" + item.tblCajas.noEconomico + "</td >" +
                     "<td>" + fechaInicio + "</td >" +
                     "<td>" + fechaFin + "</td >" +

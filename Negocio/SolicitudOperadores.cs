@@ -8,7 +8,7 @@ namespace Negocio
         private transportesContext ctx = new transportesContext();
         public Response Response = new Response();
 
-        public Response Select(int idOperador, int? id)
+        public Response Select()
         {
             try
             {
@@ -17,7 +17,8 @@ namespace Negocio
                     .Include(d => d.TblCajas)
                     .Include(d => d.TblOperador).Include(d => d.TblTracto).Include(d => d.TblEstatusRuta)
                     .Include(r => r.TblSolicitudDetalleRuta)
-                    .Where(x => x.TblOperadorId == idOperador && x.TblSolicitud.TblEstatusId != 7).ToList();
+                    //.Where(x => x.TblOperadorId == idOperador && x.TblSolicitud.TblEstatusId != 7).ToList();
+                    .Where(x => x.TblSolicitud.TblEstatusId != 7).ToList();
 
                 Response.Estado = true;
                 Response.Mensaje = "OK";

@@ -12,9 +12,9 @@ namespace Servicios.Controllers
 
         [HttpGet]
         [Route("Select")]
-        public Response Get(int idOperador, int? id)
+        public Response Get()
         {
-            return solicitudes.Select(idOperador, id);
+            return solicitudes.Select();
         }
 
         [HttpGet]

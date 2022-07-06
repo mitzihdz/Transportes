@@ -55,7 +55,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <input id="IdOperador" type="hidden" value=@SessionHelper.GetOperadorId(User) />
+        @*<input id="IdOperador" type="hidden" value=@SessionHelper.GetOperadorId(User) />*@
         <br />
         <div class="row">
              <div class="col-12">
@@ -63,6 +63,7 @@
                     <thead>
                         <tr>
                             <th class="text-center">Órden de Servicio</th>
+                            <th class="text-center">Operador</th>
                             <th class="text-center">Tracto</th>
                             <th class="text-center">Caja</th>
                             <th class="text-center">Fecha Inicio</th>
