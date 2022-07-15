@@ -3,7 +3,8 @@
     tblClientesId: 0,
     tblEstatusId: 0,
     fechaInicio: '',
-    fechaFin: '',
+    fechaFin: null,
+    numeroViaje: '',
     ordenServicio: '',
     tblSolicitudDetalles: [{
         id: 0,
@@ -11,7 +12,7 @@
         tblCajasId: 0,
         tblOperadorId: 0,
         fechaInicio: '',
-        fechaFin: '',
+        fechaFin: null,
         tblSolicitudDetalleRuta: [{
             id: 0,
             tblUbicacionesId: 0,
@@ -27,7 +28,7 @@ var tblSolicitudDetalles = [{
     tblCajasId: 0,
     tblOperadorId: 0,
     fechaInicio: '',
-    fechaFin: '',
+    fechaFin: null,
     tblSolicitudDetalleRuta: [{
         id: 0,
         tblUbicacionesId: 0,
@@ -60,15 +61,18 @@ $(document).ready(function () {
             Cliente: {
                 required: true
             },
+            Viaje: {
+                required: true
+            },
             Orden: {
                 required: true
             },
             FechaInicio: {
                 required: true
             },
-            FechaFin: {
-                required: true
-            },
+            //FechaFin: {
+            //    required: true
+            //},
             Operador: {
                 required: true
             },
@@ -81,9 +85,10 @@ $(document).ready(function () {
         },
         messages: {
             Cliente: "Seleccionar un cliente es requerido",
-            Orden: "El numero de orden de servicio es requerida",
+            Viaje: "El número de viaje es requerido",
+            Orden: "La orden de servicio es requerida",
             FechaInicio: "Seleccionar una fecha es requerida",
-            FechaFin: "Seleccionar una fecha es requerida",
+            //FechaFin: "Seleccionar una fecha es requerida",
             Operador: "Seleccionar un operador es requerido",
             Tractor: "Seleccionar un tractor es requerido",
             Caja: "Seleccionar una caja es requerido"
@@ -297,8 +302,16 @@ $('#form1').click(function () {
             return this.value == $('#txtCliente').val();
         }).data('xyz');
         solicitud.fechaInicio = $("#txtFechaInicio").val();
-        solicitud.fechaFin = $("#txtFechaFin").val();
+
+        if ($("#txtFechaFin").val() == '') {
+            solicitud.fechaFin = null;
+        }
+        else {
+            solicitud.fechaFin = $("#txtFechaFin").val();
+        }
+        
         solicitud.ordenServicio = $("#txtOrden").val();
+        solicitud.numeroViaje = $("#txtViaje").val();
         for (let i = 0; i < tblSolicitudDetalles.length; i++) {
             solicitud.tblSolicitudDetalles[i] = tblSolicitudDetalles[i];
         }
@@ -355,11 +368,20 @@ $('#guardarRuta').click(function () {
         //var operadorDataTable = $("#txtOperador").val();
         //var tractorDataTable = $("#txtTractor").val();
         //var cajaDataTable = $("#txtCaja").val();
+        var fechaFinRuta;
+        if ($("#txtFechaFinRuta").val() == '') {
+            fechaFinRuta = null;
+        }
+        else {
+            fechaFinRuta = $("#txtFechaFinRuta").val();
+        }
+
+
         if (tblSolicitudDetalles.length == 0) {
             tblSolicitudDetalles.push({
                 id: 0,
                 fechaInicio: $("#txtFechaInicioRuta").val(),
-                fechaFin: $("#txtFechaFinRuta").val(),
+                fechaFin: fechaFinRuta, //$("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
                 tblCajasId: caja,
                 tblOperadorId: operador,
@@ -399,7 +421,7 @@ $('#guardarRuta').click(function () {
             tblSolicitudDetalles.push({
                 id: 0,
                 fechaInicio: $("#txtFechaInicioRuta").val(),
-                fechaFin: $("#txtFechaFinRuta").val(),
+                fechaFin: fechaFinRuta, //$("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
                 tblCajasId: caja,
                 tblOperadorId: operador,

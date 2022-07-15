@@ -3,7 +3,7 @@
     tblClientesId: 0,
     tblEstatusId: 0,
     fechaInicio: '',
-    fechaFin: '',
+    fechaFin: null,
     ordenServicio: '',
     tblSolicitudDetalles: [{
         id: 0,
@@ -11,7 +11,7 @@
         tblCajasId: 0,
         tblOperadorId: 0,
         fechaInicio: '',
-        fechaFin: '',
+        fechaFin: null,
         tblSolicitudDetalleRuta: [{
             id: 0,
             tblUbicacionesId: 0,
@@ -27,7 +27,7 @@ var tblSolicitudDetalles = [{
     tblCajasId: 0,
     tblOperadorId: 0,
     fechaInicio: '',
-    fechaFin: '',
+    fechaFin: null,
     tblSolicitudDetalleRuta: [{
         id: 0,
         tblUbicacionesId: 0,
@@ -71,11 +71,17 @@ $(document).ready(function () {
             var diaInicio = data.respuesta[0].fechaInicio.substr(8, 2);
             var mesInicio = data.respuesta[0].fechaInicio.substr(5, 2);
             var añoInicio = data.respuesta[0].fechaInicio.substr(0, 4);
-            var diaFin = data.respuesta[0].fechaFin.substr(8, 2);
-            var mesFin = data.respuesta[0].fechaFin.substr(5, 2);
-            var añoFin = data.respuesta[0].fechaFin.substr(0, 4);
+            
             $("#txtFechaInicio").attr("value", añoInicio + '-' + mesInicio + '-' + diaInicio);
-            $("#txtFechaFin").attr("value", añoFin + '-' + mesFin + '-' + diaFin);
+
+            if (data.respuesta[0].fechaFin != null) {
+                var diaFin = data.respuesta[0].fechaFin.substr(8, 2);
+                var mesFin = data.respuesta[0].fechaFin.substr(5, 2);
+                var añoFin = data.respuesta[0].fechaFin.substr(0, 4);
+
+                $("#txtFechaFin").attr("value", añoFin + '-' + mesFin + '-' + diaFin);
+            }
+            $("#txtViaje").val(data.respuesta[0].numeroViaje)
             $("#txtOrden").val(data.respuesta[0].ordenServicio)
             cargarDatos(data.respuesta[0]);
         },
@@ -100,9 +106,16 @@ function cargarDatos(solicitudData) {
         var diaInicio = tblSolicitudDetalles2[i].fechaInicio.substr(8, 2);
         var mesInicio = tblSolicitudDetalles2[i].fechaInicio.substr(5, 2);
         var añoInicio = tblSolicitudDetalles2[i].fechaInicio.substr(0, 4);
-        var diaFin = tblSolicitudDetalles2[i].fechaFin.substr(8, 2);
-        var mesFin = tblSolicitudDetalles2[i].fechaFin.substr(5, 2);
-        var añoFin = tblSolicitudDetalles2[i].fechaFin.substr(0, 4);
+        var diaFin = '';
+        var mesFin = '';
+        var añoFin = '';
+
+        if (tblSolicitudDetalles2[i].fechaFin != null) {
+            diaFin = tblSolicitudDetalles2[i].fechaFin.substr(8, 2);
+            mesFin = tblSolicitudDetalles2[i].fechaFin.substr(5, 2);
+            añoFin = tblSolicitudDetalles2[i].fechaFin.substr(0, 4);
+        }
+
         var rows =
             "<tr>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
@@ -320,9 +333,16 @@ function eliminarOperador(id) {
         var diaInicio = tblSolicitudDetalles2[i].fechaInicio.substr(8, 2);
         var mesInicio = tblSolicitudDetalles2[i].fechaInicio.substr(5, 2);
         var añoInicio = tblSolicitudDetalles2[i].fechaInicio.substr(0, 4);
-        var diaFin = tblSolicitudDetalles2[i].fechaFin.substr(8, 2);
-        var mesFin = tblSolicitudDetalles2[i].fechaFin.substr(5, 2);
-        var añoFin = tblSolicitudDetalles2[i].fechaFin.substr(0, 4);
+        var diaFin = '';
+        var mesFin = '';
+        var añoFin = '';
+
+        if (item.fechaFin != null) {
+            diaFin = tblSolicitudDetalles2[i].fechaFin.substr(8, 2);
+            mesFin = tblSolicitudDetalles2[i].fechaFin.substr(5, 2);
+            añoFin = tblSolicitudDetalles2[i].fechaFin.substr(0, 4);
+        }
+
         var rows =
             "<tr>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
@@ -348,9 +368,15 @@ $('#form1').click(function () {
     solicitud.tblClientesId = $('#clientes option').filter(function () {
         return this.value == $('#txtCliente').val();
     }).data('xyz');
+    solicitud.numeroViaje = $("#txtViaje").val();
     solicitud.ordenServicio = $("#txtOrden").val();
     solicitud.fechaInicio = $("#txtFechaInicio").val();
-    solicitud.fechaFin = $("#txtFechaFin").val();
+    if ($("#txtFechaFin").val() == '') {
+        solicitud.fechaFin = null;
+    }
+    else {
+        solicitud.fechaFin = $("#txtFechaFin").val();
+    }
     for (let i = 0; i < tblSolicitudDetalles.length; i++) {
         solicitud.tblSolicitudDetalles[i] = tblSolicitudDetalles2[i];
     }
@@ -391,11 +417,17 @@ function abrirModalRuta(posicion) {
     var diaInicio = tblSolicitudDetalles2[posicion].fechaInicio.substr(8, 2);
     var mesInicio = tblSolicitudDetalles2[posicion].fechaInicio.substr(5, 2);
     var añoInicio = tblSolicitudDetalles2[posicion].fechaInicio.substr(0, 4);
-    var diaFin = tblSolicitudDetalles2[posicion].fechaFin.substr(8, 2);
-    var mesFin = tblSolicitudDetalles2[posicion].fechaFin.substr(5, 2);
-    var añoFin = tblSolicitudDetalles2[posicion].fechaFin.substr(0, 4);
     $("#txtFechaInicioRuta2").attr("value", añoInicio + '-' + mesInicio + '-' + diaInicio);
-    $("#txtFechaFinRuta2").attr("value", añoFin + '-' + mesFin + '-' + diaFin);
+
+    if (tblSolicitudDetalles2[posicion].fechaFin != null) {
+        var diaFin = tblSolicitudDetalles2[posicion].fechaFin.substr(8, 2);
+        var mesFin = tblSolicitudDetalles2[posicion].fechaFin.substr(5, 2);
+        var añoFin = tblSolicitudDetalles2[posicion].fechaFin.substr(0, 4);
+
+        $("#txtFechaFinRuta2").attr("value", añoFin + '-' + mesFin + '-' + diaFin);
+    }
+
+    
     //Get Operadores
     $.ajax({
         type: "GET",
@@ -656,13 +688,20 @@ $('#guardarRuta').click(function () {
         var operadorDataTable = $("#txtOperador").val();
         var tractorDataTable = $("#txtTractor").val();
         var cajaDataTable = $("#txtCaja").val();
+        var fechaFinRuta;
+        if ($("#txtFechaFinRuta").val() == '') {
+            fechaFinRuta = null;
+        }
+        else {
+            fechaFinRuta = $("#txtFechaFinRuta").val();
+        }
         var nombreCompleto = operadorDataTable.split(" ")
         console.log('nombre completo', nombreCompleto);
         if (nombreCompleto.length == 3) {
             tblSolicitudDetalles2.push({
                 id: 0,
                 fechaInicio: $("#txtFechaInicioRuta").val(),
-                fechaFin: $("#txtFechaFinRuta").val(),
+                fechaFin: fechaFinRuta, //$("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
                 tblTracto: {
                     noEconomico: tractorDataTable
@@ -687,7 +726,7 @@ $('#guardarRuta').click(function () {
             tblSolicitudDetalles2.push({
                 id: 0,
                 fechaInicio: $("#txtFechaInicioRuta").val(),
-                fechaFin: $("#txtFechaFinRuta").val(),
+                fechaFin: fechaFinRuta, //$("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
                 tblTracto: {
                     noEconomico: tractorDataTable
@@ -713,9 +752,16 @@ $('#guardarRuta').click(function () {
             var diaInicio = tblSolicitudDetalles2[i].fechaInicio.substr(8, 2);
             var mesInicio = tblSolicitudDetalles2[i].fechaInicio.substr(5, 2);
             var añoInicio = tblSolicitudDetalles2[i].fechaInicio.substr(0, 4);
-            var diaFin = tblSolicitudDetalles2[i].fechaFin.substr(8, 2);
-            var mesFin = tblSolicitudDetalles2[i].fechaFin.substr(5, 2);
-            var añoFin = tblSolicitudDetalles2[i].fechaFin.substr(0, 4);
+            var diaFin = '';
+            var mesFin = '';
+            var añoFin = '';
+
+            if (tblSolicitudDetalles2[i].fechaFin != null) {
+                diaFin = tblSolicitudDetalles2[i].fechaFin.substr(8, 2);
+                mesFin = tblSolicitudDetalles2[i].fechaFin.substr(5, 2);
+                añoFin = tblSolicitudDetalles2[i].fechaFin.substr(0, 4);
+            }
+
             var rows =
                 "<tr>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +

@@ -38,11 +38,19 @@ function GetGrid() {
                 var diaInicio = item.fechaInicio.substr(8, 2);
                 var mesInicio = item.fechaInicio.substr(5, 2);
                 var añoInicio = item.fechaInicio.substr(0, 4);
-                var diaFin = item.fechaFin.substr(8, 2);
-                var mesFin = item.fechaFin.substr(5, 2);
-                var añoFin = item.fechaFin.substr(0, 4);
+                var diaFin = '';
+                var mesFin = '';
+                var añoFin = '';
+
+                if (item.fechaFin != null) {
+                    diaFin = item.fechaFin.substr(8, 2);
+                    mesFin = item.fechaFin.substr(5, 2);
+                    añoFin = item.fechaFin.substr(0, 4);
+                }
+
                 var rows =
                     "<tr>" +
+                    "<td>" + item.numeroViaje + "</td>" +
                     "<td>" + item.ordenServicio + "</td>" +
                     "<td>" + item.tblClientes.nombreCorto + "</td>" +
                     "<td>" + item.tblEstatus.estatus + "</td >" +

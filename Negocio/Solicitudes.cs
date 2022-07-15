@@ -48,6 +48,7 @@ namespace Negocio
 
                     tblSolicitud.TblClientesId = solicitud.TblClientesId;
                     tblSolicitud.TblEstatusId = 1;//Solicitado
+                    tblSolicitud.NumeroViaje = solicitud.NumeroViaje.ToUpper();
                     tblSolicitud.OrdenServicio = solicitud.OrdenServicio.ToUpper();
                     tblSolicitud.FechaInicio = solicitud.FechaInicio;
                     tblSolicitud.FechaFin = solicitud.FechaFin;
@@ -161,6 +162,7 @@ namespace Negocio
                     TblSolicitud tblSolicitud = ctx.TblSolicituds.Find(solicitud.Id);
 
                     tblSolicitud.TblClientesId = solicitud.TblClientesId;
+                    tblSolicitud.NumeroViaje = solicitud.NumeroViaje.ToUpper();
                     tblSolicitud.OrdenServicio = solicitud.OrdenServicio.ToUpper();
                     tblSolicitud.FechaInicio = solicitud.FechaInicio;
                     tblSolicitud.FechaFin = solicitud.FechaFin;
