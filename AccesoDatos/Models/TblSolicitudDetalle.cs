@@ -13,6 +13,7 @@ namespace AccesoDatos.Models
         }
 
         public int Id { get; set; }
+        public string NumeroViaje { get; set; }
         public int? TblTractoId { get; set; }
         public int? TblCajasId { get; set; }
         public int? TblOperadorId { get; set; }

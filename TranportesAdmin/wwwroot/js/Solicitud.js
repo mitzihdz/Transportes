@@ -50,7 +50,6 @@ function GetGrid() {
 
                 var rows =
                     "<tr>" +
-                    "<td>" + item.numeroViaje + "</td>" +
                     "<td>" + item.ordenServicio + "</td>" +
                     "<td>" + item.tblClientes.nombreCorto + "</td>" +
                     "<td>" + item.tblEstatus.estatus + "</td >" +

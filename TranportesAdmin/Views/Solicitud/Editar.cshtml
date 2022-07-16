@@ -76,13 +76,7 @@
                             </datalist>
                         </div>
                       </div>
-                      <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="txtOrden">Número de Viaje</label>
-                            <input autocomplete="off" class="form-control form-control-sm" id="txtViaje" name="Viaje" style="text-transform:uppercase" maxlength="200">
-                        </div>
-                      </div>
-                      <div class="col-md-2">
+                      <div class="col-md-4">
                         <div class="form-group">
                             <label for="txtOrden">Orden de Servicio</label>
                             <input autocomplete="off" class="form-control form-control-sm" id="txtOrden" name="Orden" style="text-transform:uppercase" maxlength="200">
@@ -116,6 +110,7 @@
                              <table id="otroOperador" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
+                                        <th class="text-center">Número de Servicio</th>
                                         <th class="text-center">Operador</th>
                                         <th class="text-center">Tractor</th>
                                         <th class="text-center">Caja</th>
@@ -169,13 +164,19 @@
       </div>
     <div class="modal-body ct-control">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="txtOrden">Número de Viaje *</label>
+                        <input autocomplete="off" class="form-control form-control-sm" id="txtViaje" name="Viaje" style="text-transform:uppercase" maxlength="200">
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtFechaInicioRuta">Fecha de Inicio *</label>
                         <input class="form-control form-control-sm" type="date" id="txtFechaInicioRuta"  name="FechaInicioRuta" style="text-transform:uppercase" maxlength="200">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtFechaFinRuta">Fecha de Fin *</label>
                         <input class="form-control form-control-sm" type="date" id="txtFechaFinRuta" name="FechaFinRuta" style="text-transform:uppercase" maxlength="200">
@@ -183,7 +184,7 @@
                 </div>
             </div>
             <div class="row">
-               <div class="col-md-6">
+               <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtOperador">Operador *</label>
                         <input autocomplete="off" list="operador" class="form-control form-control-sm" type="text" id="txtOperador" name="Operador" style="text-transform:uppercase" maxlength="200">
@@ -191,7 +192,7 @@
                         </datalist>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class='form-group'>
                         <label for="Tractor">Tracto *</label>
                         <input autocomplete="off" list="tractor" class="form-control form-control-sm" type="text" id="txtTractor" name="Tractor" style="text-transform:uppercase" maxlength="20">
@@ -199,9 +200,7 @@
                         </datalist>
                     </div>
                 </div>
-           </div> 
-           <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="Caja">Caja *</label>
                         <input autocomplete="off" list="caja" class="form-control form-control-sm" type="text" id="txtCaja" name="Caja" style="text-transform:uppercase" maxlength="20">
@@ -209,7 +208,9 @@
                         </datalist>
                     </div>
                 </div>
-                <div class="col-md-6">
+           </div> 
+           <div class="row">
+                <div class="col-md-8">
                     <div class="form-group">
                         <label for="Destino">Destino *</label>
                         <input autocomplete="off" list="destino" class="form-control form-control-sm" onchange="agregarDestino()" type="text" id="txtDestino" name="Destino" style="text-transform:uppercase" maxlength="20">
@@ -217,7 +218,7 @@
                         </datalist>
                     </div>
                 </div>
-                <div class="col-md-4 d-flex justify-content-center">
+                <div class="col-md-8 d-flex justify-content-center">
                 </div>
            </div>
       </div>
@@ -247,13 +248,19 @@
       </div>
     <div class="modal-body ct-control">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="txtOrden">Número de Viaje *</label>
+                        <input autocomplete="off" class="form-control form-control-sm" id="txtViaje2" name="Viaje" style="text-transform:uppercase" maxlength="200">
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtFechaInicioRuta2">Fecha de Inicio *</label>
                         <input class="form-control form-control-sm" type="date" id="txtFechaInicioRuta2" name="FechaInicioRuta2" style="text-transform:uppercase" maxlength="200">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtFechaFinRuta2">Fecha de Fin *</label>
                         <input class="form-control form-control-sm" type="date" id="txtFechaFinRuta2" name="FechaFinRuta2" style="text-transform:uppercase" maxlength="200">
@@ -261,7 +268,7 @@
                 </div>
             </div>
             <div class="row">
-               <div class="col-md-6">
+               <div class="col-md-4">
                     <div class="form-group">
                         <label for="txtOperador2">Operador *</label>
                         <input autocomplete="off" list="operador2" class="form-control form-control-sm" type="text" id="txtOperador2" name="Operador" style="text-transform:uppercase" maxlength="200">
@@ -269,7 +276,7 @@
                         </datalist>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class='form-group'>
                         <label for="Tractor2">Tracto *</label>
                         <input autocomplete="off" list="tractor2" class="form-control form-control-sm" type="text" id="txtTractor2" name="Tractor" style="text-transform:uppercase" maxlength="20">
@@ -277,9 +284,7 @@
                         </datalist>
                     </div>
                 </div>
-           </div> 
-           <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="Caja">Caja *</label>
                         <input autocomplete="off" list="caja2" class="form-control form-control-sm" type="text" id="txtCaja2" name="Caja" style="text-transform:uppercase" maxlength="20">
@@ -287,7 +292,9 @@
                         </datalist>
                     </div>
                 </div>
-                <div class="col-md-6">
+           </div> 
+           <div class="row">
+                <div class="col-md-8">
                     <div class="form-group">
                         <label for="Destino">Destino *</label>
                         <input autocomplete="off" list="destino2" class="form-control form-control-sm" onchange="agregarDestino2()" type="text" id="txtDestino2" name="Destino" style="text-transform:uppercase" maxlength="20">
@@ -295,7 +302,7 @@
                         </datalist>
                     </div>
                 </div>
-                <div class="col-md-4 d-flex justify-content-center">
+                <div class="col-md-8 d-flex justify-content-center">
                 </div>
            </div>
       </div>

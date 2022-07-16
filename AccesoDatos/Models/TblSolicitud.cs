@@ -15,7 +15,6 @@ namespace AccesoDatos.Models
         public int Id { get; set; }
         public int? TblClientesId { get; set; }
         public int? TblEstatusId { get; set; }
-        public string NumeroViaje { get; set; }
         public string OrdenServicio { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime? FechaFin { get; set; }

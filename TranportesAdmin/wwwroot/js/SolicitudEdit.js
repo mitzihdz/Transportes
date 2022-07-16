@@ -7,6 +7,7 @@
     ordenServicio: '',
     tblSolicitudDetalles: [{
         id: 0,
+        numeroViaje: '',
         tblTractoId: 0,
         tblCajasId: 0,
         tblOperadorId: 0,
@@ -23,6 +24,7 @@
 }
 var tblSolicitudDetalles = [{
     id: 0,
+    numeroViaje: '',
     tblTractoId: 0,
     tblCajasId: 0,
     tblOperadorId: 0,
@@ -81,7 +83,6 @@ $(document).ready(function () {
 
                 $("#txtFechaFin").attr("value", añoFin + '-' + mesFin + '-' + diaFin);
             }
-            $("#txtViaje").val(data.respuesta[0].numeroViaje)
             $("#txtOrden").val(data.respuesta[0].ordenServicio)
             cargarDatos(data.respuesta[0]);
         },
@@ -118,6 +119,7 @@ function cargarDatos(solicitudData) {
 
         var rows =
             "<tr>" +
+            "<td class='text-center'>" + tblSolicitudDetalles2[i].numeroViaje + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.noEconomico + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
@@ -337,7 +339,7 @@ function eliminarOperador(id) {
         var mesFin = '';
         var añoFin = '';
 
-        if (item.fechaFin != null) {
+        if (tblSolicitudDetalles2[i].fechaFin != null) {
             diaFin = tblSolicitudDetalles2[i].fechaFin.substr(8, 2);
             mesFin = tblSolicitudDetalles2[i].fechaFin.substr(5, 2);
             añoFin = tblSolicitudDetalles2[i].fechaFin.substr(0, 4);
@@ -345,6 +347,7 @@ function eliminarOperador(id) {
 
         var rows =
             "<tr>" +
+            "<td class='text-center'>" + tblSolicitudDetalles2[i].numeroViaje + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.noEconomico + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
@@ -364,11 +367,10 @@ function eliminarOperador(id) {
 }
 //actualizar
 $('#form1').click(function () {
-    
+    debugger;
     solicitud.tblClientesId = $('#clientes option').filter(function () {
         return this.value == $('#txtCliente').val();
     }).data('xyz');
-    solicitud.numeroViaje = $("#txtViaje").val();
     solicitud.ordenServicio = $("#txtOrden").val();
     solicitud.fechaInicio = $("#txtFechaInicio").val();
     if ($("#txtFechaFin").val() == '') {
@@ -414,6 +416,7 @@ function abrirModalRuta(posicion) {
     posRuta = posicion;
     console.log('posicion',posicion);
     $("#verRuta").modal('show');
+    $("#txtViaje2").val(tblSolicitudDetalles2[posicion].numeroViaje);
     var diaInicio = tblSolicitudDetalles2[posicion].fechaInicio.substr(8, 2);
     var mesInicio = tblSolicitudDetalles2[posicion].fechaInicio.substr(5, 2);
     var añoInicio = tblSolicitudDetalles2[posicion].fechaInicio.substr(0, 4);
@@ -610,11 +613,15 @@ $('#guardarRuta2').click(function () {
     tblSolicitudDetalles2[posRuta].tblCajaId = $('#caja2 option').filter(function () {
         return this.value == $('#txtCaja2').val();
     }).data('xyz');
+    tblSolicitudDetalles2[posRuta].numeroViaje = $('#txtViaje2').val();
     tblSolicitudDetalles2[posRuta].tblOperador.nombre = $('#txtOperador2').val();
     tblSolicitudDetalles2[posRuta].tblTracto.noEconomico = $('#txtTractor2').val();
     tblSolicitudDetalles2[posRuta].tblCajas.noEconomico = $('#txtCaja2').val();
     tblSolicitudDetalles2[posRuta].fechaInicio = $('#txtFechaInicioRuta2').val();
-    tblSolicitudDetalles2[posRuta].fechaFin = $('#txtFechaFinRuta2').val();
+    if ($('#txtFechaFinRuta2').val() != '') {
+        tblSolicitudDetalles2[posRuta].fechaFin = $('#txtFechaFinRuta2').val();
+    }
+    
     console.log('ruta editada', tblSolicitudDetalles2[posRuta]);
     $("#verRuta").modal('hide');
     $('#otroOperador > tbody').html('');
@@ -622,11 +629,19 @@ $('#guardarRuta2').click(function () {
         var diaInicio = tblSolicitudDetalles2[i].fechaInicio.substr(8, 2);
         var mesInicio = tblSolicitudDetalles2[i].fechaInicio.substr(5, 2);
         var añoInicio = tblSolicitudDetalles2[i].fechaInicio.substr(0, 4);
-        var diaFin = tblSolicitudDetalles2[i].fechaFin.substr(8, 2);
-        var mesFin = tblSolicitudDetalles2[i].fechaFin.substr(5, 2);
-        var añoFin = tblSolicitudDetalles2[i].fechaFin.substr(0, 4);
+        var diaFin = '';
+        var mesFin = '';
+        var añoFin = '';
+
+        if (tblSolicitudDetalles2[i].fechaFin != null) {
+            diaFin = tblSolicitudDetalles2[i].fechaFin.substr(8, 2);
+            mesFin = tblSolicitudDetalles2[i].fechaFin.substr(5, 2);
+            añoFin = tblSolicitudDetalles2[i].fechaFin.substr(0, 4);
+        }
+
         var rows =
             "<tr>" +
+            "<td class='text-center'>" + tblSolicitudDetalles2[i].numeroViaje + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.noEconomico + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
@@ -642,12 +657,16 @@ $('#guardarRuta2').click(function () {
     //    "responsive": true, "lengthChange": false, "autoWidth": false,
     //    "buttons": ["copy", "csv", "excel", "pdf", "print"]
     //}).buttons().container().appendTo('#otroOperador_wrapper .col-md-6:eq(0)');
+
 })
 //agregar ruta
 $('#guardarRuta').click(function () {
     console.log('ruta guardar', tblSolicitudDetalleRuta);
     valSolicitud = $('#fmSolicitud').validate({
         rules: {
+            Viaje: {
+                required: true
+            },
             Operador: {
                 required: true
             },
@@ -659,6 +678,7 @@ $('#guardarRuta').click(function () {
             }
         },
         messages: {
+            Viaje: "El número de viaje es requerido",
             Operador: "Seleccionar un operador es requerido",
             Tractor: "Seleccionar un tractor es requerido",
             Caja: "Seleccionar una caja es requerido"
@@ -688,6 +708,7 @@ $('#guardarRuta').click(function () {
         var operadorDataTable = $("#txtOperador").val();
         var tractorDataTable = $("#txtTractor").val();
         var cajaDataTable = $("#txtCaja").val();
+        
         var fechaFinRuta;
         if ($("#txtFechaFinRuta").val() == '') {
             fechaFinRuta = null;
@@ -695,11 +716,13 @@ $('#guardarRuta').click(function () {
         else {
             fechaFinRuta = $("#txtFechaFinRuta").val();
         }
+        
         var nombreCompleto = operadorDataTable.split(" ")
         console.log('nombre completo', nombreCompleto);
         if (nombreCompleto.length == 3) {
             tblSolicitudDetalles2.push({
                 id: 0,
+                numeroViaje: $("#txtViaje").val(),
                 fechaInicio: $("#txtFechaInicioRuta").val(),
                 fechaFin: fechaFinRuta, //$("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
@@ -725,6 +748,7 @@ $('#guardarRuta').click(function () {
         else {
             tblSolicitudDetalles2.push({
                 id: 0,
+                numeroViaje: $("#txtViaje").val(),
                 fechaInicio: $("#txtFechaInicioRuta").val(),
                 fechaFin: fechaFinRuta, //$("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
@@ -764,6 +788,7 @@ $('#guardarRuta').click(function () {
 
             var rows =
                 "<tr>" +
+                "<td class='text-center'>" + tblSolicitudDetalles2[i].numeroViaje + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.noEconomico + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
@@ -782,7 +807,8 @@ $('#guardarRuta').click(function () {
         console.log("Lego aqui");
         x = 0;
         y++;
-        
+
+        $('#txtViaje').val('');
         $('#txtOperador').val('');
         $('#txtTractor').val('');
         $('#txtCaja').val('');

@@ -60,7 +60,7 @@ function GetGrid() {
                 }
                 var rows =
                     "<tr>" +
-                    "<td>" + item.tblSolicitud.numeroViaje + "</td>" +
+                    "<td>" + item.numeroViaje + "</td>" +
                     "<td>" + item.tblSolicitud.ordenServicio + "</td>" +
                     "<td>" + item.tblOperador.nombre + " " + item.tblOperador.apellidoPaterno + " " + item.tblOperador.apellidoMaterno + "</td >" +
                     "<td>" + item.tblTracto.noEconomico + "</td >" +

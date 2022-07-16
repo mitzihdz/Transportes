@@ -150,7 +150,7 @@ function GetGrid() {
             $.each(data.respuesta, function (i, item) {
                 var rows =
                     "<tr>" +
-                    "<td>" + item.tblSolicitud.numeroViaje + "</td>" +
+                    "<td>" + item.numeroViaje + "</td>" +
                     "<td>" + item.tblSolicitud.ordenServicio + "</td>" +
                     "<td>" + item.tblSolicitud.tblClientes.nombreCorto + "</td>" +
                     "<td>" + item.tblOperador.apellidoPaterno + " " + item.tblOperador.apellidoMaterno + " " + item.tblOperador.nombre + "</td>" +

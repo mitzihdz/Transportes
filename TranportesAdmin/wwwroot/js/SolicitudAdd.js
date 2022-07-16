@@ -4,10 +4,10 @@
     tblEstatusId: 0,
     fechaInicio: '',
     fechaFin: null,
-    numeroViaje: '',
     ordenServicio: '',
     tblSolicitudDetalles: [{
         id: 0,
+        numeroViaje: '',
         tblTractoId: 0,
         tblCajasId: 0,
         tblOperadorId: 0,
@@ -24,6 +24,7 @@
 }
 var tblSolicitudDetalles = [{
     id: 0,
+    numeroViaje: '',
     tblTractoId: 0,
     tblCajasId: 0,
     tblOperadorId: 0,
@@ -311,7 +312,6 @@ $('#form1').click(function () {
         }
         
         solicitud.ordenServicio = $("#txtOrden").val();
-        solicitud.numeroViaje = $("#txtViaje").val();
         for (let i = 0; i < tblSolicitudDetalles.length; i++) {
             solicitud.tblSolicitudDetalles[i] = tblSolicitudDetalles[i];
         }
@@ -359,6 +359,7 @@ $('#guardarRuta').click(function () {
         var caja = $('#caja option').filter(function () {
             return this.value == $('#txtCaja').val();
         }).data('xyz');
+
         var diaInicio = $("#txtFechaInicioRuta").val().substr(8, 2);
         var mesInicio = $("#txtFechaInicioRuta").val().substr(5, 2);
         var añoInicio = $("#txtFechaInicioRuta").val().substr(0, 4);
@@ -380,6 +381,7 @@ $('#guardarRuta').click(function () {
         if (tblSolicitudDetalles.length == 0) {
             tblSolicitudDetalles.push({
                 id: 0,
+                numeroViaje: $("#txtViaje").val(),
                 fechaInicio: $("#txtFechaInicioRuta").val(),
                 fechaFin: fechaFinRuta, //$("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
@@ -398,6 +400,7 @@ $('#guardarRuta').click(function () {
             });            
             var rows =
                 "<tr class='text-center'>" +
+                "<td class='text-center'>" + $("#txtViaje").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtOperador").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtTractor").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtCaja").val() + "</td>" +
@@ -420,6 +423,7 @@ $('#guardarRuta').click(function () {
         else {
             tblSolicitudDetalles.push({
                 id: 0,
+                numeroViaje: $("#txtViaje").val(),
                 fechaInicio: $("#txtFechaInicioRuta").val(),
                 fechaFin: fechaFinRuta, //$("#txtFechaFinRuta").val(),
                 tblTractoId: tractor,
@@ -438,6 +442,7 @@ $('#guardarRuta').click(function () {
             });
             var rows =
                 "<tr>" +
+                "<td class='text-center'>" + $("#txtViaje").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtOperador").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtTractor").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtCaja").val() + "</td>" +
@@ -452,6 +457,7 @@ $('#guardarRuta').click(function () {
             x = 0;
             y++;
         }
+        $('#txtViaje').val('');
         $('#txtOperador').val('');
         $('#txtTractor').val('');
         $('#txtCaja').val('');
@@ -463,6 +469,7 @@ $('#guardarRuta').click(function () {
         console.log('antes de reiniciar', tblSolicitudDetalleRuta.length);
         tblSolicitudDetalleRuta = [{
             id: 0,
+            numeroViaje:'',
             tblUbicacionesId: 0,
             orden: 0,
             tblEstatusRutaId: 0,
@@ -527,6 +534,7 @@ function eliminarOperador(id) {
         var añoFin = tblSolicitudDetalles[i].fechaFin.substr(0, 4);
         var rows =
             "<tr class='text-center'>" +
+            "<td class='text-center'>" + tblSolicitudDetalles[i].numeroViaje + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].tblOperador.nombre + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].tblTracto.noEconomico + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].tblCajas.noEconomico + "</td>" +
@@ -568,6 +576,7 @@ function abrirModalRuta(y) {
     var diaFin = ruta.fechaFin.substr(8, 2);
     var mesFin = ruta.fechaFin.substr(5, 2);
     var añoFin = ruta.fechaFin.substr(0, 4);
+    $("#txtViaje2").attr("value", ruta.numeroViaje);
     $("#txtFechaInicioRuta2").attr("value", añoInicio + '-' + mesInicio + '-' + diaInicio);
     $("#txtFechaFinRuta2").attr("value", añoFin + '-' + mesFin + '-' + diaFin);
     $.ajax({
