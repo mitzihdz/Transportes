@@ -148,6 +148,13 @@ function GetGrid() {
         success: function (data) {
             $('#tblReportes > tbody').empty();
             $.each(data.respuesta, function (i, item) {
+
+                var rowRuta = "<ul>";
+                $.each(item.tblSolicitudDetalleRuta, function (i, item) {
+                    rowRuta = rowRuta + "<li>" + item.tblUbicaciones.planta + "</li>";
+                });
+                rowRuta = rowRuta + "</ul >";
+
                 var rows =
                     "<tr>" +
                     "<td>" + item.numeroViaje + "</td>" +
@@ -157,6 +164,7 @@ function GetGrid() {
                     "<td>" + item.tblTracto.noEconomico + "</td>" +
                     "<td>" + item.tblCajas.noEconomico + "</td>" +
                     "<td>" + item.tblEstatusRuta.estatus + "</td>" +
+                    "<td>" + rowRuta + "</td>" +
                     "</tr>";
                 $('#tblReportes > tbody').append(rows);
             });

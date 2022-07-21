@@ -22,7 +22,7 @@ namespace Negocio
                     .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblOperador)
                     .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblTracto)
                     .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblEstatusRuta)
-                    .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblSolicitudDetalleRuta).ThenInclude(r => r.TblUbicaciones)
+                    .Include(s => s.TblSolicitudDetalles).ThenInclude(d => d.TblSolicitudDetalleRuta.OrderBy(r => r.Orden)).ThenInclude(r => r.TblUbicaciones)
                     .Where(x => x.Id == id).ToList();
 
                 Response.Estado = true;

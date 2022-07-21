@@ -58,16 +58,24 @@ function GetGrid() {
                 if (item.fechaFin) {
                     fechaFin = item.fechaFin.substr(8, 2) + "/" + item.fechaFin.substr(5, 2) + "/" + item.fechaFin.substr(0, 4);
                 }
+
+                var rowRuta = "<ul>";
+                $.each(item.tblSolicitudDetalleRuta, function (i, item) {
+                    rowRuta = rowRuta + "<li>" + item.tblUbicaciones.planta + "</li>";
+                });
+                rowRuta = rowRuta + "</ul >";
+
                 var rows =
                     "<tr>" +
                     "<td>" + item.numeroViaje + "</td>" +
-                    "<td>" + item.tblSolicitud.ordenServicio + "</td>" +
+                    //"<td>" + item.tblSolicitud.ordenServicio + "</td>" +
                     "<td>" + item.tblOperador.nombre + " " + item.tblOperador.apellidoPaterno + " " + item.tblOperador.apellidoMaterno + "</td >" +
                     "<td>" + item.tblTracto.noEconomico + "</td >" +
                     "<td>" + item.tblCajas.noEconomico + "</td >" +
                     "<td>" + fechaInicio + "</td >" +
                     "<td>" + fechaFin + "</td >" +
                     "<td>" + item.tblEstatusRuta.estatus + "</td >" +
+                    "<td>" + rowRuta + "</td>" +
                     "<td class='text-center'><a class='nav_link'  href='#' onclick='OpenEdit(" + item.id + ", " + item.tblEstatusRutaId + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
                     "</tr>";
                 $('#tblSolicitud > tbody').append(rows);

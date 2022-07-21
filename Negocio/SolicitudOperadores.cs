@@ -16,7 +16,7 @@ namespace Negocio
                     .Include(s => s.TblSolicitud)
                     .Include(d => d.TblCajas)
                     .Include(d => d.TblOperador).Include(d => d.TblTracto).Include(d => d.TblEstatusRuta)
-                    .Include(r => r.TblSolicitudDetalleRuta)
+                    .Include(r => r.TblSolicitudDetalleRuta.OrderBy(r => r.Orden)).ThenInclude(r => r.TblUbicaciones)
                     //.Where(x => x.TblOperadorId == idOperador && x.TblSolicitud.TblEstatusId != 7).ToList();
                     .Where(x => x.TblSolicitud.TblEstatusId != 7).ToList();
 

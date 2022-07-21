@@ -44,8 +44,7 @@ var tblSolicitudDetalleRuta = [{
     orden: 0,
     tblEstatusRutaId: 0,
     destino: '',
-    ruta: ''
-    
+    ruta: ''    
 }];
 var valSolicitud;
 var x = 0;
@@ -397,7 +396,14 @@ $('#guardarRuta').click(function () {
                     nombre: $("#txtOperador").val()
                 },
                 tblSolicitudDetalleRuta: tblSolicitudDetalleRuta
-            });            
+            });
+
+            var rowRuta = "<ul>";
+            $.each(tblSolicitudDetalleRuta, function (i, item) {
+                rowRuta = rowRuta + "<li>" + item.destino + "</li>";
+            });
+            rowRuta = rowRuta + "</ul >";
+
             var rows =
                 "<tr class='text-center'>" +
                 "<td class='text-center'>" + $("#txtViaje").val() + "</td>" +
@@ -405,8 +411,9 @@ $('#guardarRuta').click(function () {
                 "<td class='text-center'>" + $("#txtTractor").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtCaja").val() + "</td>" +
                 "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
-                "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + y + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
-                "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + y + ")'><i style='' class='fa-solid fa-circle-trash'></i></a >" +
+                "<td class='text-center'>" + rowRuta + "</td>" +
+                "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + y + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a></td>" +
+                "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + y + ")'><i style='' class='fa-solid fa-circle-trash'></i></a></td>" +
                 "</tr>";
             $('#otroOperador > tbody').append(rows);
             $("#otroOperador").DataTable({
@@ -440,6 +447,12 @@ $('#guardarRuta').click(function () {
                 },
                 tblSolicitudDetalleRuta: tblSolicitudDetalleRuta
             });
+            var rowRuta = "<ul>";
+            $.each(tblSolicitudDetalleRuta, function (i, item) {
+                rowRuta = rowRuta + "<li>" + item.destino + "</li>";
+            });
+            rowRuta = rowRuta + "</ul >";
+
             var rows =
                 "<tr>" +
                 "<td class='text-center'>" + $("#txtViaje").val() + "</td>" +
@@ -447,8 +460,9 @@ $('#guardarRuta').click(function () {
                 "<td class='text-center'>" + $("#txtTractor").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtCaja").val() + "</td>" +
                 "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
-                "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + y +")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
-                "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + y + ")'><i style='' class='fa-solid fa-circle-trash'></i></a >" +
+                "<td class='text-center'>" + rowRuta + "</td>" +
+                "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + y + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a></td>" +
+                "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + y + ")'><i style='' class='fa-solid fa-circle-trash'></i></a></td>" +
                 "</tr>";
             $('#otroOperador > tbody').append(rows);
             console.log("Lego aqui");
@@ -532,6 +546,13 @@ function eliminarOperador(id) {
         var diaFin = tblSolicitudDetalles[i].fechaFin.substr(8, 2);
         var mesFin = tblSolicitudDetalles[i].fechaFin.substr(5, 2);
         var añoFin = tblSolicitudDetalles[i].fechaFin.substr(0, 4);
+
+        var rowRuta = "<ul>";
+        $.each(tblSolicitudDetalles[i].tblSolicitudDetalleRuta, function (i, item) {
+            rowRuta = rowRuta + "<li>" + item.destino + "</li>";
+        });
+        rowRuta = rowRuta + "</ul >";
+
         var rows =
             "<tr class='text-center'>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].numeroViaje + "</td>" +
@@ -539,6 +560,7 @@ function eliminarOperador(id) {
             "<td class='text-center'>" + tblSolicitudDetalles[i].tblTracto.noEconomico + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].tblCajas.noEconomico + "</td>" +
             "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
+            "<td class='text-center'>" + rowRuta + "</td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
             "</tr>";
