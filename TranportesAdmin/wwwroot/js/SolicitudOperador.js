@@ -12,6 +12,7 @@
             type: "POST",
             data: JSON.stringify({
                 id: _id,
+                numeroViaje: "",
                 tblTractoId: 0,
                 tblCajasId: 0,
                 tblOperadorId: 0,
