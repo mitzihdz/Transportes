@@ -568,7 +568,7 @@ function agregarDestino2() {
             id: 0,
             tblUbicacionesId: destinoid,
             tblEstatusId: 0,
-            orden: tblSolicitudDetalleRuta2.length - 1,
+            orden: tblSolicitudDetalleRuta2.length + 1,
             tblUbicaciones: {
                 id: 0,
                 planta: destinonombre,
@@ -625,9 +625,21 @@ $('#guardarRuta2').click(function () {
     tblSolicitudDetalles2[posRuta].tblTractoId = $('#tractor2 option').filter(function () {
         return this.value == $('#txtTractor2').val();
     }).data('xyz');
-    tblSolicitudDetalles2[posRuta].tblCajaId = $('#caja2 option').filter(function () {
+    tblSolicitudDetalles2[posRuta].tblCajasId = $('#caja2 option').filter(function () {
         return this.value == $('#txtCaja2').val();
     }).data('xyz');
+
+    var nombreCompleto = $('#txtOperador2').val().split(" ");
+    if (nombreCompleto.length == 3) {
+        tblSolicitudDetalles2[posRuta].tblOperador.nombre = nombreCompleto[nombreCompleto.length - 1];
+        tblSolicitudDetalles2[posRuta].tblOperador.apellidoPaterno = nombreCompleto[0];
+        tblSolicitudDetalles2[posRuta].tblOperador.apellidoMaterno = nombreCompleto[1];
+    } else {
+        tblSolicitudDetalles2[posRuta].tblOperador.nombre = nombreCompleto[3] + nombreCompleto[nombreCompleto.length - 1];
+        tblSolicitudDetalles2[posRuta].tblOperador.apellidoPaterno = nombreCompleto[0];
+        tblSolicitudDetalles2[posRuta].tblOperador.apellidoMaterno = nombreCompleto[1];
+    }
+
     tblSolicitudDetalles2[posRuta].numeroViaje = $('#txtViaje2').val();
     tblSolicitudDetalles2[posRuta].tblOperador.nombre = $('#txtOperador2').val();
     tblSolicitudDetalles2[posRuta].tblTracto.noEconomico = $('#txtTractor2').val();
