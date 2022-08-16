@@ -10,6 +10,7 @@ namespace AccesoDatos.Models
     {
         public TblCaja()
         {
+            TblDocumentosCajas = new HashSet<TblDocumentosCaja>();
             TblPolizas = new HashSet<TblPoliza>();
             TblProveedoresCajas = new HashSet<TblProveedoresCaja>();
             TblSolicitudDetalles = new HashSet<TblSolicitudDetalle>();
@@ -25,9 +26,10 @@ namespace AccesoDatos.Models
         public DateTime? Inclusion { get; set; }
 
         public virtual TblMarcaCaja TblMarcaCajas { get; set; }
+        public virtual ICollection<TblDocumentosCaja> TblDocumentosCajas { get; set; }
         public virtual ICollection<TblPoliza> TblPolizas { get; set; }
         public virtual ICollection<TblProveedoresCaja> TblProveedoresCajas { get; set; }
-        [JsonIgnore]
+        [JsonIgnore] 
         public virtual ICollection<TblSolicitudDetalle> TblSolicitudDetalles { get; set; }
     }
 }

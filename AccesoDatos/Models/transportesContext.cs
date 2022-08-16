@@ -21,7 +21,9 @@ namespace AccesoDatos.Models
         public virtual DbSet<TblCaja> TblCajas { get; set; }
         public virtual DbSet<TblCliente> TblClientes { get; set; }
         public virtual DbSet<TblDocumento> TblDocumentos { get; set; }
+        public virtual DbSet<TblDocumentosCaja> TblDocumentosCajas { get; set; }
         public virtual DbSet<TblDocumentosOperadore> TblDocumentosOperadores { get; set; }
+        public virtual DbSet<TblDocumentosTracto> TblDocumentosTractos { get; set; }
         public virtual DbSet<TblDomicilioOper> TblDomicilioOpers { get; set; }
         public virtual DbSet<TblEstatus> TblEstatuses { get; set; }
         public virtual DbSet<TblEstatusRuta> TblEstatusRutas { get; set; }
@@ -34,6 +36,7 @@ namespace AccesoDatos.Models
         public virtual DbSet<TblSolicitud> TblSolicituds { get; set; }
         public virtual DbSet<TblSolicitudDetalle> TblSolicitudDetalles { get; set; }
         public virtual DbSet<TblSolicitudDetalleRuta> TblSolicitudDetalleRutas { get; set; }
+        public virtual DbSet<TblTipoDocumento> TblTipoDocumentos { get; set; }
         public virtual DbSet<TblTracto> TblTractos { get; set; }
         public virtual DbSet<TblUbicacione> TblUbicaciones { get; set; }
         public virtual DbSet<TblUsuario> TblUsuarios { get; set; }
@@ -43,9 +46,10 @@ namespace AccesoDatos.Models
             if (!optionsBuilder.IsConfigured)
             {
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                //                optionsBuilder.UseSqlServer("server=10.10.0.32\\MSSQLSERVER2017;user=UsrTransporte;password=123;database=transportes");
                 IConfigurationRoot Configuration = new ConfigurationBuilder()
-                                                  .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                                                  .AddJsonFile("appsettings.json", optional: false).Build();
+                                                                  .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                                                                  .AddJsonFile("appsettings.json", optional: false).Build();
                 optionsBuilder.UseSqlServer(Configuration.GetConnectionString("conTransportes"));
             }
         }
@@ -127,6 +131,43 @@ namespace AccesoDatos.Models
                 entity.Property(e => e.NombreDocumento)
                     .IsRequired()
                     .HasMaxLength(200);
+
+                entity.Property(e => e.TblTipoDocumentoId).HasColumnName("tbl_Tipo_Documento_id");
+
+                entity.HasOne(d => d.TblTipoDocumento)
+                    .WithMany(p => p.TblDocumentos)
+                    .HasForeignKey(d => d.TblTipoDocumentoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tbl_documentos_tbl_tipo_documento");
+            });
+
+            modelBuilder.Entity<TblDocumentosCaja>(entity =>
+            {
+                entity.ToTable("tbl_documentos_Cajas");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Inclusion).HasColumnType("datetime");
+
+                entity.Property(e => e.Ruta)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TblCajasId).HasColumnName("tbl_cajas_id");
+
+                entity.Property(e => e.TblDocumentoId).HasColumnName("tbl_documento_id");
+
+                entity.HasOne(d => d.TblCajas)
+                    .WithMany(p => p.TblDocumentosCajas)
+                    .HasForeignKey(d => d.TblCajasId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tbl_documentos_Cajas_tbl_cajas");
+
+                entity.HasOne(d => d.TblDocumento)
+                    .WithMany(p => p.TblDocumentosCajas)
+                    .HasForeignKey(d => d.TblDocumentoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tbl_documentos_Cajas_tbl_documentos");
             });
 
             modelBuilder.Entity<TblDocumentosOperadore>(entity =>
@@ -156,6 +197,35 @@ namespace AccesoDatos.Models
                     .WithMany(p => p.TblDocumentosOperadores)
                     .HasForeignKey(d => d.TblOperadorId)
                     .HasConstraintName("FK__tbl_docum__tbl_o__19DFD96B");
+            });
+
+            modelBuilder.Entity<TblDocumentosTracto>(entity =>
+            {
+                entity.ToTable("tbl_documentos_Tractos");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Inclusion).HasColumnType("datetime");
+
+                entity.Property(e => e.Ruta)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TblDocumentoId).HasColumnName("tbl_documento_id");
+
+                entity.Property(e => e.TblTractoId).HasColumnName("tbl_tracto_id");
+
+                entity.HasOne(d => d.TblDocumento)
+                    .WithMany(p => p.TblDocumentosTractos)
+                    .HasForeignKey(d => d.TblDocumentoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tbl_documentos_Tractos_tbl_documentos");
+
+                entity.HasOne(d => d.TblTracto)
+                    .WithMany(p => p.TblDocumentosTractos)
+                    .HasForeignKey(d => d.TblTractoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tbl_documentos_Tractos_tbl_tracto");
             });
 
             modelBuilder.Entity<TblDomicilioOper>(entity =>
@@ -479,6 +549,19 @@ namespace AccesoDatos.Models
                     .HasForeignKey(d => d.TblUbicacionesId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tbl_Solicitud_detalle_rutas_tbl_Ubicaciones");
+            });
+
+            modelBuilder.Entity<TblTipoDocumento>(entity =>
+            {
+                entity.ToTable("tbl_tipo_documento");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Inclusion).HasColumnType("datetime");
+
+                entity.Property(e => e.Tipo)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<TblTracto>(entity =>

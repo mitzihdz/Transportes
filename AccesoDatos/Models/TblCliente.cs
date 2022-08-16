@@ -20,7 +20,7 @@ namespace AccesoDatos.Models
         public bool? Activo { get; set; }
         public DateTime? Inclusion { get; set; }
 
-        [JsonIgnore]
+        [JsonIgnore] 
         public virtual ICollection<TblSolicitud> TblSolicituds { get; set; }
     }
 }

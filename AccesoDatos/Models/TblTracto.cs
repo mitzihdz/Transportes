@@ -10,6 +10,7 @@ namespace AccesoDatos.Models
     {
         public TblTracto()
         {
+            TblDocumentosTractos = new HashSet<TblDocumentosTracto>();
             TblPolizas = new HashSet<TblPoliza>();
             TblSolicitudDetalles = new HashSet<TblSolicitudDetalle>();
         }
@@ -23,8 +24,9 @@ namespace AccesoDatos.Models
         public bool? Activo { get; set; }
         public DateTime? Inclusion { get; set; }
 
+        public virtual ICollection<TblDocumentosTracto> TblDocumentosTractos { get; set; }
         public virtual ICollection<TblPoliza> TblPolizas { get; set; }
-        [JsonIgnore]
+        [JsonIgnore] 
         public virtual ICollection<TblSolicitudDetalle> TblSolicitudDetalles { get; set; }
     }
 }
