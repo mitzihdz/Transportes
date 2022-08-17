@@ -158,6 +158,7 @@ function GetGrid() {
                 if (item.tblEstatusRuta.estatus == "Cargado") {
                     var rows =
                         "<tr>" +
+                        "<td style='color: #49CC90'>" + rowRuta + "</td>" +
                         "<td style='color: #49CC90'>" + item.numeroViaje + "</td>" +
                         "<td style='color: #49CC90'>" + item.tblSolicitud.ordenServicio + "</td>" +
                         "<td style='color: #49CC90'>" + item.tblSolicitud.tblClientes.nombreCorto + "</td>" +
@@ -165,13 +166,14 @@ function GetGrid() {
                         "<td style='color: #49CC90'>" + item.tblTracto.noEconomico + "</td>" +
                         "<td style='color: #49CC90'>" + item.tblCajas.noEconomico + "</td>" +
                         "<td style='color: #49CC90'>" + item.tblEstatusRuta.estatus + "</td>" +
-                        "<td style='color: #49CC90'>" + rowRuta + "</td>" +
+                        
                         "</tr>";
                     $('#tblReportes > tbody').append(rows);
                 }
                 else {
                     var rows =
                         "<tr>" +
+                        "<td>" + rowRuta + "</td>" +
                         "<td>" + item.numeroViaje + "</td>" +
                         "<td>" + item.tblSolicitud.ordenServicio + "</td>" +
                         "<td>" + item.tblSolicitud.tblClientes.nombreCorto + "</td>" +
@@ -179,7 +181,6 @@ function GetGrid() {
                         "<td>" + item.tblTracto.noEconomico + "</td>" +
                         "<td>" + item.tblCajas.noEconomico + "</td>" +
                         "<td>" + item.tblEstatusRuta.estatus + "</td>" +
-                        "<td>" + rowRuta + "</td>" +
                         "</tr>";
                     $('#tblReportes > tbody').append(rows);
                 }

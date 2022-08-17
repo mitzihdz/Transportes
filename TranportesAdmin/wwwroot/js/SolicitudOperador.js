@@ -68,6 +68,7 @@ function GetGrid() {
 
                 var rows =
                     "<tr>" +
+                    "<td>" + rowRuta + "</td>" +
                     "<td>" + item.numeroViaje + "</td>" +
                     //"<td>" + item.tblSolicitud.ordenServicio + "</td>" +
                     "<td>" + item.tblOperador.nombre + " " + item.tblOperador.apellidoPaterno + " " + item.tblOperador.apellidoMaterno + "</td >" +
@@ -76,7 +77,7 @@ function GetGrid() {
                     "<td>" + fechaInicio + "</td >" +
                     "<td>" + fechaFin + "</td >" +
                     "<td>" + item.tblEstatusRuta.estatus + "</td >" +
-                    "<td>" + rowRuta + "</td>" +
+                   
                     "<td class='text-center'><a class='nav_link'  href='#' onclick='OpenEdit(" + item.id + ", " + item.tblEstatusRutaId + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
                     "</tr>";
                 $('#tblSolicitud > tbody').append(rows);

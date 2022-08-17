@@ -406,12 +406,13 @@ $('#guardarRuta').click(function () {
 
             var rows =
                 "<tr class='text-center'>" +
+                "<td class='text-center'>" + rowRuta + "</td>" +
                 "<td class='text-center'>" + $("#txtViaje").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtOperador").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtTractor").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtCaja").val() + "</td>" +
                 "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
-                "<td class='text-center'>" + rowRuta + "</td>" +
+                
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + y + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a></td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + y + ")'><i style='' class='fa-solid fa-circle-trash'></i></a></td>" +
                 "</tr>";
@@ -456,12 +457,13 @@ $('#guardarRuta').click(function () {
 
             var rows =
                 "<tr>" +
+                "<td class='text-center'>" + rowRuta + "</td>" +
                 "<td class='text-center'>" + $("#txtViaje").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtOperador").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtTractor").val() + "</td>" +
                 "<td class='text-center'>" + $("#txtCaja").val() + "</td>" +
                 "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
-                "<td class='text-center'>" + rowRuta + "</td>" +
+               
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + y + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a></td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + y + ")'><i style='' class='fa-solid fa-circle-trash'></i></a></td>" +
                 "</tr>";
@@ -556,12 +558,13 @@ function eliminarOperador(id) {
 
         var rows =
             "<tr class='text-center'>" +
+            "<td class='text-center'>" + rowRuta + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].numeroViaje + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].tblOperador.nombre + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].tblTracto.noEconomico + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles[i].tblCajas.noEconomico + "</td>" +
             "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
-            "<td class='text-center'>" + rowRuta + "</td>" +
+            
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a >" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a >" +
             "</tr>";

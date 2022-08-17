@@ -127,13 +127,14 @@ function cargarDatos(solicitudData) {
         if (tblSolicitudDetalles2[i].tblEstatusRuta.estatus == "Cargado") {
             var rows =
                 "<tr>" +
+                "<td class='text-center' style='color: #49CC90'>" + rowRuta + "</td>" +
                 "<td class='text-center' style='color: #49CC90'>" + tblSolicitudDetalles2[i].numeroViaje + "</td>" +
                 "<td class='text-center' style='color: #49CC90'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
                 "<td class='text-center' style='color: #49CC90'>" + tblSolicitudDetalles2[i].tblTracto.noEconomico + "</td>" +
                 "<td class='text-center' style='color: #49CC90'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
                 "<td class='text-center' style='color: #49CC90'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
                 "<td class='text-center' style='color: #49CC90'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
-                "<td class='text-center' style='color: #49CC90'>" + rowRuta + "</td>" +
+                
                 "<td class='text-center' style='color: #49CC90'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a ></td>" +
                 "<td class='text-center' style='color: #49CC90'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a ></td>" +
                 "</tr>";
@@ -142,13 +143,14 @@ function cargarDatos(solicitudData) {
         else {
             var rows =
                 "<tr>" +
+                "<td class='text-center'>" + rowRuta + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].numeroViaje + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.noEconomico + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
                 "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
-                "<td class='text-center'>" + rowRuta + "</td>" +
+                
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a ></td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a ></td>" +
                 "</tr>";
@@ -378,13 +380,14 @@ function eliminarOperador(id) {
 
         var rows =
             "<tr>" +
+            "<td class='text-center'>" + rowRuta + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].numeroViaje + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.noEconomico + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
             "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
-            "<td class='text-center'>" + rowRuta + "</td>" +
+            
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a></td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a></td>" +
             "</tr>";
@@ -691,13 +694,14 @@ $('#guardarRuta2').click(function () {
 
         var rows =
             "<tr>" +
+            "<td class='text-center'>" + rowRuta + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].numeroViaje + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.noEconomico + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
             "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +
             "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
-            "<td class='text-center'>" + rowRuta + "</td>" +
+            
             "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a></td>" +
             "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a></td>" +
             "</tr>";
@@ -845,13 +849,14 @@ $('#guardarRuta').click(function () {
 
             var rows =
                 "<tr>" +
+                "<td class='text-center'>" + rowRuta + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].numeroViaje + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblOperador.apellidoPaterno + " " + tblSolicitudDetalles2[i].tblOperador.apellidoMaterno + " " + tblSolicitudDetalles2[i].tblOperador.nombre + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblTracto.noEconomico + "</td>" +
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblCajas.noEconomico + "</td>" +
                 "<td class='text-center'>" + diaInicio + "/" + mesInicio + "/" + añoInicio + "-" + diaFin + "/" + mesFin + "/" + añoFin + "</td>" +          
                 "<td class='text-center'>" + tblSolicitudDetalles2[i].tblEstatusRuta.estatus + "</td>" +
-                "<td class='text-center'>" + rowRuta + "</td>" +
+                
                 "<td class='text-center'><a class='nav_link' href='#' onclick='abrirModalRuta(" + i + ")'><i style='color: yellowgreen;' class='fa-solid fa-truck'></i></a></td>" +
                 "<td class='text-center'><a class='nav_link' href='#' onclick='eliminarOperador(" + i + ")'><i style='color: indianred;' class='fa-solid fa-circle-trash'></i></a></td>" +
                 "</tr>";

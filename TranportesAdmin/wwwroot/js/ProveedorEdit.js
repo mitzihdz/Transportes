@@ -351,7 +351,7 @@ function GetGrid() {
         success: function (data) {
             $('#tblCajas > tbody').empty();
             $.each(data.respuesta, function (i, item) {
-                debugger
+                //debugger
                 var marca = "";
                 if (item.tblCajas.tblMarcaCajas != null)
                     if (item.tblCajas.tblMarcaCajas.marca != null)
