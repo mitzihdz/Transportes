@@ -9,6 +9,9 @@ namespace TranportesAdmin.Controllers
             ISession session = HttpContext.Session;
             session.SetString("Route", System.Reflection.MethodBase.GetCurrentMethod().Name);
             ViewBag.IdProveedor = TempData["IdProveedor"];
+            if (TempData["IdProveedor"] != null)
+                TempData.Remove("IdProveedor");
+            TempData.Add("IdProveedor", ViewBag.IdProveedor);
             return View();
         }
 
@@ -16,6 +19,7 @@ namespace TranportesAdmin.Controllers
         {
             ISession session = HttpContext.Session;
             session.SetString("Route", System.Reflection.MethodBase.GetCurrentMethod().Name);
+            ViewBag.IdProveedor = TempData["IdProveedor"];
             ViewBag.IdCaja = id;
             return View();
         }

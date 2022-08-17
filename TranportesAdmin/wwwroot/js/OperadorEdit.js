@@ -353,7 +353,7 @@ function OpenNew() {
 function GetTipoDocumento() {
     $.ajax({
         type: "GET",
-        url: server_key + "api/Documento/Select?id=1",
+        url: server_key + "api/Documento/SelectAll?idTipo=1",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {

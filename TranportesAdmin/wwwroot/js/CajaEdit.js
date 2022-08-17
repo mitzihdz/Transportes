@@ -2,47 +2,47 @@
 
     $("form").attr('autocomplete', 'off');
 
+    GetMarcas();
     GetGrid();
 
     $(function () {
         bsCustomFileInput.init();
     });
     
-    var id = $("#idTracto").val();
+    var id = $("#IdCaja").val();
     $.ajax({
         type: "GET",
-        url: server_key + "api/Tracto/Select?id=" + id,
+        url: server_key + "api/Caja/Select?id=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
-            var tractorData = data.respuesta;
-            $('#txtClave').val(tractorData[0].idTracto);
-            $('#txtNumEconomico').val(tractorData[0].noEconomico);
-            $('#txtPlacas').val(tractorData[0].placas);
-            $('#txtModelo').val(tractorData[0].modelo);
-            $('#txtAnio').val(tractorData[0].anio);
+            var cajaData = data.respuesta;
+            $('#txtNoEconomico').val(cajaData[0].noEconomico);
+            $('#txtPlacas').val(cajaData[0].placas);
+            $('#txtDimension').val(cajaData[0].dimensiones);
+            $('#ddlMarca').val(cajaData[0].tblMarcaCajasId);
+            $('#txtAnio').val(cajaData[0].anioModelo);
         },
         failure: function (data) {
-            AlertError('Ocurrio un error al consultar el tracto. Contacte al administrador.');
+            AlertError('Ocurrio un error al consultar la caja. Contacte al administrador.');
         },
         error: function (data) {
-            AlertError('Ocurrio un error al consultar el tracto. Contacte al administrador.');
+            AlertError('Ocurrio un error al consultar la caja. Contacte al administrador.');
         }
     });
 
-
-    var valTractor = $('#fmTracto').validate({
+    var valCaja = $('#fmCaja').validate({
         rules: {
-            Clave: {
-                required: true
-            },
-            NumEconomico: {
+            NoEconomico: {
                 required: true
             },
             Placas: {
                 required: true
             },
-            Modelo: {
+            Dimension: {
+                required: true
+            },
+            Marca: {
                 required: true
             },
             Anio: {
@@ -52,15 +52,15 @@
             }
         },
         messages: {
-            Clave: "La clave del tracto es requerida",
             NumEconomico: "El número económico es requerido",
             Placas: "Las placas son requeridas",
-            Modelo: "El modelo es requerido",
+            Dimension: "La dimension es requerida",
+            Marca: "La marca es requerida",
             Anio:
             {
                 required: "El año es requerido",
                 digits: "Formato numérico",
-                maxlength: "Máximo 5 digitos"
+                maxlength: "Máximo 4 digitos"
             }
         },
         errorElement: 'span',
@@ -76,41 +76,41 @@
         }
     });
 
+    $("#BtnEditaCaja").click(function () {
+        if (valCaja.form()) {
 
-    $("#BtnEditaTracto").click(function () {
-        if (valTractor.form()) {
-            var _id = $("#idTracto").val();
-            var _idTracto = $('#txtClave').val();
-            var _noEconomico = $('#txtNumEconomico').val();
+            var _id = $('#IdCaja').val();
+            var _noEconomico = $('#txtNoEconomico').val();
             var _placas = $('#txtPlacas').val();
-            var _modelo = $('#txtModelo').val();
+            var _dimension = $('#txtDimension').val();
+            var _marcaId = $('#ddlMarca').val();
             var _anio = $('#txtAnio').val();
 
             $.ajax({
-                url: server_key + "api/Tracto/Update",
+                url: server_key + "api/Caja/Update",
                 type: "POST",
                 data: JSON.stringify({
                     id: _id,
-                    idTracto: _idTracto,
                     noEconomico: _noEconomico,
                     placas: _placas,
-                    modelo: _modelo,
-                    anio: _anio
+                    anioModelo: _anio,
+                    tblMarcaCajasId: _marcaId,
+                    dimensiones: _dimension
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    AlertSuccessOk('El tracto se actualizó correctamente.', '/Tracto');
+                    AlertSuccess('La caja se actualizó correctamente.');
                 },
                 failure: function (data) {
-                    AlertError('Ocurrio un error al guardar el tracto. Contacte al administrador.');
+                    AlertError('Ocurrio un error al actualizar la caja. Contacte al administrador.');
                 },
                 error: function (data) {
-                    AlertError('Ocurrio un error al guardar el tracto. Contacte al administrador.');
+                    AlertError('Ocurrio un error al actualizar la caja. Contacte al administrador.');
                 }
             });
-
         }
     });
+    
 
     //Documentos
     var valDocumento = $('#fmNewDocument').validate({
@@ -144,16 +144,16 @@
         if (valDocumento.form()) {
 
             var files = $("#fileInput").prop("files");
-            var idTracto = $('#idTracto').val();
+            var idCaja = $('#IdCaja').val();
             var idDocumento = $('#ddlDocumento').val();
-            var name = idTracto + '_' + idDocumento;
+            var name = idCaja + '_' + idDocumento;
             var fileData = new FormData();
             fileData.append("fileData", files[0]);
             fileData.append("name", name);
 
             $.ajax({
                 type: "POST",
-                url: "/Tracto/UploadFiles",
+                url: "/Caja/UploadFiles",
                 dataType: "json",
                 contentType: false,
                 processData: false,
@@ -176,13 +176,35 @@
 
     });
 
-
-
-
 });
 
+function GetMarcas() {
+    $.ajax({
+        type: "GET",
+        url: server_key + "api/Marca/Select",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            var marcaData = data.respuesta;
+
+            $('#ddlMarca').html('');
+            $('#ddlMarca').append('<option value="">SELECCIONE</option>');
+            $.each(marcaData, function (k, v) {
+                $('#ddlMarca').append('<option value="' + v.id + '">' + v.marca + '</option>');
+            });
+        },
+        failure: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        },
+        error: function (data) {
+            AlertError('Ocurrio un error al consultar la marca. Contacte al administrador.');
+        }
+    });
+
+}
 
 
+//-------------Documentos
 
 
 function OpenNew() {
@@ -196,7 +218,7 @@ function OpenNew() {
 function GetTipoDocumento() {
     $.ajax({
         type: "GET",
-        url: server_key + "api/Documento/SelectAll?idTipo=3",
+        url: server_key + "api/Documento/SelectAll?idTipo=2",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -219,15 +241,15 @@ function GetTipoDocumento() {
 function GuardaDocumento(name) {
     debugger
     var _tblDocumentoId = $('#ddlDocumento').val();
-    var _tblTractoId = $('#idTracto').val();
+    var _tblCajaId = $('#IdCaja').val();
 
     $.ajax({
-        url: server_key + "api/TractoDocumentos/Add",
+        url: server_key + "api/CajaDocumentos/Add",
         type: "POST",
         data: JSON.stringify({
             id: 0,
             tblDocumentoId: _tblDocumentoId,
-            tblTractoId: _tblTractoId,
+            tblCajasId: _tblCajaId,
             ruta: name
         }),
         contentType: 'application/json; charset=utf-8',
@@ -247,11 +269,11 @@ function GuardaDocumento(name) {
 
 
 function GetGrid() {
-    var id = $('#idTracto').val();
+    var id = $('#IdCaja').val();
 
     $.ajax({
         type: "GET",
-        url: server_key + "api/TractoDocumentos/Select?idTracto=" + id,
+        url: server_key + "api/CajaDocumentos/Select?idCaja=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
@@ -265,13 +287,6 @@ function GetGrid() {
                     "</tr>";
                 $('#tblDocumentos > tbody').append(rows);
             });
-            //console.log(data);
-
-            //$("#tblDocumentos").DataTable({
-            //    "destroy": true,
-            //    "responsive": true, "lengthChange": false, "autoWidth": false,
-            //    "buttons": ["copy", "csv", "excel", "pdf", "print"]
-            //}).buttons().container().appendTo('#tblDocumentos_wrapper .col-md-6:eq(0)');
         },
         failure: function (data) {
             AlertError('Ocurrio un error al consultar la información. Contacte al administrador.');
@@ -284,14 +299,14 @@ function GetGrid() {
 
 
 function View(ruta) {
-    var url = '/Tracto/GetPDF?fileName=' + ruta;
+    var url = '/Caja/GetPDF?fileName=' + ruta;
     window.open(url, '_blank');
 }
 
 
 function Delete(id) {
     $.ajax({
-        url: server_key + "api/TractoDocumentos/Delete/" + id,
+        url: server_key + "api/CajaDocumentos/Delete/" + id,
         type: "DELETE",
         contentType: 'application/json; charset=utf-8',
         dataType: "json",

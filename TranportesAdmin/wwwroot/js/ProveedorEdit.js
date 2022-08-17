@@ -351,14 +351,19 @@ function GetGrid() {
         success: function (data) {
             $('#tblCajas > tbody').empty();
             $.each(data.respuesta, function (i, item) {
+                debugger
+                var marca = "";
+                if (item.tblCajas.tblMarcaCajas != null)
+                    if (item.tblCajas.tblMarcaCajas.marca != null)
+                        marca = item.tblCajas.tblMarcaCajas.marca;
                 var rows =
                     "<tr>" +
                     "<td>" + item.tblCajas.noEconomico + "</td>" +
                     "<td>" + item.tblCajas.placas + "</td>" +
-                    "<td>" + item.tblCajas.tblMarcaCajas.marca + "</td>" +
+                    "<td>" + marca + "</td>" +
                     "<td>" + item.tblCajas.anioModelo + "</td>" +
                     "<td>" + item.tblCajas.dimensiones + "</td>" +
-                    "<td class='text-center'><a class='nav_link' href='#' onclick='OpenEdit(" + item.tblCajas.id + ")'><i class='nav-icon fas fa-edit'></i></a >" +
+                    "<td class='text-center'><a class='nav_link' href='../../Caja/Editar/" + item.tblCajas.id + "'><i class='nav-icon fas fa-edit'></i></a >" +
                     "<td class='text-center'><a class='nav_link' href='#' onclick='Delete(" + item.tblCajas.id + ")'><i  class='fa-solid fa-circle-trash'></i></a >" +
                     "</tr>";
                 $('#tblCajas > tbody').append(rows);
