@@ -11,8 +11,22 @@ namespace Servicios.Controllers
         private Documentos documentos = new Documentos();
 
         [HttpGet]
+        [Route("SelectTipo")]
+        public Response Get()
+        {
+            return documentos.SelectTipo();
+        }
+        
+        [HttpGet]
+        [Route("SelectAll")]
+        public Response Get(int? idTipo)
+        {
+            return documentos.Select(idTipo);
+        }
+
+        [HttpGet]
         [Route("Select")]
-        public Response Get(int? id)
+        public Response Get(int id)
         {
             return documentos.Select(id);
         }

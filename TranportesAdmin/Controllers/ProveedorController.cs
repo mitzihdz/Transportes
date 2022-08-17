@@ -25,6 +25,7 @@ namespace TranportesAdmin.Controllers
             ISession session = HttpContext.Session;
             session.SetString("Route", System.Reflection.MethodBase.GetCurrentMethod().Name);
             ViewBag.IdProveedor = id;
+            TempData.Add("IdProveedor", id);
             return View();
         }
     }

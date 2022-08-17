@@ -8,11 +8,50 @@ namespace Negocio
         private transportesContext ctx = new transportesContext();
         public Response Response = new Response();
 
-        public Response Select(int? id)
+        public Response SelectTipo()
         {
             try
             {
-                List<TblDocumento> list = id == null ? ctx.TblDocumentos.Where(x => x.Activo == true).OrderBy(x => x.NombreDocumento).ToList() : ctx.TblDocumentos.Where(x => x.Id == id).ToList();
+                List<TblTipoDocumento> list = ctx.TblTipoDocumentos.Where(x => x.Activo == true).OrderBy(x => x.Tipo).ToList();
+
+                Response.Estado = true;
+                Response.Mensaje = "OK";
+                Response.Respuesta = list;
+            }
+            catch (Exception ex)
+            {
+                Response.Estado = false;
+                Response.Mensaje = ex.Message;
+            }
+
+            return Response;
+        }
+
+        public Response Select(int? idTipo)
+        {
+            try
+            {
+                List<TblDocumento> list = idTipo == null ? ctx.TblDocumentos.Include(t => t.TblTipoDocumento).Where(x => x.Activo == true).OrderBy(x => x.TblTipoDocumento.Tipo).ThenBy(x => x.NombreDocumento).ToList() :
+                    ctx.TblDocumentos.Where(x => x.TblTipoDocumentoId == idTipo && x.Activo == true).OrderBy(x => x.NombreDocumento).ToList();
+
+                Response.Estado = true;
+                Response.Mensaje = "OK";
+                Response.Respuesta = list;
+            }
+            catch (Exception ex)
+            {
+                Response.Estado = false;
+                Response.Mensaje = ex.Message;
+            }
+
+            return Response;
+        }
+
+        public Response Select(int id)
+        {
+            try
+            {
+                List<TblDocumento> list = ctx.TblDocumentos.Where(x => x.Id == id).ToList();
 
                 Response.Estado = true;
                 Response.Mensaje = "OK";

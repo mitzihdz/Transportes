@@ -40,14 +40,17 @@
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
             var domicilioData = data.respuesta;
-            $('#txtCalle').val(domicilioData[0].calle);
-            $('#txtNumExt').val(domicilioData[0].ninte);
-            $('#txtNumInt').val(domicilioData[0].nexte);
-            $('#txtCP').val(domicilioData[0].cp);
-            $('#txtEntidad').val(domicilioData[0].entidadFed);
-            $('#txtMunicipio').val(domicilioData[0].municipio);
-            $('#txtColonia').val(domicilioData[0].colonia);
-            $('#txtReferencias').val(domicilioData[0].referencias);
+            console.log(domicilioData);
+            if (domicilioData.length > 0) {
+                $('#txtCalle').val(domicilioData[0].calle);
+                $('#txtNumExt').val(domicilioData[0].ninte);
+                $('#txtNumInt').val(domicilioData[0].nexte);
+                $('#txtCP').val(domicilioData[0].cp);
+                $('#txtEntidad').val(domicilioData[0].entidadFed);
+                $('#txtMunicipio').val(domicilioData[0].municipio);
+                $('#txtColonia').val(domicilioData[0].colonia);
+                $('#txtReferencias').val(domicilioData[0].referencias);
+            }
         },
         failure: function (data) {
             AlertError('Ocurrio un error al consultar el operador. Contacte al administrador.');
@@ -337,13 +340,6 @@
         }
 
     });
-
-
-
-
-
-
-
 });
 
 function OpenNew() {
@@ -357,7 +353,7 @@ function OpenNew() {
 function GetTipoDocumento() {
     $.ajax({
         type: "GET",
-        url: server_key + "api/Documento/Select",
+        url: server_key + "api/Documento/Select?id=1",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
@@ -397,10 +393,10 @@ function GuardaDocumento(name) {
             $('#modalDocumento').modal('toggle');
         },
         failure: function (data) {
-            AlertError('Ocurrio un error al guardar la marca. Contacte al administrador.');
+            AlertError('Ocurrio un error al guardar el documento. Contacte al administrador.');
         },
         error: function (data) {
-            AlertError('Ocurrio un error al guardar la marca. Contacte al administrador.');
+            AlertError('Ocurrio un error al guardar el documento. Contacte al administrador.');
         }
     });
 }
@@ -460,7 +456,7 @@ function Delete(id) {
             AlertSuccess(result.mensaje);
         },
         failure: function (data) {
-            AlertError('Ocurrio un error al eliminar el documento x. Contacte al administrador.');
+            AlertError('Ocurrio un error al eliminar el documento. Contacte al administrador.');
         },
         error: function (data) {
             debugger

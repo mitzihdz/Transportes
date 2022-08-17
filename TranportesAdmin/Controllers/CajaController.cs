@@ -1,23 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Web;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace TranportesAdmin.Controllers
 {
-    [Authorize]
-    public class OperadorController : Controller
+    public class CajaController : Controller
     {
-        public IActionResult Index()
-        {
-            ISession session = HttpContext.Session;
-            session.SetString("Route", String.Empty);
-            return View();
-        }
         public IActionResult Agregar()
         {
             ISession session = HttpContext.Session;
             session.SetString("Route", System.Reflection.MethodBase.GetCurrentMethod().Name);
+            ViewBag.IdProveedor = TempData["IdProveedor"];
             return View();
         }
 
@@ -25,7 +16,7 @@ namespace TranportesAdmin.Controllers
         {
             ISession session = HttpContext.Session;
             session.SetString("Route", System.Reflection.MethodBase.GetCurrentMethod().Name);
-            ViewBag.IdOperador = id;    
+            ViewBag.IdCaja = id;
             return View();
         }
 
@@ -34,7 +25,7 @@ namespace TranportesAdmin.Controllers
         {
             try
             {
-                string path = Directory.GetCurrentDirectory() + @"\Files\Operador";
+                string path = Directory.GetCurrentDirectory() + @"\Files\Caja";
 
                 FileInfo infoFile = new FileInfo(fileData.FileName);
                 string fileName = name + infoFile.Extension;
@@ -48,23 +39,23 @@ namespace TranportesAdmin.Controllers
 
                 return Json(new { estatus = true, mensaje = "OK", file = fileName });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json(new { estatus = false, mensaje = ex.Message });
-            }            
+            }
         }
 
         public ActionResult GetPDF(string fileName)
         {
             try
             {
-                string path = Directory.GetCurrentDirectory() + @"\Files\Operador\";
+                string path = Directory.GetCurrentDirectory() + @"\Files\Caja\";
                 byte[] fileData = System.IO.File.ReadAllBytes(path + fileName);
                 string resultFileName = String.Format("{0}.pdf", fileName);
                 //Response.("Content-Disposition", "inline; filename=" + resultFileName);
                 return File(fileData, "application/pdf");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Json(new { estatus = false, mensaje = ex.Message });
             }

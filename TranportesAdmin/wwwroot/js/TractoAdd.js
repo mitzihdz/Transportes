@@ -8,8 +8,7 @@
                 required: true
             },
             NumEconomico: {
-                required: true,
-                digits: true
+                required: true
             },
             Placas: {
                 required: true
@@ -25,11 +24,7 @@
         },
         messages: {
             Clave: "La clave del tracto es requerida",
-            NumEconomico:
-            {
-                required: "El número económico es requerido",
-                digits: "Formato numérico"
-            },
+            NumEconomico: "El número económico es requerido",
             Placas: "Las placas son requeridas",
             Modelo: "El modelo es requerido",
             Anio:
@@ -75,7 +70,7 @@
                 }),
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    AlertSuccessOk('El tracto se registró correctamente.','/Tracto');
+                    AlertSuccessOk('El tracto se registró correctamente.', '/Tracto/Editar/' + data.respuesta);
                 },
                 failure: function (data) {
                     AlertError('Ocurrio un error al guardar el tracto. Contacte al administrador.');

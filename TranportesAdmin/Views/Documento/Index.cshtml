@@ -66,7 +66,8 @@
                  <table id="tblDocumentos" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th class="col-md-10">Documento</th>
+                            <th class="col-md-6">Documento</th>
+                            <th class="col-md-4">Tipo Documento</th>
                             <th class="col-md-1">Editar</th>
                             <th class="col-md-1">Eliminar</th>
                         </tr>
@@ -89,6 +90,14 @@
       </div>
       <div class="modal-body">
        <form id="fmNuevoDoc">
+           <div class="row">
+               <div class="col-md-12">
+                   <div class="form-group">
+                       <label for="ddlTipo">Tipo Documento</label>
+                       <select class="form-control form-control-sm" id="ddlTipo" name="Tipo"></select>               
+                   </div>
+               </div>
+           </div>
            <div class="row">
                <div class="col-md-12">
                 <div class="form-group">
@@ -119,6 +128,14 @@
       <div class="modal-body">
        <form id="fmEditDoc">
            <input type="hidden" id="IdDocumento" />
+           <div class="row">
+               <div class="col-md-12">
+                   <div class="form-group">
+                       <label for="ddlTipoEdit">Tipo Documento</label>
+                       <select class="form-control form-control-sm" id="ddlTipoEdit" name="TipoEdit" disabled></select>               
+                   </div>
+               </div>
+           </div>
            <div class="row">
                <div class="col-md-12">
                 <div class="form-group">
