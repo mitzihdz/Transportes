@@ -95,24 +95,75 @@ $(document).ready(function () {
 });
 /////////////////////////////////////////////////////////////////
 function pie_initial() {
+    //$.ajax({
+    //    type: "GET",
+    //    url: server_key + "api/Graph/SelectSolicitudesCliente",
+    //    contentType: "application/json; charset=utf-8",
+    //    dataType: "json",
+    //    success: function (data, textStatus, jqXHR) {
+    //        console.log('Data pie ->', data.respuesta);
+    //        data = {
+    //            labels: data.respuesta.labels,
+    //            datasets: [{
+                 
+    //                data: data.respuesta.data,
+    //                backgroundColor:desordenar(colors_),
+    //                hoverOffset: 4
+    //            }]
+    //        };
+    //        config = {
+    //            type: 'pie',
+    //            data: data,
+    //            options: {
+    //                plugins: {
+    //                    legend: {
+    //                        legend: false,
+    //                        display: false
+
+    //                    },
+    //                    title: {
+    //                        display: true,
+    //                        text: 'NUMERO DE SOLICITUDES POR CLIENTE'
+    //                    }
+    //                }
+    //            }
+    //        };
+    //        var myChart1 = new Chart(document.getElementById('myChart'), config);
+    //    },
+    //    failure: function (data) {
+    //        AlertError('Ocurrio un error al consultar la lista de clientes. Contacte al administrador.');
+    //    },
+    //    error: function (data) {
+    //        AlertError('Ocurrio un error al consultar la lista de clientes. Contacte al administrador.');
+    //    }
+    //});
     $.ajax({
         type: "GET",
-        url: server_key + "api/Graph/SelectSolicitudesCliente",
+        url: server_key + "api/Graph/SelectReporteRutas",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
-            console.log('Data pie ->', data.respuesta);
+            console.log('Data barras ->', data.respuesta);
             data = {
                 labels: data.respuesta.labels,
                 datasets: [{
-                 
+                    label: 'CANTIDAD',
                     data: data.respuesta.data,
-                    backgroundColor:desordenar(colors_),
-                    hoverOffset: 4
+                    backgroundColor: desordenar(colors_),
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)'
+                    ],
+                    borderWidth: 1
                 }]
             };
             config = {
-                type: 'pie',
+                type: 'bar',
                 data: data,
                 options: {
                     plugins: {
@@ -123,12 +174,18 @@ function pie_initial() {
                         },
                         title: {
                             display: true,
-                            text: 'NUMERO DE SOLICITUDES POR CLIENTE'
+                            text: 'ESTATUS DE LAS RUTAS'
+                        }
+                    },
+                    scales: {
+                        y: {
+
+                            beginAtZero: true
                         }
                     }
-                }
+                },
             };
-            var myChart1 = new Chart(document.getElementById('myChart'), config);
+            var myChart2 = new Chart(document.getElementById('myChart'), config);
         },
         failure: function (data) {
             AlertError('Ocurrio un error al consultar la lista de clientes. Contacte al administrador.');

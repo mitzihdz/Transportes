@@ -63,6 +63,7 @@ function GetGrid() {
 
             $("#tblSolicitud").DataTable({
                 "destroy": true,
+                "pageLength": 60,
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print"]
             }).buttons().container().appendTo('#tblSolicitud_wrapper .col-md-6:eq(0)');

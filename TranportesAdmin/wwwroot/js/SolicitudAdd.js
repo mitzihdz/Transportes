@@ -418,6 +418,7 @@ $('#guardarRuta').click(function () {
             $('#otroOperador > tbody').append(rows);
             $("#otroOperador").DataTable({
                 "destroy": true,
+                "pageLength": 60,
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print"]
             }).buttons().container().appendTo('#otroOperador_wrapper .col-md-6:eq(0)');

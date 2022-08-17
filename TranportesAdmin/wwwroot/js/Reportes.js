@@ -155,23 +155,40 @@ function GetGrid() {
                 });
                 rowRuta = rowRuta + "</ul >";
 
-                var rows =
-                    "<tr>" +
-                    "<td>" + item.numeroViaje + "</td>" +
-                    "<td>" + item.tblSolicitud.ordenServicio + "</td>" +
-                    "<td>" + item.tblSolicitud.tblClientes.nombreCorto + "</td>" +
-                    "<td>" + item.tblOperador.apellidoPaterno + " " + item.tblOperador.apellidoMaterno + " " + item.tblOperador.nombre + "</td>" +
-                    "<td>" + item.tblTracto.noEconomico + "</td>" +
-                    "<td>" + item.tblCajas.noEconomico + "</td>" +
-                    "<td>" + item.tblEstatusRuta.estatus + "</td>" +
-                    "<td>" + rowRuta + "</td>" +
-                    "</tr>";
-                $('#tblReportes > tbody').append(rows);
+                if (item.tblEstatusRuta.estatus == "Cargado") {
+                    var rows =
+                        "<tr>" +
+                        "<td style='color: #49CC90'>" + item.numeroViaje + "</td>" +
+                        "<td style='color: #49CC90'>" + item.tblSolicitud.ordenServicio + "</td>" +
+                        "<td style='color: #49CC90'>" + item.tblSolicitud.tblClientes.nombreCorto + "</td>" +
+                        "<td style='color: #49CC90'>" + item.tblOperador.apellidoPaterno + " " + item.tblOperador.apellidoMaterno + " " + item.tblOperador.nombre + "</td>" +
+                        "<td style='color: #49CC90'>" + item.tblTracto.noEconomico + "</td>" +
+                        "<td style='color: #49CC90'>" + item.tblCajas.noEconomico + "</td>" +
+                        "<td style='color: #49CC90'>" + item.tblEstatusRuta.estatus + "</td>" +
+                        "<td style='color: #49CC90'>" + rowRuta + "</td>" +
+                        "</tr>";
+                    $('#tblReportes > tbody').append(rows);
+                }
+                else {
+                    var rows =
+                        "<tr>" +
+                        "<td>" + item.numeroViaje + "</td>" +
+                        "<td>" + item.tblSolicitud.ordenServicio + "</td>" +
+                        "<td>" + item.tblSolicitud.tblClientes.nombreCorto + "</td>" +
+                        "<td>" + item.tblOperador.apellidoPaterno + " " + item.tblOperador.apellidoMaterno + " " + item.tblOperador.nombre + "</td>" +
+                        "<td>" + item.tblTracto.noEconomico + "</td>" +
+                        "<td>" + item.tblCajas.noEconomico + "</td>" +
+                        "<td>" + item.tblEstatusRuta.estatus + "</td>" +
+                        "<td>" + rowRuta + "</td>" +
+                        "</tr>";
+                    $('#tblReportes > tbody').append(rows);
+                }
             });
             console.log(data);
 
             $("#tblReportes").DataTable({
                 "destroy": true,
+                "pageLength": 60,
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print"]
             }).buttons().container().appendTo('#tblReportes_wrapper .col-md-6:eq(0)');
