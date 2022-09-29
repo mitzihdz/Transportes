@@ -202,7 +202,7 @@
 
       @if(User.Identity.IsAuthenticated)
       {
-        if(@SessionHelper.GetPerfil(User) == "1")
+        if(@SessionHelper.GetPerfil(User) == "1") //Administrador
         {
             <!-- Sidebar Menu -->
               <nav class="mt-2">
@@ -288,7 +288,8 @@
               </nav>
               <!-- /.sidebar-menu -->
         }
-        else
+
+        @if(@SessionHelper.GetPerfil(User) == "2") //Controlador
         {
             <!-- Sidebar Menu -->
               <nav class="mt-2">
@@ -304,6 +305,104 @@
                     </a>
                   </li>
                 </ul>
+              </nav>
+              <!-- /.sidebar-menu -->
+        }
+
+        @if(@SessionHelper.GetPerfil(User) == "3") //SuperUsuario
+        {
+            <!-- Sidebar Menu -->
+              <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                  <!-- Add icons to the links using the .nav-icon class
+                       with font-awesome or any other icon font library -->
+                  <li class="nav-item "> <!--menu-open-->
+                    <a href="#" class="nav-link"> <!--active-->
+                      <i class="fa-solid fa-book-open"></i>
+                      <p>
+                        Catálogos 
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                        <a href="~/Cliente" class="nav-link">
+                            <i class="fas fa-street-view"></i>
+                            <p>Clientes</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="~/Documento" class="nav-link">
+                          <i class="fas fa-file-invoice"></i>
+                          <p>Documentos</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="~/Marca" class="nav-link">
+                          <i class="fas fa-boxes"></i>
+                          <p>Marcas Cajas</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="~/Operador" class="nav-link">
+                          <i class="fas fa-id-card-alt"></i>
+                          <p>Operadores</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="~/Proveedor" class="nav-link">
+                          <i class="fas fa-people-arrows"></i>
+                          <p>Proveedores</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="~/Tracto" class="nav-link">
+                          <i class="fas fa-truck"></i>
+                          <p>Tractos</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="~/Ubicacion" class="nav-link">
+                          <i class="fas fa-location-arrow"></i>
+                          <p>Ubicaciones</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="~/Usuario" class="nav-link">
+                          <i class="far fa-user"></i>
+                          <p>Usuarios</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                      <a href="~/Solicitud" class="nav-link"> <!--active-->
+                      <i class="fas fa-map-marked-alt"></i>
+                      <p>
+                        Solicitudes 
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="~/Reportes" class="nav-link"> <!--active-->
+                      <i class="fa-solid fa-file-chart-column"></i>
+                      <p>
+                        Reporte por Ruta 
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a href="~/SolicitudOperador" class="nav-link"> <!--active-->
+                      <i class="fas fa-map-marked-alt"></i>
+                      <p>
+                        Solicitudes Operador
+                      </p>
+                    </a>
+                  </li>
+                </ul>
+
+                
               </nav>
               <!-- /.sidebar-menu -->
         }
