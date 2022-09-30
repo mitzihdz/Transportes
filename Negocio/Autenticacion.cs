@@ -15,7 +15,7 @@ namespace Negocio
             {
                 string pass = SS.Encrypt(SS.Base64Encode(password));
 
-                TblUsuario usuario = ctx.TblUsuarios.Where(x => x.Usuario == user.ToUpper() && x.Contrasena == pass).FirstOrDefault();
+                TblUsuario usuario = ctx.TblUsuarios.Where(x => x.Usuario == user.ToUpper() && x.Contrasena == pass && x.Activo == true).FirstOrDefault();
 
                 if(usuario != null)
                 {
